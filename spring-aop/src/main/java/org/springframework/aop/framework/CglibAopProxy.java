@@ -16,6 +16,22 @@
 
 package org.springframework.aop.framework;
 
+import org.aopalliance.aop.Advice;
+import org.aopalliance.intercept.MethodInvocation;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.aop.*;
+import org.springframework.aop.support.AopUtils;
+import org.springframework.cglib.core.ClassGenerator;
+import org.springframework.cglib.core.CodeGenerationException;
+import org.springframework.cglib.core.SpringNamingPolicy;
+import org.springframework.cglib.proxy.*;
+import org.springframework.cglib.transform.impl.UndeclaredThrowableStrategy;
+import org.springframework.core.SmartClassLoader;
+import org.springframework.util.Assert;
+import org.springframework.util.ClassUtils;
+import org.springframework.util.ObjectUtils;
+
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -24,34 +40,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
-
-import org.aopalliance.aop.Advice;
-import org.aopalliance.intercept.MethodInvocation;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.springframework.aop.Advisor;
-import org.springframework.aop.AopInvocationException;
-import org.springframework.aop.PointcutAdvisor;
-import org.springframework.aop.RawTargetAccess;
-import org.springframework.aop.TargetSource;
-import org.springframework.aop.support.AopUtils;
-import org.springframework.cglib.core.ClassGenerator;
-import org.springframework.cglib.core.CodeGenerationException;
-import org.springframework.cglib.core.SpringNamingPolicy;
-import org.springframework.cglib.proxy.Callback;
-import org.springframework.cglib.proxy.CallbackFilter;
-import org.springframework.cglib.proxy.Dispatcher;
-import org.springframework.cglib.proxy.Enhancer;
-import org.springframework.cglib.proxy.Factory;
-import org.springframework.cglib.proxy.MethodInterceptor;
-import org.springframework.cglib.proxy.MethodProxy;
-import org.springframework.cglib.proxy.NoOp;
-import org.springframework.cglib.transform.impl.UndeclaredThrowableStrategy;
-import org.springframework.core.SmartClassLoader;
-import org.springframework.util.Assert;
-import org.springframework.util.ClassUtils;
-import org.springframework.util.ObjectUtils;
 
 /**
  * CGLIB-based {@link AopProxy} implementation for the Spring AOP framework.
@@ -638,6 +626,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 				if (target != null) {
 					targetClass = target.getClass();
 				}
+				//获取拦截器链
 				List<Object> chain = this.advised.getInterceptorsAndDynamicInterceptionAdvice(method, targetClass);
 				Object retVal;
 				// Check whether we only have one InvokerInterceptor: that is,
@@ -648,9 +637,11 @@ class CglibAopProxy implements AopProxy, Serializable {
 					// it does nothing but a reflective operation on the target, and no hot
 					// swapping or fancy proxying.
 					Object[] argsToUse = AopProxyUtils.adaptArgumentsIfNecessary(method, args);
+					//如果拦截为空则激活原方法
 					retVal = methodProxy.invoke(target, argsToUse);
 				}
 				else {
+					//进入拦截器链
 					// We need to create a method invocation...
 					retVal = new CglibMethodInvocation(proxy, target, method, args, targetClass, chain, methodProxy).proceed();
 				}
