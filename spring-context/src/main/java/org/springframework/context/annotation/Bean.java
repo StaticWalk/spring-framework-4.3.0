@@ -121,8 +121,8 @@ import org.springframework.beans.factory.support.AbstractBeanDefinition;
  * <em>'inter-bean references'</em> are not supported in <em>lite</em> mode. Instead,
  * when one {@code @Bean}-method invokes another {@code @Bean}-method in <em>lite</em>
  * mode, the invocation is a standard Java method invocation; Spring does not intercept
- * the invocation via a CGLIB proxy. This is analogous to inter-{@code @Transactional}
- * method calls where in proxy mode, Spring does not intercept the invocation &mdash;
+ * the invocation via a CGLIB staticProxy. This is analogous to inter-{@code @Transactional}
+ * method calls where in staticProxy mode, Spring does not intercept the invocation &mdash;
  * Spring does so only in AspectJ mode.
  *
  * <p>For example:

@@ -32,7 +32,7 @@ import javax.persistence.EntityManager;
 public interface EntityManagerProxy extends EntityManager {
 
 	/**
-	 * Return the underlying EntityManager that this proxy will delegate to.
+	 * Return the underlying EntityManager that this staticProxy will delegate to.
 	 * <p>In case of an extended EntityManager, this will be the associated
 	 * raw EntityManager.
 	 * <p>In case of a shared ("transactional") EntityManager, this will be

@@ -40,7 +40,7 @@ import org.springframework.tests.sample.beans.ITestBean;
 import static org.junit.Assert.*;
 
 /**
- * Tests for auto proxy creation by advisor recognition.
+ * Tests for auto staticProxy creation by advisor recognition.
  *
  * @see org.springframework.aop.framework.autoproxy.AdvisorAutoProxyCreatorIntegrationTests
  *
@@ -214,7 +214,7 @@ public class AdvisorAutoProxyCreatorTests {
 		testBean.setAge(23);
 		testBean.getAge();
 
-		assertEquals("Incorrect number of calls to proxy", 2, beforeAdvice.getCalls());
+		assertEquals("Incorrect number of calls to staticProxy", 2, beforeAdvice.getCalls());
 	}
 
 }

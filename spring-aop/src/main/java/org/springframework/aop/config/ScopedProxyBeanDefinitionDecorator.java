@@ -27,7 +27,7 @@ import org.springframework.beans.factory.xml.ParserContext;
 
 /**
  * {@link BeanDefinitionDecorator} responsible for parsing the
- * {@code <aop:scoped-proxy/>} tag.
+ * {@code <aop:scoped-staticProxy/>} tag.
  *
  * @author Rob Harrop
  * @author Juergen Hoeller
@@ -36,7 +36,7 @@ import org.springframework.beans.factory.xml.ParserContext;
  */
 class ScopedProxyBeanDefinitionDecorator implements BeanDefinitionDecorator {
 
-	private static final String PROXY_TARGET_CLASS = "proxy-target-class";
+	private static final String PROXY_TARGET_CLASS = "staticProxy-target-class";
 
 
 	@Override
@@ -49,7 +49,7 @@ class ScopedProxyBeanDefinitionDecorator implements BeanDefinitionDecorator {
 			}
 		}
 
-		// Register the original bean definition as it will be referenced by the scoped proxy
+		// Register the original bean definition as it will be referenced by the scoped staticProxy
 		// and is relevant for tooling (validation, navigation).
 		BeanDefinitionHolder holder =
 				ScopedProxyUtils.createScopedProxy(definition, parserContext.getRegistry(), proxyTargetClass);

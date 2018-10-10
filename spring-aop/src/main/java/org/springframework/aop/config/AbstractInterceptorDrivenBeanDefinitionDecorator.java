@@ -62,7 +62,7 @@ public abstract class AbstractInterceptorDrivenBeanDefinitionDecorator implement
 	public final BeanDefinitionHolder decorate(Node node, BeanDefinitionHolder definitionHolder, ParserContext parserContext) {
 		BeanDefinitionRegistry registry = parserContext.getRegistry();
 
-		// get the root bean name - will be the name of the generated proxy factory bean
+		// get the root bean name - will be the name of the generated staticProxy factory bean
 		String existingBeanName = definitionHolder.getBeanName();
 		BeanDefinition targetDefinition = definitionHolder.getBeanDefinition();
 		BeanDefinitionHolder targetHolder = new BeanDefinitionHolder(targetDefinition, existingBeanName + ".TARGET");
@@ -78,9 +78,9 @@ public abstract class AbstractInterceptorDrivenBeanDefinitionDecorator implement
 		BeanDefinitionHolder result = definitionHolder;
 
 		if (!isProxyFactoryBeanDefinition(targetDefinition)) {
-			// create the proxy definition
+			// create the staticProxy definition
 			RootBeanDefinition proxyDefinition = new RootBeanDefinition();
-			// create proxy factory bean definition
+			// create staticProxy factory bean definition
 			proxyDefinition.setBeanClass(ProxyFactoryBean.class);
 			proxyDefinition.setScope(targetDefinition.getScope());
 			proxyDefinition.setLazyInit(targetDefinition.isLazyInit());

@@ -70,7 +70,7 @@ public class BeanMethodQualificationTests {
 	public void testScopedProxy() {
 		AnnotationConfigApplicationContext ctx =
 				new AnnotationConfigApplicationContext(ScopedProxyConfig.class, StandardPojo.class);
-		assertTrue(ctx.getBeanFactory().containsSingleton("testBean1"));  // a shared scoped proxy
+		assertTrue(ctx.getBeanFactory().containsSingleton("testBean1"));  // a shared scoped staticProxy
 		StandardPojo pojo = ctx.getBean(StandardPojo.class);
 		assertThat(pojo.testBean.getName(), equalTo("interesting"));
 		assertThat(pojo.testBean2.getName(), equalTo("boring"));

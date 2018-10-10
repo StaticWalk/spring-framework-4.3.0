@@ -158,7 +158,7 @@ public class HibernateTemplate implements HibernateOperations, InitializingBean 
 	/**
 	 * Set whether to expose the native Hibernate Session to
 	 * HibernateCallback code.
-	 * <p>Default is "false": a Session proxy will be returned, suppressing
+	 * <p>Default is "false": a Session staticProxy will be returned, suppressing
 	 * {@code close} calls and automatically applying query cache
 	 * settings and transaction timeouts.
 	 * @see HibernateCallback
@@ -174,7 +174,7 @@ public class HibernateTemplate implements HibernateOperations, InitializingBean 
 
 	/**
 	 * Return whether to expose the native Hibernate Session to
-	 * HibernateCallback code, or rather a Session proxy.
+	 * HibernateCallback code, or rather a Session staticProxy.
 	 */
 	public boolean isExposeNativeSession() {
 		return this.exposeNativeSession;
@@ -357,10 +357,10 @@ public class HibernateTemplate implements HibernateOperations, InitializingBean 
 	}
 
 	/**
-	 * Create a close-suppressing proxy for the given Hibernate Session.
-	 * The proxy also prepares returned Query and Criteria objects.
-	 * @param session the Hibernate Session to create a proxy for
-	 * @return the Session proxy
+	 * Create a close-suppressing staticProxy for the given Hibernate Session.
+	 * The staticProxy also prepares returned Query and Criteria objects.
+	 * @param session the Hibernate Session to create a staticProxy for
+	 * @return the Session staticProxy
 	 * @see Session#close()
 	 * @see #prepareQuery
 	 * @see #prepareCriteria
@@ -1238,7 +1238,7 @@ public class HibernateTemplate implements HibernateOperations, InitializingBean 
 				return (proxy == args[0]);
 			}
 			else if (method.getName().equals("hashCode")) {
-				// Use hashCode of Session proxy.
+				// Use hashCode of Session staticProxy.
 				return System.identityHashCode(proxy);
 			}
 			else if (method.getName().equals("close")) {

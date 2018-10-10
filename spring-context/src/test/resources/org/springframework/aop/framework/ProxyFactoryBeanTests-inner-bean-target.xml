@@ -3,7 +3,7 @@
 
 <!--
 	Test that inner bean for target means that we can use
-	autowire without ambiguity from target and proxy.
+	autowire without ambiguity from target and staticProxy.
 	$Id: innerBeanTarget.xml,v 1.4 2006/08/20 19:08:40 jhoeller Exp $
 -->
 
@@ -27,8 +27,8 @@
 	</bean>
 
 	<!--
-		Autowire would fail if distinct target and proxy:
-		we expect just to have proxy
+		Autowire would fail if distinct target and staticProxy:
+		we expect just to have staticProxy
 	-->
 	<bean id="autowireCheck"
 		class="org.springframework.aop.framework.ProxyFactoryBeanTests$DependsOnITestBean"

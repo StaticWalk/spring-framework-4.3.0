@@ -31,7 +31,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 
 /**
- * Utility methods for AOP proxy factories.
+ * Utility methods for AOP staticProxy factories.
  * Mainly for internal use within the AOP framework.
  *
  * <p>See {@link org.springframework.aop.support.AopUtils} for a collection of
@@ -45,9 +45,9 @@ public abstract class AopProxyUtils {
 
 	/**
 	 * Determine the ultimate target class of the given bean instance, traversing
-	 * not only a top-level proxy but any number of nested proxies as well &mdash;
+	 * not only a top-level staticProxy but any number of nested proxies as well &mdash;
 	 * as long as possible without side effects, that is, just for singleton targets.
-	 * @param candidate the instance to check (might be an AOP proxy)
+	 * @param candidate the instance to check (might be an AOP staticProxy)
 	 * @return the ultimate target class (or the plain class of the given
 	 * object as fallback; never {@code null})
 	 * @see org.springframework.aop.TargetClassAware#getTargetClass()
@@ -75,12 +75,12 @@ public abstract class AopProxyUtils {
 	}
 
 	/**
-	 * Determine the complete set of interfaces to proxy for the given AOP configuration.
+	 * Determine the complete set of interfaces to staticProxy for the given AOP configuration.
 	 * <p>This will always add the {@link Advised} interface unless the AdvisedSupport's
 	 * {@link AdvisedSupport#setOpaque "opaque"} flag is on. Always adds the
 	 * {@link org.springframework.aop.SpringProxy} marker interface.
-	 * @param advised the proxy config
-	 * @return the complete set of interfaces to proxy
+	 * @param advised the staticProxy config
+	 * @return the complete set of interfaces to staticProxy
 	 * @see SpringProxy
 	 * @see Advised
 	 */
@@ -89,13 +89,13 @@ public abstract class AopProxyUtils {
 	}
 
 	/**
-	 * Determine the complete set of interfaces to proxy for the given AOP configuration.
+	 * Determine the complete set of interfaces to staticProxy for the given AOP configuration.
 	 * <p>This will always add the {@link Advised} interface unless the AdvisedSupport's
 	 * {@link AdvisedSupport#setOpaque "opaque"} flag is on. Always adds the
 	 * {@link org.springframework.aop.SpringProxy} marker interface.
-	 * @param advised the proxy config
+	 * @param advised the staticProxy config
 	 * @param decoratingProxy whether to expose the {@link DecoratingProxy} interface
-	 * @return the complete set of interfaces to proxy
+	 * @return the complete set of interfaces to staticProxy
 	 * @since 4.3
 	 * @see SpringProxy
 	 * @see Advised
@@ -147,10 +147,10 @@ public abstract class AopProxyUtils {
 	}
 
 	/**
-	 * Extract the user-specified interfaces that the given proxy implements,
-	 * i.e. all non-Advised interfaces that the proxy implements.
-	 * @param proxy the proxy to analyze (usually a JDK dynamic proxy)
-	 * @return all user-specified interfaces that the proxy implements,
+	 * Extract the user-specified interfaces that the given staticProxy implements,
+	 * i.e. all non-Advised interfaces that the staticProxy implements.
+	 * @param proxy the staticProxy to analyze (usually a JDK dynamic staticProxy)
+	 * @return all user-specified interfaces that the staticProxy implements,
 	 * in the original order (never {@code null} or empty)
 	 * @see Advised
 	 */
@@ -168,7 +168,7 @@ public abstract class AopProxyUtils {
 		}
 		Class<?>[] userInterfaces = new Class<?>[proxyInterfaces.length - nonUserIfcCount];
 		System.arraycopy(proxyInterfaces, 0, userInterfaces, 0, userInterfaces.length);
-		Assert.notEmpty(userInterfaces, "JDK proxy must implement one or more interfaces");
+		Assert.notEmpty(userInterfaces, "JDK staticProxy must implement one or more interfaces");
 		return userInterfaces;
 	}
 

@@ -51,7 +51,7 @@ public class IntroductionInfoSupport implements IntroductionInfo, Serializable {
 	/**
 	 * Suppress the specified interface, which may have been autodetected
 	 * due to the delegate implementing it. Call this method to exclude
-	 * internal interfaces from being visible at the proxy level.
+	 * internal interfaces from being visible at the staticProxy level.
 	 * <p>Does nothing if the interface is not implemented by the delegate.
 	 * @param intf the interface to suppress
 	 */
@@ -79,7 +79,7 @@ public class IntroductionInfoSupport implements IntroductionInfo, Serializable {
 	}
 
 	/**
-	 * Publish all interfaces that the given delegate implements at the proxy level.
+	 * Publish all interfaces that the given delegate implements at the staticProxy level.
 	 * @param delegate the delegate object
 	 */
 	protected void implementInterfacesOnObject(Object delegate) {

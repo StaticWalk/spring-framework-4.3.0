@@ -43,12 +43,12 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
 
 /**
- * Base class for AOP proxy configuration managers.
+ * Base class for AOP staticProxy configuration managers.
  * These are not themselves AOP proxies, but subclasses of this class are
- * normally factories from which AOP proxy instances are obtained directly.
+ * normally factories from which AOP staticProxy instances are obtained directly.
  *
  * <p>This class frees subclasses of the housekeeping of Advices
- * and Advisors, but doesn't actually implement proxy creation
+ * and Advisors, but doesn't actually implement staticProxy creation
  * methods, which are provided by subclasses.
  *
  * <p>This class is serializable; subclasses need not be.
@@ -84,8 +84,8 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 	private transient Map<MethodCacheKey, List<Object>> methodCache;
 
 	/**
-	 * Interfaces to be implemented by the proxy. Held in List to keep the order
-	 * of registration, to create JDK proxy with specified order of interfaces.
+	 * Interfaces to be implemented by the staticProxy. Held in List to keep the order
+	 * of registration, to create JDK staticProxy with specified order of interfaces.
 	 */
 	private List<Class<?>> interfaces = new ArrayList<Class<?>>();
 
@@ -147,13 +147,13 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 	}
 
 	/**
-	 * Set a target class to be proxied, indicating that the proxy
+	 * Set a target class to be proxied, indicating that the staticProxy
 	 * should be castable to the given class.
 	 * <p>Internally, an {@link org.springframework.aop.target.EmptyTargetSource}
-	 * for the given target class will be used. The kind of proxy needed
-	 * will be determined on actual creation of the proxy.
+	 * for the given target class will be used. The kind of staticProxy needed
+	 * will be determined on actual creation of the staticProxy.
 	 * <p>This is a replacement for setting a "targetSource" or "target",
-	 * for the case where we want a proxy based on a target class
+	 * for the case where we want a staticProxy based on a target class
 	 * (which can be an interface or a concrete class) without having
 	 * a fully capable TargetSource available.
 	 * @see #setTargetSource
@@ -208,7 +208,7 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 
 	/**
 	 * Add a new proxied interface.
-	 * @param intf the additional interface to proxy
+	 * @param intf the additional interface to staticProxy
 	 */
 	public void addInterface(Class<?> intf) {
 		Assert.notNull(intf, "Interface must not be null");
@@ -224,7 +224,7 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 	/**
 	 * Remove a proxied interface.
 	 * <p>Does nothing if the given interface isn't proxied.
-	 * @param intf the interface to remove from the proxy
+	 * @param intf the interface to remove from the staticProxy
 	 * @return {@code true} if the interface was removed; {@code false}
 	 * if the interface was not found and hence could not be removed
 	 */
@@ -323,7 +323,7 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 	}
 
 	/**
-	 * Add all of the given advisors to this proxy configuration.
+	 * Add all of the given advisors to this staticProxy configuration.
 	 * @param advisors the advisors to register
 	 */
 	public void addAdvisors(Advisor... advisors) {
@@ -331,7 +331,7 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 	}
 
 	/**
-	 * Add all of the given advisors to this proxy configuration.
+	 * Add all of the given advisors to this staticProxy configuration.
 	 * @param advisors the advisors to register
 	 */
 	public void addAdvisors(Collection<Advisor> advisors) {
@@ -442,7 +442,7 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 	}
 
 	/**
-	 * Is the given advice included in any advisor within this proxy configuration?
+	 * Is the given advice included in any advisor within this staticProxy configuration?
 	 * @param advice the advice to check inclusion of
 	 * @return whether this advice instance is included
 	 */
@@ -512,7 +512,7 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 	/**
 	 * Copy the AOP configuration from the given AdvisedSupport object,
 	 * but allow substitution of a fresh TargetSource and a given interceptor chain.
-	 * @param other the AdvisedSupport object to take proxy configuration from
+	 * @param other the AdvisedSupport object to take staticProxy configuration from
 	 * @param targetSource the new TargetSource
 	 * @param advisors the Advisors for the chain
 	 */

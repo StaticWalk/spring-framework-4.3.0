@@ -65,7 +65,7 @@ public class GenericMessageEndpointFactory extends AbstractMessageEndpointFactor
 	}
 
 	/**
-	 * Wrap each concrete endpoint instance with an AOP proxy,
+	 * Wrap each concrete endpoint instance with an AOP staticProxy,
 	 * exposing the message listener's interfaces as well as the
 	 * endpoint SPI through an AOP introduction.
 	 */
@@ -90,7 +90,7 @@ public class GenericMessageEndpointFactory extends AbstractMessageEndpointFactor
 
 	/**
 	 * Private inner class that implements the concrete generic message endpoint,
-	 * as an AOP Alliance MethodInterceptor that will be invoked by a proxy.
+	 * as an AOP Alliance MethodInterceptor that will be invoked by a staticProxy.
 	 */
 	private class GenericMessageEndpoint extends AbstractMessageEndpoint implements MethodInterceptor {
 

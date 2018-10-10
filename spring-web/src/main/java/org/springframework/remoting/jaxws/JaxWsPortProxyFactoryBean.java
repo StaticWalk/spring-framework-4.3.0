@@ -23,7 +23,7 @@ import org.springframework.beans.factory.FactoryBean;
 
 /**
  * {@link org.springframework.beans.factory.FactoryBean} for a specific port of a
- * JAX-WS service. Exposes a proxy for the port, to be used for bean references.
+ * JAX-WS service. Exposes a staticProxy for the port, to be used for bean references.
  * Inherits configuration properties from {@link JaxWsPortClientInterceptor}.
  *
  * @author Juergen Hoeller
@@ -41,7 +41,7 @@ public class JaxWsPortProxyFactoryBean extends JaxWsPortClientInterceptor
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
 
-		// Build a proxy that also exposes the JAX-WS BindingProvider interface.
+		// Build a staticProxy that also exposes the JAX-WS BindingProvider interface.
 		ProxyFactory pf = new ProxyFactory();
 		pf.addInterface(getServiceInterface());
 		pf.addInterface(BindingProvider.class);

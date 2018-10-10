@@ -288,7 +288,7 @@ public class JaxWsPortClientInterceptor extends LocalJaxWsServiceFactory
 	}
 
 	/**
-	 * Set the interface of the service that this factory should create a proxy for.
+	 * Set the interface of the service that this factory should create a staticProxy for.
 	 */
 	public void setServiceInterface(Class<?> serviceInterface) {
 		if (serviceInterface != null && !serviceInterface.isInterface()) {
@@ -298,7 +298,7 @@ public class JaxWsPortClientInterceptor extends LocalJaxWsServiceFactory
 	}
 
 	/**
-	 * Return the interface of the service that this factory should create a proxy for.
+	 * Return the interface of the service that this factory should create a staticProxy for.
 	 */
 	public Class<?> getServiceInterface() {
 		return this.serviceInterface;
@@ -318,7 +318,7 @@ public class JaxWsPortClientInterceptor extends LocalJaxWsServiceFactory
 	 * Set the bean ClassLoader to use for this interceptor:
 	 * for resolving WebServiceFeature class names as specified through
 	 * {@link #setWebServiceFeatures}, and also for building a client
-	 * proxy in the {@link JaxWsPortProxyFactoryBean} subclass.
+	 * staticProxy in the {@link JaxWsPortProxyFactoryBean} subclass.
 	 */
 	@Override
 	public void setBeanClassLoader(ClassLoader classLoader) {
@@ -520,7 +520,7 @@ public class JaxWsPortClientInterceptor extends LocalJaxWsServiceFactory
 
 	/**
 	 * Return the underlying JAX-WS port stub that this interceptor delegates to
-	 * for each method invocation on the proxy.
+	 * for each method invocation on the staticProxy.
 	 */
 	protected Object getPortStub() {
 		return this.portStub;
@@ -530,7 +530,7 @@ public class JaxWsPortClientInterceptor extends LocalJaxWsServiceFactory
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
 		if (AopUtils.isToStringMethod(invocation.getMethod())) {
-			return "JAX-WS proxy for port [" + getPortName() + "] of service [" + getServiceName() + "]";
+			return "JAX-WS staticProxy for port [" + getPortName() + "] of service [" + getServiceName() + "]";
 		}
 		// Lazily prepare service and stub if necessary.
 		synchronized (this.preparationMonitor) {

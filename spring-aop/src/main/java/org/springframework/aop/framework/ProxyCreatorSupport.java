@@ -22,7 +22,7 @@ import java.util.List;
 import org.springframework.util.Assert;
 
 /**
- * Base class for proxy factories.
+ * Base class for staticProxy factories.
  * Provides convenient access to a configurable AopProxyFactory.
  *
  * @author Juergen Hoeller
@@ -36,7 +36,7 @@ public class ProxyCreatorSupport extends AdvisedSupport {
 
 	private List<AdvisedSupportListener> listeners = new LinkedList<AdvisedSupportListener>();
 
-	/** Set to true when the first AOP proxy has been created */
+	/** Set to true when the first AOP staticProxy has been created */
 	private boolean active = false;
 
 
@@ -76,7 +76,7 @@ public class ProxyCreatorSupport extends AdvisedSupport {
 	}
 
 	/**
-	 * Add the given AdvisedSupportListener to this proxy configuration.
+	 * Add the given AdvisedSupportListener to this staticProxy configuration.
 	 * @param listener the listener to register
 	 */
 	public void addListener(AdvisedSupportListener listener) {
@@ -85,7 +85,7 @@ public class ProxyCreatorSupport extends AdvisedSupport {
 	}
 
 	/**
-	 * Remove the given AdvisedSupportListener from this proxy configuration.
+	 * Remove the given AdvisedSupportListener from this staticProxy configuration.
 	 * @param listener the listener to deregister
 	 */
 	public void removeListener(AdvisedSupportListener listener) {
@@ -95,8 +95,8 @@ public class ProxyCreatorSupport extends AdvisedSupport {
 
 
 	/**
-	 * Subclasses should call this to get a new AOP proxy. They should <b>not</b>
-	 * create an AOP proxy with {@code this} as an argument.
+	 * Subclasses should call this to get a new AOP staticProxy. They should <b>not</b>
+	 * create an AOP staticProxy with {@code this} as an argument.
 	 */
 	protected final synchronized AopProxy createAopProxy() {
 		if (!this.active) {
@@ -106,7 +106,7 @@ public class ProxyCreatorSupport extends AdvisedSupport {
 	}
 
 	/**
-	 * Activate this proxy configuration.
+	 * Activate this staticProxy configuration.
 	 * @see AdvisedSupportListener#activated
 	 */
 	private void activate() {

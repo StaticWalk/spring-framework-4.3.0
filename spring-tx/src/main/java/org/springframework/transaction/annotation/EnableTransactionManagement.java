@@ -79,7 +79,7 @@ import org.springframework.core.Ordered;
  * In both of the scenarios above, {@code @EnableTransactionManagement} and {@code
  * <tx:annotation-driven/>} are responsible for registering the necessary Spring
  * components that power annotation-driven transaction management, such as the
- * TransactionInterceptor and the proxy- or AspectJ-based advice that weave the
+ * TransactionInterceptor and the staticProxy- or AspectJ-based advice that weave the
  * interceptor into the call stack when {@code JdbcFooRepository}'s {@code @Transactional}
  * methods are invoked.
  *
@@ -162,7 +162,7 @@ public @interface EnableTransactionManagement {
 	 * {@code @Transactional}. For example, other beans marked with Spring's
 	 * {@code @Async} annotation will be upgraded to subclass proxying at the same
 	 * time. This approach has no negative impact in practice unless one is explicitly
-	 * expecting one type of proxy vs another, e.g. in tests.
+	 * expecting one type of staticProxy vs another, e.g. in tests.
 	 */
 	boolean proxyTargetClass() default false;
 

@@ -133,7 +133,7 @@ public class BshScriptFactoryTests {
 		ConfigurableMessenger messenger = (ConfigurableMessenger) ctx.getBean("messengerPrototype");
 		ConfigurableMessenger messenger2 = (ConfigurableMessenger) ctx.getBean("messengerPrototype");
 
-		assertFalse("Shouldn't get proxy when refresh is disabled", AopUtils.isAopProxy(messenger));
+		assertFalse("Shouldn't get staticProxy when refresh is disabled", AopUtils.isAopProxy(messenger));
 		assertFalse("Scripted object should not be instance of Refreshable", messenger instanceof Refreshable);
 
 		assertNotSame(messenger, messenger2);
@@ -151,7 +151,7 @@ public class BshScriptFactoryTests {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("bshRefreshableContext.xml", getClass());
 		Messenger messenger = (Messenger) ctx.getBean("messenger");
 
-		assertTrue("Should be a proxy for refreshable scripts", AopUtils.isAopProxy(messenger));
+		assertTrue("Should be a staticProxy for refreshable scripts", AopUtils.isAopProxy(messenger));
 		assertTrue("Should be an instance of Refreshable", messenger instanceof Refreshable);
 
 		String desiredMessage = "Hello World!";
@@ -170,7 +170,7 @@ public class BshScriptFactoryTests {
 		ConfigurableMessenger messenger = (ConfigurableMessenger) ctx.getBean("messengerPrototype");
 		ConfigurableMessenger messenger2 = (ConfigurableMessenger) ctx.getBean("messengerPrototype");
 
-		assertTrue("Should be a proxy for refreshable scripts", AopUtils.isAopProxy(messenger));
+		assertTrue("Should be a staticProxy for refreshable scripts", AopUtils.isAopProxy(messenger));
 		assertTrue("Should be an instance of Refreshable", messenger instanceof Refreshable);
 
 		assertEquals("Hello World!", messenger.getMessage());

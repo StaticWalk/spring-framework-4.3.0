@@ -21,7 +21,7 @@ import org.springframework.util.Assert;
 
 /**
  * Describes scope characteristics for a Spring-managed bean including the scope
- * name and the scoped-proxy behavior.
+ * name and the scoped-staticProxy behavior.
  *
  * <p>The default scope is "singleton", and the default is to <i>not</i> create
  * scoped-proxies.
@@ -55,7 +55,7 @@ public class ScopeMetadata {
 	}
 
 	/**
-	 * Set the proxy-mode to be applied to the scoped instance.
+	 * Set the staticProxy-mode to be applied to the scoped instance.
 	 */
 	public void setScopedProxyMode(ScopedProxyMode scopedProxyMode) {
 		Assert.notNull(scopedProxyMode, "'scopedProxyMode' must not be null");
@@ -63,7 +63,7 @@ public class ScopeMetadata {
 	}
 
 	/**
-	 * Get the proxy-mode to be applied to the scoped instance.
+	 * Get the staticProxy-mode to be applied to the scoped instance.
 	 */
 	public ScopedProxyMode getScopedProxyMode() {
 		return this.scopedProxyMode;

@@ -72,7 +72,7 @@ public abstract class AbstractMethodMessageHandler<T>
 	 * Bean name prefix for target beans behind scoped proxies. Used to exclude those
 	 * targets from handler method detection, in favor of the corresponding proxies.
 	 * <p>We're not checking the autowire-candidate status here, which is how the
-	 * proxy target filtering problem is being handled at the autowiring level,
+	 * staticProxy target filtering problem is being handled at the autowiring level,
 	 * since autowire-candidate may have been turned to {@code false} for other
 	 * reasons, while still expecting the bean to be eligible for handler methods.
 	 * <p>Originally defined in {@link org.springframework.aop.scope.ScopedProxyUtils}

@@ -68,7 +68,7 @@ public interface JpaVendorAdapter {
 
 	/**
 	 * Return the vendor-specific EntityManagerFactory interface
-	 * that the EntityManagerFactory proxy is supposed to implement.
+	 * that the EntityManagerFactory staticProxy is supposed to implement.
 	 * <p>If the provider does not offer any EntityManagerFactory extensions,
 	 * the adapter should simply return the standard
 	 * {@link javax.persistence.EntityManagerFactory} class here.

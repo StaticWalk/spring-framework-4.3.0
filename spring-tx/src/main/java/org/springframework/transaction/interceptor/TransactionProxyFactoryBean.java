@@ -36,7 +36,7 @@ import org.springframework.transaction.PlatformTransactionManager;
  *
  * <p><strong>HISTORICAL NOTE:</strong> This class was originally designed to cover the
  * typical case of declarative transaction demarcation: namely, wrapping a singleton
- * target object with a transactional proxy, proxying all the interfaces that the target
+ * target object with a transactional staticProxy, proxying all the interfaces that the target
  * implements. However, in Spring versions 2.0 and beyond, the functionality provided here
  * is superseded by the more convenient {@code tx:} XML namespace. See the <a
  * href="http://bit.ly/qUwvwz">declarative transaction management</a> section of the
@@ -51,7 +51,7 @@ import org.springframework.transaction.PlatformTransactionManager;
  * <ul>
  * <li>"transactionManager": the {@link PlatformTransactionManager} implementation to use
  * (for example, a {@link org.springframework.transaction.jta.JtaTransactionManager} instance)
- * <li>"target": the target object that a transactional proxy should be created for
+ * <li>"target": the target object that a transactional staticProxy should be created for
  * <li>"transactionAttributes": the transaction attributes (for example, propagation
  * behavior and "readOnly" flag) per target method name (or method name pattern)
  * </ul>
@@ -202,7 +202,7 @@ public class TransactionProxyFactoryBean extends AbstractSingletonProxyFactoryBe
 
 	/**
 	 * As of 4.2, this method adds {@link TransactionalProxy} to the set of
-	 * proxy interfaces in order to avoid re-processing of transaction metadata.
+	 * staticProxy interfaces in order to avoid re-processing of transaction metadata.
 	 */
 	@Override
 	protected void postProcessProxyFactory(ProxyFactory proxyFactory) {

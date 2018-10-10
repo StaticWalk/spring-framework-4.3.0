@@ -264,9 +264,9 @@ public interface HibernateOperations {
 	void evict(Object entity) throws DataAccessException;
 
 	/**
-	 * Force initialization of a Hibernate proxy or persistent collection.
-	 * @param proxy a proxy for a persistent object or a persistent collection
-	 * @throws DataAccessException if we can't initialize the proxy, for example
+	 * Force initialization of a Hibernate staticProxy or persistent collection.
+	 * @param proxy a staticProxy for a persistent object or a persistent collection
+	 * @throws DataAccessException if we can't initialize the staticProxy, for example
 	 * because it is not associated with an active Session
 	 * @see org.hibernate.Hibernate#initialize
 	 */

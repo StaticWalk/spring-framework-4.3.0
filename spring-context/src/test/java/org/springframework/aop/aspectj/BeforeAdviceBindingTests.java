@@ -56,7 +56,7 @@ public final class BeforeAdviceBindingTests {
 		testBeanProxy = (ITestBean) ctx.getBean("testBean");
 		assertTrue(AopUtils.isAopProxy(testBeanProxy));
 
-		// we need the real target too, not just the proxy...
+		// we need the real target too, not just the staticProxy...
 		testBeanTarget = (TestBean) ((Advised) testBeanProxy).getTargetSource().getTarget();
 
 		AdviceBindingTestAspect beforeAdviceAspect = (AdviceBindingTestAspect) ctx.getBean("testAspect");

@@ -25,7 +25,7 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
 
 /**
- * Base class with common functionality for proxy processors, in particular
+ * Base class with common functionality for staticProxy processors, in particular
  * ClassLoader management and the {@link #evaluateProxyInterfaces} algorithm.
  *
  * @author Juergen Hoeller
@@ -38,7 +38,7 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 
 	/**
 	 * This should run after all other processors, so that it can just add
-	 * an advisor to existing proxies rather than double-proxy.
+	 * an advisor to existing proxies rather than double-staticProxy.
 	 */
 	private int order = Ordered.LOWEST_PRECEDENCE;
 
@@ -63,7 +63,7 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 	}
 
 	/**
-	 * Set the ClassLoader to generate the proxy class in.
+	 * Set the ClassLoader to generate the staticProxy class in.
 	 * <p>Default is the bean ClassLoader, i.e. the ClassLoader used by the containing
 	 * {@link org.springframework.beans.factory.BeanFactory} for loading all bean classes.
 	 * This can be overridden here for specific proxies.
@@ -74,7 +74,7 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 	}
 
 	/**
-	 * Return the configured proxy ClassLoader for this processor.
+	 * Return the configured staticProxy ClassLoader for this processor.
 	 */
 	protected ClassLoader getProxyClassLoader() {
 		return this.proxyClassLoader;
@@ -92,7 +92,7 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 	 * Check the interfaces on the given bean class and apply them to the {@link ProxyFactory},
 	 * if appropriate.
 	 * <p>Calls {@link #isConfigurationCallbackInterface} and {@link #isInternalLanguageInterface}
-	 * to filter for reasonable proxy interfaces, falling back to a target-class proxy otherwise.
+	 * to filter for reasonable staticProxy interfaces, falling back to a target-class staticProxy otherwise.
 	 * @param beanClass the class of the bean
 	 * @param proxyFactory the ProxyFactory for the bean
 	 */
@@ -119,8 +119,8 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 
 	/**
 	 * Determine whether the given interface is just a container callback and
-	 * therefore not to be considered as a reasonable proxy interface.
-	 * <p>If no reasonable proxy interface is found for a given bean, it will get
+	 * therefore not to be considered as a reasonable staticProxy interface.
+	 * <p>If no reasonable staticProxy interface is found for a given bean, it will get
 	 * proxied with its full target class, assuming that as the user's intention.
 	 * @param ifc the interface to check
 	 * @return whether the given interface is just a container callback
@@ -132,8 +132,8 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 
 	/**
 	 * Determine whether the given interface is a well-known internal language interface
-	 * and therefore not to be considered as a reasonable proxy interface.
-	 * <p>If no reasonable proxy interface is found for a given bean, it will get
+	 * and therefore not to be considered as a reasonable staticProxy interface.
+	 * <p>If no reasonable staticProxy interface is found for a given bean, it will get
 	 * proxied with its full target class, assuming that as the user's intention.
 	 * @param ifc the interface to check
 	 * @return whether the given interface is an internal language interface

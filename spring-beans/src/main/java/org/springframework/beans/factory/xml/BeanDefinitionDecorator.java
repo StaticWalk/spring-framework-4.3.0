@@ -44,7 +44,7 @@ import org.springframework.beans.factory.config.BeanDefinitionHolder;
  * <p>{@link BeanDefinitionDecorator BeanDefinitionDecorators} that wish to add an
  * interceptor to the enclosing bean should extend
  * {@link org.springframework.aop.config.AbstractInterceptorDrivenBeanDefinitionDecorator}
- * which handles the chaining ensuring that only one proxy is created and that it
+ * which handles the chaining ensuring that only one staticProxy is created and that it
  * contains all interceptors from the chain.
  *
  * <p>The parser locates a {@link BeanDefinitionDecorator} from the

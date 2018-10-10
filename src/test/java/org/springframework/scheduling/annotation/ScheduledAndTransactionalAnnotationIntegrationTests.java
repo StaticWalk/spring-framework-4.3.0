@@ -80,7 +80,7 @@ public class ScheduledAndTransactionalAnnotationIntegrationTests {
 
 		MyRepository repository = ctx.getBean(MyRepository.class);
 		CallCountingTransactionManager txManager = ctx.getBean(CallCountingTransactionManager.class);
-		assertThat("repository is not a proxy", AopUtils.isAopProxy(repository), equalTo(true));
+		assertThat("repository is not a staticProxy", AopUtils.isAopProxy(repository), equalTo(true));
 		assertThat("@Scheduled method never called", repository.getInvocationCount(), greaterThan(0));
 		assertThat("no transactions were committed", txManager.commits, greaterThan(0));
 	}
@@ -95,7 +95,7 @@ public class ScheduledAndTransactionalAnnotationIntegrationTests {
 
 		MyRepositoryWithScheduledMethod repository = ctx.getBean(MyRepositoryWithScheduledMethod.class);
 		CallCountingTransactionManager txManager = ctx.getBean(CallCountingTransactionManager.class);
-		assertThat("repository is not a proxy", AopUtils.isAopProxy(repository), is(true));
+		assertThat("repository is not a staticProxy", AopUtils.isAopProxy(repository), is(true));
 		assertThat("@Scheduled method never called", repository.getInvocationCount(), greaterThan(0));
 		assertThat("no transactions were committed", txManager.commits, greaterThan(0));
 	}

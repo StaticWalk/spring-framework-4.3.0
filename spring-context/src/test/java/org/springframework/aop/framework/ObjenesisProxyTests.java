@@ -26,7 +26,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 /**
- * Integration test for Objenesis proxy creation.
+ * Integration test for Objenesis staticProxy creation.
  *
  * @author Oliver Gierke
  */

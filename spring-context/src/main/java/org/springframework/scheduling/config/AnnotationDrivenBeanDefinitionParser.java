@@ -62,7 +62,7 @@ public class AnnotationDrivenBeanDefinitionParser implements BeanDefinitionParse
 			registerAsyncExecutionAspect(element, parserContext);
 		}
 		else {
-			// mode="proxy"
+			// mode="staticProxy"
 			if (registry.containsBeanDefinition(TaskManagementConfigUtils.ASYNC_ANNOTATION_PROCESSOR_BEAN_NAME)) {
 				parserContext.getReaderContext().error(
 						"Only one AsyncAnnotationBeanPostProcessor may exist within the context.", source);

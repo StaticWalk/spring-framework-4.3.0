@@ -65,7 +65,7 @@ public final class AfterReturningAdviceBindingTests {
 		testBeanProxy = (ITestBean) ctx.getBean("testBean");
 		assertTrue(AopUtils.isAopProxy(testBeanProxy));
 
-		// we need the real target too, not just the proxy...
+		// we need the real target too, not just the staticProxy...
 		this.testBeanTarget = (TestBean) ((Advised)testBeanProxy).getTargetSource().getTarget();
 	}
 

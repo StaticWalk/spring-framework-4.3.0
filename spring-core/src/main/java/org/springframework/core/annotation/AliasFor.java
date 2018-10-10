@@ -53,7 +53,7 @@ import java.lang.annotation.Target;
  * on its own will not enforce alias semantics. For alias semantics to be
  * enforced, annotations must be <em>loaded</em> via the utility methods in
  * {@link AnnotationUtils}. Behind the scenes, Spring will <em>synthesize</em>
- * an annotation by wrapping it in a dynamic proxy that transparently enforces
+ * an annotation by wrapping it in a dynamic staticProxy that transparently enforces
  * <em>attribute alias</em> semantics for annotation attributes that are
  * annotated with {@code @AliasFor}. Similarly, {@link AnnotatedElementUtils}
  * supports explicit meta-annotation attribute overrides when {@code @AliasFor}

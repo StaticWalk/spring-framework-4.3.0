@@ -79,12 +79,12 @@ public @interface Scope {
 	String scopeName() default "";
 
 	/**
-	 * Specifies whether a component should be configured as a scoped proxy
-	 * and if so, whether the proxy should be interface-based or subclass-based.
+	 * Specifies whether a component should be configured as a scoped staticProxy
+	 * and if so, whether the staticProxy should be interface-based or subclass-based.
 	 * <p>Defaults to {@link ScopedProxyMode#DEFAULT}, which typically indicates
-	 * that no scoped proxy should be created unless a different default
+	 * that no scoped staticProxy should be created unless a different default
 	 * has been configured at the component-scan instruction level.
-	 * <p>Analogous to {@code <aop:scoped-proxy/>} support in Spring XML.
+	 * <p>Analogous to {@code <aop:scoped-staticProxy/>} support in Spring XML.
 	 * @see ScopedProxyMode
 	 */
 	ScopedProxyMode proxyMode() default ScopedProxyMode.DEFAULT;

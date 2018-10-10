@@ -26,7 +26,7 @@ import org.springframework.web.context.WebApplicationContext;
  * JSF NavigationHandler implementation that delegates to a NavigationHandler
  * bean obtained from the Spring root WebApplicationContext.
  *
- * <p>Configure this handler proxy in your {@code faces-config.xml} file
+ * <p>Configure this handler staticProxy in your {@code faces-config.xml} file
  * as follows:
  *
  * <pre class="code">
@@ -56,11 +56,11 @@ import org.springframework.web.context.WebApplicationContext;
  *
  * <p>For <b>decorating the original NavigationHandler</b>, make sure that your
  * target bean extends Spring's <b>DecoratingNavigationHandler</b> class. This
- * allows to pass in the original handler as method argument, which this proxy
+ * allows to pass in the original handler as method argument, which this staticProxy
  * automatically detects. Note that a DecoratingNavigationHandler subclass
  * will still work as standard JSF NavigationHandler as well!
  *
- * <p>This proxy may be subclassed to change the bean name used to search for the
+ * <p>This staticProxy may be subclassed to change the bean name used to search for the
  * navigation handler, change the strategy used to obtain the target handler,
  * or change the strategy used to access the ApplicationContext (normally obtained
  * via {@link FacesContextUtils#getWebApplicationContext(FacesContext)}).

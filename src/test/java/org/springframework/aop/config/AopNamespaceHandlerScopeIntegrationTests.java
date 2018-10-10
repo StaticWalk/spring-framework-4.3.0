@@ -38,7 +38,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
 /**
- * Integration tests for scoped proxy use in conjunction with aop: namespace.
+ * Integration tests for scoped staticProxy use in conjunction with aop: namespace.
  * Deemed an integration test because .web mocks and application contexts are required.
  *
  * @see org.springframework.aop.config.AopNamespaceHandlerTests
@@ -65,8 +65,8 @@ public final class AopNamespaceHandlerScopeIntegrationTests {
 	@Test
 	public void testSingletonScoping() throws Exception {
 		ITestBean scoped = (ITestBean) this.context.getBean("singletonScoped");
-		assertTrue("Should be AOP proxy", AopUtils.isAopProxy(scoped));
-		assertTrue("Should be target class proxy", scoped instanceof TestBean);
+		assertTrue("Should be AOP staticProxy", AopUtils.isAopProxy(scoped));
+		assertTrue("Should be target class staticProxy", scoped instanceof TestBean);
 		String rob = "Rob Harrop";
 		String bram = "Bram Smeets";
 		assertEquals(rob, scoped.getName());
@@ -84,12 +84,12 @@ public final class AopNamespaceHandlerScopeIntegrationTests {
 		RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(oldRequest));
 
 		ITestBean scoped = (ITestBean) this.context.getBean("requestScoped");
-		assertTrue("Should be AOP proxy", AopUtils.isAopProxy(scoped));
-		assertTrue("Should be target class proxy", scoped instanceof TestBean);
+		assertTrue("Should be AOP staticProxy", AopUtils.isAopProxy(scoped));
+		assertTrue("Should be target class staticProxy", scoped instanceof TestBean);
 
 		ITestBean testBean = (ITestBean) this.context.getBean("testBean");
-		assertTrue("Should be AOP proxy", AopUtils.isAopProxy(testBean));
-		assertFalse("Regular bean should be JDK proxy", testBean instanceof TestBean);
+		assertTrue("Should be AOP staticProxy", AopUtils.isAopProxy(testBean));
+		assertFalse("Regular bean should be JDK staticProxy", testBean instanceof TestBean);
 
 		String rob = "Rob Harrop";
 		String bram = "Bram Smeets";
@@ -114,15 +114,15 @@ public final class AopNamespaceHandlerScopeIntegrationTests {
 		RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
 		ITestBean scoped = (ITestBean) this.context.getBean("sessionScoped");
-		assertTrue("Should be AOP proxy", AopUtils.isAopProxy(scoped));
-		assertFalse("Should not be target class proxy", scoped instanceof TestBean);
+		assertTrue("Should be AOP staticProxy", AopUtils.isAopProxy(scoped));
+		assertFalse("Should not be target class staticProxy", scoped instanceof TestBean);
 
 		ITestBean scopedAlias = (ITestBean) this.context.getBean("sessionScopedAlias");
 		assertSame(scoped, scopedAlias);
 
 		ITestBean testBean = (ITestBean) this.context.getBean("testBean");
-		assertTrue("Should be AOP proxy", AopUtils.isAopProxy(testBean));
-		assertFalse("Regular bean should be JDK proxy", testBean instanceof TestBean);
+		assertTrue("Should be AOP staticProxy", AopUtils.isAopProxy(testBean));
+		assertFalse("Regular bean should be JDK staticProxy", testBean instanceof TestBean);
 
 		String rob = "Rob Harrop";
 		String bram = "Bram Smeets";

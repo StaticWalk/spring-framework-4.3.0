@@ -116,7 +116,7 @@ public class ReflectionTestUtilsTests {
 		ProxyFactory pf = new ProxyFactory(this.person);
 		pf.addInterface(Person.class);
 		Person proxy = (Person) pf.getProxy();
-		assertTrue("Proxy is a JDK dynamic proxy", AopUtils.isJdkDynamicProxy(proxy));
+		assertTrue("Proxy is a JDK dynamic staticProxy", AopUtils.isJdkDynamicProxy(proxy));
 		assertSetFieldAndGetFieldBehaviorForProxy(proxy, this.person);
 	}
 
@@ -125,7 +125,7 @@ public class ReflectionTestUtilsTests {
 		ProxyFactory pf = new ProxyFactory(this.person);
 		pf.setProxyTargetClass(true);
 		Person proxy = (Person) pf.getProxy();
-		assertTrue("Proxy is a CGLIB proxy", AopUtils.isCglibProxy(proxy));
+		assertTrue("Proxy is a CGLIB staticProxy", AopUtils.isCglibProxy(proxy));
 		assertSetFieldAndGetFieldBehaviorForProxy(proxy, this.person);
 	}
 

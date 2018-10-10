@@ -79,7 +79,7 @@ public abstract class AbstractMonitoringInterceptor extends AbstractTraceInterce
 	/**
 	 * Set whether to log the invocation on the target class, if applicable
 	 * (i.e. if the method is actually delegated to the target class).
-	 * <p>Default is "false", logging the invocation based on the proxy
+	 * <p>Default is "false", logging the invocation based on the staticProxy
 	 * interface/class name.
 	 */
 	public void setLogTargetClassInvocation(boolean logTargetClassInvocation) {

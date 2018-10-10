@@ -75,7 +75,7 @@ import org.springframework.util.StringUtils;
  * be undesirable when running against a remote {@code MBeanServer}
  * that may not be running when the application starts. Through setting the
  * {@link #setConnectOnStartup(boolean) connectOnStartup} property to "false",
- * you can defer this process until the first invocation against the proxy.
+ * you can defer this process until the first invocation against the staticProxy.
  *
  * <p>This functionality is usually used through {@link MBeanProxyFactoryBean}.
  * See the javadoc of that class for more information.
@@ -174,7 +174,7 @@ public class MBeanClientInterceptor
 	}
 
 	/**
-	 * Set whether or not the proxy should connect to the {@code MBeanServer}
+	 * Set whether or not the staticProxy should connect to the {@code MBeanServer}
 	 * at creation time ("true") or the first time it is invoked ("false").
 	 * Default is "true".
 	 */
@@ -277,7 +277,7 @@ public class MBeanClientInterceptor
 	}
 	/**
 	 * Loads the management interface info for the configured MBean into the caches.
-	 * This information is used by the proxy when determining whether an invocation matches
+	 * This information is used by the staticProxy when determining whether an invocation matches
 	 * a valid operation or attribute on the management interface of the managed resource.
 	 */
 	private void retrieveMBeanInfo() throws MBeanInfoRetrievalException {
@@ -306,7 +306,7 @@ public class MBeanClientInterceptor
 		catch (InstanceNotFoundException ex) {
 			// if we are this far this shouldn't happen, but...
 			throw new MBeanInfoRetrievalException("Unable to obtain MBean info for bean [" + this.objectName +
-					"]: it is likely that this bean was unregistered during the proxy creation process",
+					"]: it is likely that this bean was unregistered during the staticProxy creation process",
 					ex);
 		}
 		catch (ReflectionException ex) {
@@ -521,9 +521,9 @@ public class MBeanClientInterceptor
 
 	/**
 	 * Convert the given result object (from attribute access or operation invocation)
-	 * to the specified target class for returning from the proxy method.
+	 * to the specified target class for returning from the staticProxy method.
 	 * @param result the result object as returned by the {@code MBeanServer}
-	 * @param parameter the method parameter of the proxy method that's been invoked
+	 * @param parameter the method parameter of the staticProxy method that's been invoked
 	 * @return the converted result object, or the passed-in object if no conversion
 	 * is necessary
 	 */

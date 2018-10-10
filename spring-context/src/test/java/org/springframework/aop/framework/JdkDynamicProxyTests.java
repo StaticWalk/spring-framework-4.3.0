@@ -44,7 +44,7 @@ public class JdkDynamicProxyTests extends AbstractAopProxyTests implements Seria
 	protected Object createProxy(ProxyCreatorSupport as) {
 		assertFalse("Not forcible CGLIB", as.isProxyTargetClass());
 		Object proxy = as.createAopProxy().getProxy();
-		assertTrue("Should be a JDK proxy: " + proxy.getClass(), AopUtils.isJdkDynamicProxy(proxy));
+		assertTrue("Should be a JDK staticProxy: " + proxy.getClass(), AopUtils.isJdkDynamicProxy(proxy));
 		return proxy;
 	}
 

@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 
 <!--
-	Common bean definitions for auto proxy creator tests.
+	Common bean definitions for auto staticProxy creator tests.
 -->
 <beans>
 

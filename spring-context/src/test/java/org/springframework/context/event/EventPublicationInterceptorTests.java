@@ -107,7 +107,7 @@ public class EventPublicationInterceptorTests {
 
 		ITestBean testBean = (ITestBean) factory.getProxy();
 
-		// invoke any method on the advised proxy to see if the interceptor has been invoked
+		// invoke any method on the advised staticProxy to see if the interceptor has been invoked
 		testBean.getAge();
 
 		// two events: ContextRefreshedEvent and TestEvent

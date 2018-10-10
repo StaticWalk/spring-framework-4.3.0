@@ -243,7 +243,7 @@ public class CachingConnectionFactory extends SingleConnectionFactory {
 	}
 
 	/**
-	 * Wrap the given Session with a proxy that delegates every method call to it
+	 * Wrap the given Session with a staticProxy that delegates every method call to it
 	 * but adapts close calls. This is useful for allowing application code to
 	 * handle a special framework Session just like an ordinary Session.
 	 * @param target the original Session to wrap
@@ -267,7 +267,7 @@ public class CachingConnectionFactory extends SingleConnectionFactory {
 
 
 	/**
-	 * Invocation handler for a cached JMS Session proxy.
+	 * Invocation handler for a cached JMS Session staticProxy.
 	 */
 	private class CachedSessionInvocationHandler implements InvocationHandler {
 
@@ -296,7 +296,7 @@ public class CachingConnectionFactory extends SingleConnectionFactory {
 				return (proxy == args[0]);
 			}
 			else if (methodName.equals("hashCode")) {
-				// Use hashCode of Session proxy.
+				// Use hashCode of Session staticProxy.
 				return System.identityHashCode(proxy);
 			}
 			else if (methodName.equals("toString")) {

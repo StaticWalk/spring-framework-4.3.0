@@ -32,7 +32,7 @@ import org.springframework.remoting.support.RemoteInvocationResult;
 
 /**
  * HTTP request handler that exports the specified service bean as
- * HTTP invoker service endpoint, accessible via an HTTP invoker proxy.
+ * HTTP invoker service endpoint, accessible via an HTTP invoker staticProxy.
  * Designed for Sun's JRE 1.6 HTTP server, implementing the
  * {@link com.sun.net.httpserver.HttpHandler} interface.
  *

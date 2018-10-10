@@ -55,7 +55,7 @@ public class AnnotationTransactionNamespaceHandlerTests {
 	@Test
 	public void isProxy() throws Exception {
 		TransactionalTestBean bean = getTestBean();
-		assertTrue("testBean is not a proxy", AopUtils.isAopProxy(bean));
+		assertTrue("testBean is not a staticProxy", AopUtils.isAopProxy(bean));
 		Map<String, Object> services = this.context.getBeansWithAnnotation(Service.class);
 		assertTrue("Stereotype annotation not visible", services.containsKey("testBean"));
 	}

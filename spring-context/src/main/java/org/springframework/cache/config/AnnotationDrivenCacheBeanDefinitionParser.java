@@ -40,7 +40,7 @@ import org.springframework.util.StringUtils;
  * <p>By default, all proxies are created as JDK proxies. This may cause
  * some problems if you are injecting objects as concrete classes rather
  * than interfaces. To overcome this restriction you can set the
- * '{@code proxy-target-class}' attribute to '{@code true}', which will
+ * '{@code staticProxy-target-class}' attribute to '{@code true}', which will
  * result in class-based proxies being created.
  *
  * <p>If the JSR-107 API and Spring's JCache implementation are present,
@@ -82,7 +82,7 @@ class AnnotationDrivenCacheBeanDefinitionParser implements BeanDefinitionParser 
 			registerCacheAspect(element, parserContext);
 		}
 		else {
-			// mode="proxy"
+			// mode="staticProxy"
 			registerCacheAdvisor(element, parserContext);
 		}
 

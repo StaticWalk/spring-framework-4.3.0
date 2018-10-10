@@ -174,7 +174,7 @@ public abstract class AbstractSessionFactoryBean extends HibernateExceptionTrans
 	}
 
 	/**
-	 * Return whether to expose a transaction-aware proxy for the SessionFactory.
+	 * Return whether to expose a transaction-aware staticProxy for the SessionFactory.
 	 */
 	protected boolean isExposeTransactionAwareSessionFactory() {
 		return this.exposeTransactionAwareSessionFactory;
@@ -194,10 +194,10 @@ public abstract class AbstractSessionFactoryBean extends HibernateExceptionTrans
 	}
 
 	/**
-	 * Wrap the given SessionFactory with a proxy, if demanded.
+	 * Wrap the given SessionFactory with a staticProxy, if demanded.
 	 * <p>The default implementation simply returns the given SessionFactory as-is.
 	 * Subclasses may override this to implement transaction awareness through
-	 * a SessionFactory proxy, for example.
+	 * a SessionFactory staticProxy, for example.
 	 * @param rawSf the raw SessionFactory as built by {@link #buildSessionFactory()}
 	 * @return the SessionFactory reference to expose
 	 * @see #buildSessionFactory()
@@ -256,7 +256,7 @@ public abstract class AbstractSessionFactoryBean extends HibernateExceptionTrans
 	/**
 	 * Build the underlying Hibernate SessionFactory.
 	 * @return the raw SessionFactory (potentially to be wrapped with a
-	 * transaction-aware proxy before it is exposed to the application)
+	 * transaction-aware staticProxy before it is exposed to the application)
 	 * @throws Exception in case of initialization failure
 	 */
 	protected abstract SessionFactory buildSessionFactory() throws Exception;

@@ -82,7 +82,7 @@ public class EnableCachingIntegrationTests {
 				}
 			}
 		}
-		assertTrue("FooRepository is not a cache proxy", isCacheProxy);
+		assertTrue("FooRepository is not a cache staticProxy", isCacheProxy);
 	}
 
 

@@ -21,7 +21,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.core.Conventions;
 
 /**
- * Utilities for auto-proxy aware components.
+ * Utilities for auto-staticProxy aware components.
  * Mainly for internal use within the framework.
  *
  * @author Juergen Hoeller
@@ -34,7 +34,7 @@ public abstract class AutoProxyUtils {
 	 * Bean definition attribute that may indicate whether a given bean is supposed
 	 * to be proxied with its target class (in case of it getting proxied in the first
 	 * place). The value is {@code Boolean.TRUE} or {@code Boolean.FALSE}.
-	 * <p>Proxy factories can set this attribute if they built a target class proxy
+	 * <p>Proxy factories can set this attribute if they built a target class staticProxy
 	 * for a specific bean, and want to enforce that bean can always be cast
 	 * to its target class (even if AOP advices get applied through auto-proxying).
 	 * @see #shouldProxyTargetClass
@@ -45,7 +45,7 @@ public abstract class AutoProxyUtils {
 	/**
 	 * Bean definition attribute that indicates the original target class of an
 	 * auto-proxied bean, e.g. to be used for the introspection of annotations
-	 * on the target class behind an interface-based proxy.
+	 * on the target class behind an interface-based staticProxy.
 	 * @since 4.2.3
 	 * @see #determineTargetClass
 	 */

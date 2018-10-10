@@ -52,7 +52,7 @@ public interface Advisor {
 	 * <p><b>Note that this method is not currently used by the framework.</b>
 	 * Typical Advisor implementations always return {@code true}.
 	 * Use singleton/prototype bean definitions or appropriate programmatic
-	 * proxy creation to ensure that Advisors have the correct lifecycle model.
+	 * staticProxy creation to ensure that Advisors have the correct lifecycle model.
 	 * @return whether this advice is associated with a particular target instance
 	 */
 	boolean isPerInstance();

@@ -3,7 +3,7 @@
  * by automatically creating AOP proxies without the need to use a ProxyFactoryBean.
  *
  * <p>The various post-processors in this package need only be added to an ApplicationContext
- * (typically in an XML bean definition document) to automatically proxy selected beans.
+ * (typically in an XML bean definition document) to automatically staticProxy selected beans.
  *
  * <p><b>NB</b>: Automatic auto-proxying is not supported for BeanFactory implementations,
  * as post-processors beans are only automatically detected in application contexts.

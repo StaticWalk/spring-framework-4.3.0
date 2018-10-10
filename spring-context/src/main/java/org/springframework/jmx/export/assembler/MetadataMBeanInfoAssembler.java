@@ -98,7 +98,7 @@ public class MetadataMBeanInfoAssembler extends AbstractReflectiveMBeanInfoAssem
 
 
 	/**
-	 * Throws an IllegalArgumentException if it encounters a JDK dynamic proxy.
+	 * Throws an IllegalArgumentException if it encounters a JDK dynamic staticProxy.
 	 * Metadata can only be read from target classes and CGLIB proxies!
 	 */
 	@Override

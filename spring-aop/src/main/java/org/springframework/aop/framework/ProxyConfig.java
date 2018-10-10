@@ -22,7 +22,7 @@ import org.springframework.util.Assert;
 
 /**
  * Convenience superclass for configuration used in creating proxies,
- * to ensure that all proxy creators have consistent properties.
+ * to ensure that all staticProxy creators have consistent properties.
  *
  * @author Rod Johnson
  * @author Juergen Hoeller
@@ -46,14 +46,14 @@ public class ProxyConfig implements Serializable {
 
 
 	/**
-	 * Set whether to proxy the target class directly, instead of just proxying
+	 * Set whether to staticProxy the target class directly, instead of just proxying
 	 * specific interfaces. Default is "false".
 	 * <p>Set this to "true" to force proxying for the TargetSource's exposed
-	 * target class. If that target class is an interface, a JDK proxy will be
+	 * target class. If that target class is an interface, a JDK staticProxy will be
 	 * created for the given interface. If that target class is any other class,
-	 * a CGLIB proxy will be created for the given class.
-	 * <p>Note: Depending on the configuration of the concrete proxy factory,
-	 * the proxy-target-class behavior will also be applied if no interfaces
+	 * a CGLIB staticProxy will be created for the given class.
+	 * <p>Note: Depending on the configuration of the concrete staticProxy factory,
+	 * the staticProxy-target-class behavior will also be applied if no interfaces
 	 * have been specified (and no interface autodetection is activated).
 	 * @see org.springframework.aop.TargetSource#getTargetClass()
 	 */
@@ -62,7 +62,7 @@ public class ProxyConfig implements Serializable {
 	}
 
 	/**
-	 * Return whether to proxy the target class directly as well as any interfaces.
+	 * Return whether to staticProxy the target class directly as well as any interfaces.
 	 */
 	public boolean isProxyTargetClass() {
 		return this.proxyTargetClass;
@@ -74,7 +74,7 @@ public class ProxyConfig implements Serializable {
 	 * between proxies, but there is usually some tradeoff.
 	 * Default is "false".
 	 * <p>For example, optimization will usually mean that advice changes won't
-	 * take effect after a proxy has been created. For this reason, optimization
+	 * take effect after a staticProxy has been created. For this reason, optimization
 	 * is disabled by default. An optimize value of "true" may be ignored
 	 * if other settings preclude optimization: for example, if "exposeProxy"
 	 * is set to "true" and that's not compatible with the optimization.
@@ -92,8 +92,8 @@ public class ProxyConfig implements Serializable {
 
 	/**
 	 * Set whether proxies created by this configuration should be prevented
-	 * from being cast to {@link Advised} to query proxy status.
-	 * <p>Default is "false", meaning that any AOP proxy can be cast to
+	 * from being cast to {@link Advised} to query staticProxy status.
+	 * <p>Default is "false", meaning that any AOP staticProxy can be cast to
 	 * {@link Advised}.
 	 */
 	public void setOpaque(boolean opaque) {
@@ -109,7 +109,7 @@ public class ProxyConfig implements Serializable {
 	}
 
 	/**
-	 * Set whether the proxy should be exposed by the AOP framework as a
+	 * Set whether the staticProxy should be exposed by the AOP framework as a
 	 * ThreadLocal for retrieval via the AopContext class. This is useful
 	 * if an advised object needs to call another advised method on itself.
 	 * (If it uses {@code this}, the invocation will not be advised).
@@ -122,7 +122,7 @@ public class ProxyConfig implements Serializable {
 	}
 
 	/**
-	 * Return whether the AOP proxy will expose the AOP proxy for
+	 * Return whether the AOP staticProxy will expose the AOP staticProxy for
 	 * each invocation.
 	 */
 	public boolean isExposeProxy() {

@@ -32,7 +32,7 @@ public interface AdvisorChainFactory {
 	 * for the given advisor chain configuration.
 	 * @param config the AOP configuration in the form of an Advised object
 	 * @param method the proxied method
-	 * @param targetClass the target class (may be {@code null} to indicate a proxy without
+	 * @param targetClass the target class (may be {@code null} to indicate a staticProxy without
 	 * target object, in which case the method's declaring class is the next best option)
 	 * @return List of MethodInterceptors (may also include InterceptorAndDynamicMethodMatchers)
 	 */

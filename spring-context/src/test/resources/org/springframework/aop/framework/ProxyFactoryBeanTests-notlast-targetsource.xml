@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 
 <!--
-	Tests for misconfiguring the proxy factory bean using a target source in the
+	Tests for misconfiguring the staticProxy factory bean using a target source in the
 	interceptor list as well as set by the targetSource property
 -->
 

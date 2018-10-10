@@ -244,7 +244,7 @@ class ResourcesBeanDefinitionParser implements BeanDefinitionParser {
 		if ("true".equals(element.getAttribute("cache-private"))) {
 			cacheControl = cacheControl.cachePrivate();
 		}
-		if ("true".equals(element.getAttribute("proxy-revalidate"))) {
+		if ("true".equals(element.getAttribute("staticProxy-revalidate"))) {
 			cacheControl = cacheControl.proxyRevalidate();
 		}
 		if (element.hasAttribute("s-maxage")) {

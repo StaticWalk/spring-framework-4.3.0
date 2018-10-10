@@ -465,7 +465,7 @@ public class SingleConnectionFactory implements ConnectionFactory, QueueConnecti
 	}
 
 	/**
-	 * Wrap the given Connection with a proxy that delegates every method call to it
+	 * Wrap the given Connection with a staticProxy that delegates every method call to it
 	 * but suppresses close calls. This is useful for allowing application code to
 	 * handle a special framework Connection just like an ordinary Connection from a
 	 * JMS ConnectionFactory.
@@ -489,7 +489,7 @@ public class SingleConnectionFactory implements ConnectionFactory, QueueConnecti
 
 
 	/**
-	 * Invocation handler for a cached JMS Connection proxy.
+	 * Invocation handler for a cached JMS Connection staticProxy.
 	 */
 	private class SharedConnectionInvocationHandler implements InvocationHandler {
 
@@ -526,7 +526,7 @@ public class SingleConnectionFactory implements ConnectionFactory, QueueConnecti
 				}
 				else {
 					throw new javax.jms.IllegalStateException(
-							"setClientID call not supported on proxy for shared Connection. " +
+							"setClientID call not supported on staticProxy for shared Connection. " +
 							"Set the 'clientId' property on the SingleConnectionFactory instead.");
 				}
 			}
@@ -548,7 +548,7 @@ public class SingleConnectionFactory implements ConnectionFactory, QueueConnecti
 					}
 					else {
 						throw new javax.jms.IllegalStateException(
-								"setExceptionListener call not supported on proxy for shared Connection. " +
+								"setExceptionListener call not supported on staticProxy for shared Connection. " +
 								"Set the 'exceptionListener' property on the SingleConnectionFactory instead. " +
 								"Alternatively, activate SingleConnectionFactory's 'reconnectOnException' feature, " +
 								"which will allow for registering further ExceptionListeners to the recovery chain.");

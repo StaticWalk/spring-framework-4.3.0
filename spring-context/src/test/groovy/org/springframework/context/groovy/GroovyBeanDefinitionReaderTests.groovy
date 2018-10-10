@@ -143,7 +143,7 @@ class GroovyBeanDefinitionReaderTests {
 			birthdayCardSenderAspect(BirthdayCardSender)
 
 			aop {
-				config("proxy-target-class":true) {
+				config("staticProxy-target-class":true) {
 					aspect( id:"sendBirthdayCard",ref:"birthdayCardSenderAspect" ) {
 						after method:"onBirthday", pointcut: "execution(void org.springframework.context.groovy.AdvisedPerson.birthday()) and this(person)"
 					}
@@ -175,7 +175,7 @@ class GroovyBeanDefinitionReaderTests {
 			xmlns util:"http://www.springframework.org/schema/util"
 			scopedList(ArrayList) { bean ->
 				bean.scope = "test"
-				aop.'scoped-proxy'()
+				aop.'scoped-staticProxy'()
 			}
 			util.list(id: 'foo') {
 				value 'one'
@@ -190,7 +190,7 @@ class GroovyBeanDefinitionReaderTests {
 		assertNotNull appCtx.getBean("scopedList").size()
 		assertNotNull appCtx.getBean("scopedList").size()
 
-		// should only be true because bean not initialized until proxy called
+		// should only be true because bean not initialized until staticProxy called
 		assertEquals 2, scope.instanceCount
 
 		appCtx = new GenericApplicationContext()
@@ -202,7 +202,7 @@ class GroovyBeanDefinitionReaderTests {
 				  util:"http://www.springframework.org/schema/util"
 			scopedList(ArrayList) { bean ->
 				bean.scope = "test"
-				aop.'scoped-proxy'()
+				aop.'scoped-staticProxy'()
 			}
 			util.list(id: 'foo') {
 				value 'one'
@@ -217,7 +217,7 @@ class GroovyBeanDefinitionReaderTests {
 		assertNotNull appCtx.getBean("scopedList").size()
 		assertNotNull appCtx.getBean("scopedList").size()
 
-		// should only be true because bean not initialized until proxy called
+		// should only be true because bean not initialized until staticProxy called
 		assertEquals 4, scope.instanceCount
 	}
 
@@ -235,7 +235,7 @@ class GroovyBeanDefinitionReaderTests {
 			}
 			birthdayCardSenderAspect(BirthdayCardSender)
 
-			aop.config("proxy-target-class":true) {
+			aop.config("staticProxy-target-class":true) {
 				aspect( id:"sendBirthdayCard",ref:"birthdayCardSenderAspect" ) {
 					after method:"onBirthday", pointcut: "execution(void org.springframework.context.groovy.AdvisedPerson.birthday()) and this(person)"
 				}
@@ -265,7 +265,7 @@ class GroovyBeanDefinitionReaderTests {
 			xmlns aop:"http://www.springframework.org/schema/aop"
 			scopedList(ArrayList) { bean ->
 				bean.scope = "test"
-				aop.'scoped-proxy'()
+				aop.'scoped-staticProxy'()
 			}
 		}
 		appCtx.refresh()
@@ -274,7 +274,7 @@ class GroovyBeanDefinitionReaderTests {
 		assertNotNull appCtx.getBean("scopedList").size()
 		assertNotNull appCtx.getBean("scopedList").size()
 
-		// should only be true because bean not initialized until proxy called
+		// should only be true because bean not initialized until staticProxy called
 		assertEquals 2, scope.instanceCount
 	}
 

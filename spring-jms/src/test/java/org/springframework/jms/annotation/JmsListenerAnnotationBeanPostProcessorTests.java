@@ -126,7 +126,7 @@ public class JmsListenerAnnotationBeanPostProcessorTests {
 			Method m = ReflectionUtils.findMethod(endpoint.getClass(), "getDefaultResponseDestination");
 			ReflectionUtils.makeAccessible(m);
 			Object destination = ReflectionUtils.invokeMethod(m, endpoint);
-			assertEquals("SendTo annotation not found on proxy", "foobar", destination);
+			assertEquals("SendTo annotation not found on staticProxy", "foobar", destination);
 		}
 		finally {
 			context.close();

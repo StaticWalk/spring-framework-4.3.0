@@ -347,7 +347,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 				conToUse = this.nativeJdbcExtractor.getNativeConnection(con);
 			}
 			else {
-				// Create close-suppressing Connection proxy, also preparing returned Statements.
+				// Create close-suppressing Connection staticProxy, also preparing returned Statements.
 				conToUse = createConnectionProxy(con);
 			}
 			return action.doInConnection(conToUse);
@@ -365,12 +365,12 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 	}
 
 	/**
-	 * Create a close-suppressing proxy for the given JDBC Connection.
+	 * Create a close-suppressing staticProxy for the given JDBC Connection.
 	 * Called by the {@code execute} method.
-	 * <p>The proxy also prepares returned JDBC Statements, applying
+	 * <p>The staticProxy also prepares returned JDBC Statements, applying
 	 * statement settings such as fetch size, max rows, and query timeout.
-	 * @param con the JDBC Connection to create a proxy for
-	 * @return the Connection proxy
+	 * @param con the JDBC Connection to create a staticProxy for
+	 * @return the Connection staticProxy
 	 * @see java.sql.Connection#close()
 	 * @see #execute(ConnectionCallback)
 	 * @see #applyStatementSettings
@@ -1460,7 +1460,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 				return (proxy == args[0]);
 			}
 			else if (method.getName().equals("hashCode")) {
-				// Use hashCode of PersistenceManager proxy.
+				// Use hashCode of PersistenceManager staticProxy.
 				return System.identityHashCode(proxy);
 			}
 			else if (method.getName().equals("unwrap")) {

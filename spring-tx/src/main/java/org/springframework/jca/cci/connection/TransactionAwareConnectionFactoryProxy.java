@@ -30,14 +30,14 @@ import javax.resource.cci.ConnectionFactory;
  * ConnectionFactory as provided by a J2EE server.
  *
  * <p>Data access code that should remain unaware of Spring's data access support
- * can work with this proxy to seamlessly participate in Spring-managed transactions.
+ * can work with this staticProxy to seamlessly participate in Spring-managed transactions.
  * Note that the transaction manager, for example the {@link CciLocalTransactionManager},
- * still needs to work with underlying ConnectionFactory, <i>not</i> with this proxy.
+ * still needs to work with underlying ConnectionFactory, <i>not</i> with this staticProxy.
  *
  * <p><b>Make sure that TransactionAwareConnectionFactoryProxy is the outermost
  * ConnectionFactory of a chain of ConnectionFactory proxies/adapters.</b>
  * TransactionAwareConnectionFactoryProxy can delegate either directly to the
- * target connection pool or to some intermediate proxy/adapter like
+ * target connection pool or to some intermediate staticProxy/adapter like
  * {@link ConnectionSpecConnectionFactoryAdapter}.
  *
  * <p>Delegates to {@link ConnectionFactoryUtils} for automatically participating in
@@ -46,13 +46,13 @@ import javax.resource.cci.ConnectionFactory;
  * will behave properly within a transaction, i.e. always operate on the transactional
  * Connection. If not within a transaction, normal ConnectionFactory behavior applies.
  *
- * <p>This proxy allows data access code to work with the plain JCA CCI API and still
+ * <p>This staticProxy allows data access code to work with the plain JCA CCI API and still
  * participate in Spring-managed transactions, similar to CCI code in a J2EE/JTA
  * environment. However, if possible, use Spring's ConnectionFactoryUtils, CciTemplate or
- * CCI operation objects to get transaction participation even without a proxy for
- * the target ConnectionFactory, avoiding the need to define such a proxy in the first place.
+ * CCI operation objects to get transaction participation even without a staticProxy for
+ * the target ConnectionFactory, avoiding the need to define such a staticProxy in the first place.
  *
- * <p><b>NOTE:</b> This ConnectionFactory proxy needs to return wrapped Connections
+ * <p><b>NOTE:</b> This ConnectionFactory staticProxy needs to return wrapped Connections
  * in order to handle close calls properly. Therefore, the returned Connections cannot
  * be cast to a native CCI Connection type or to a connection pool implementation type.
  *
@@ -96,7 +96,7 @@ public class TransactionAwareConnectionFactoryProxy extends DelegatingConnection
 	}
 
 	/**
-	 * Wrap the given Connection with a proxy that delegates every method call to it
+	 * Wrap the given Connection with a staticProxy that delegates every method call to it
 	 * but delegates {@code close} calls to ConnectionFactoryUtils.
 	 * @param target the original Connection to wrap
 	 * @param cf ConnectionFactory that the Connection came from
@@ -136,7 +136,7 @@ public class TransactionAwareConnectionFactoryProxy extends DelegatingConnection
 				return (proxy == args[0]);
 			}
 			else if (method.getName().equals("hashCode")) {
-				// Use hashCode of Connection proxy.
+				// Use hashCode of Connection staticProxy.
 				return System.identityHashCode(proxy);
 			}
 			else if (method.getName().equals("getLocalTransaction")) {

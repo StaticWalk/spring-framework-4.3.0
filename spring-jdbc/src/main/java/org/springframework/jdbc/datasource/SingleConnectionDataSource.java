@@ -38,7 +38,7 @@ import org.springframework.util.ObjectUtils;
  *
  * <p>If client code will call {@code close()} in the assumption of a pooled
  * Connection, like when using persistence tools, set "suppressClose" to "true".
- * This will return a close-suppressing proxy instead of the physical Connection.
+ * This will return a close-suppressing staticProxy instead of the physical Connection.
  * Be aware that you will not be able to cast this to a native
  * {@code OracleConnection} or the like anymore; you need to use a
  * {@link org.springframework.jdbc.support.nativejdbc.NativeJdbcExtractor} then.
@@ -58,7 +58,7 @@ import org.springframework.util.ObjectUtils;
 public class SingleConnectionDataSource extends DriverManagerDataSource
 		implements SmartDataSource, DisposableBean {
 
-	/** Create a close-suppressing proxy? */
+	/** Create a close-suppressing staticProxy? */
 	private boolean suppressClose;
 
 	/** Override auto-commit state? */
@@ -87,7 +87,7 @@ public class SingleConnectionDataSource extends DriverManagerDataSource
 	 * @param username the JDBC username to use for accessing the DriverManager
 	 * @param password the JDBC password to use for accessing the DriverManager
 	 * @param suppressClose if the returned Connection should be a
-	 * close-suppressing proxy or the physical Connection
+	 * close-suppressing staticProxy or the physical Connection
 	 * @see java.sql.DriverManager#getConnection(String, String, String)
 	 */
 	public SingleConnectionDataSource(String url, String username, String password, boolean suppressClose) {
@@ -100,7 +100,7 @@ public class SingleConnectionDataSource extends DriverManagerDataSource
 	 * DriverManager parameters.
 	 * @param url the JDBC URL to use for accessing the DriverManager
 	 * @param suppressClose if the returned Connection should be a
-	 * close-suppressing proxy or the physical Connection
+	 * close-suppressing staticProxy or the physical Connection
 	 * @see java.sql.DriverManager#getConnection(String, String, String)
 	 */
 	public SingleConnectionDataSource(String url, boolean suppressClose) {
@@ -125,7 +125,7 @@ public class SingleConnectionDataSource extends DriverManagerDataSource
 
 
 	/**
-	 * Set whether the returned Connection should be a close-suppressing proxy
+	 * Set whether the returned Connection should be a close-suppressing staticProxy
 	 * or the physical Connection.
 	 */
 	public void setSuppressClose(boolean suppressClose) {
@@ -133,7 +133,7 @@ public class SingleConnectionDataSource extends DriverManagerDataSource
 	}
 
 	/**
-	 * Return whether the returned Connection will be a close-suppressing proxy
+	 * Return whether the returned Connection will be a close-suppressing staticProxy
 	 * or the physical Connection.
 	 */
 	protected boolean isSuppressClose() {
@@ -270,7 +270,7 @@ public class SingleConnectionDataSource extends DriverManagerDataSource
 	}
 
 	/**
-	 * Wrap the given Connection with a proxy that delegates every method call to it
+	 * Wrap the given Connection with a staticProxy that delegates every method call to it
 	 * but suppresses close calls.
 	 * @param target the original Connection to wrap
 	 * @return the wrapped Connection
@@ -303,7 +303,7 @@ public class SingleConnectionDataSource extends DriverManagerDataSource
 				return (proxy == args[0]);
 			}
 			else if (method.getName().equals("hashCode")) {
-				// Use hashCode of Connection proxy.
+				// Use hashCode of Connection staticProxy.
 				return System.identityHashCode(proxy);
 			}
 			else if (method.getName().equals("unwrap")) {

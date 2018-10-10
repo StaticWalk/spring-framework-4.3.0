@@ -34,7 +34,7 @@ import org.springframework.web.util.NestedServletException;
 
 /**
  * Servlet-API-based HTTP request handler that exports the specified service bean
- * as HTTP invoker service endpoint, accessible via an HTTP invoker proxy.
+ * as HTTP invoker service endpoint, accessible via an HTTP invoker staticProxy.
  *
  * <p><b>Note:</b> Spring also provides an alternative version of this exporter,
  * for Sun's JRE 1.6 HTTP server: {@link SimpleHttpInvokerServiceExporter}.

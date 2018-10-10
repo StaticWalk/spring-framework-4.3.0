@@ -171,7 +171,7 @@ public abstract class AbstractFactoryBean<T>
 	}
 
 	/**
-	 * Expose the singleton instance (for access through the 'early singleton' proxy).
+	 * Expose the singleton instance (for access through the 'early singleton' staticProxy).
 	 * @return the singleton instance that this FactoryBean holds
 	 * @throws IllegalStateException if the singleton instance is not initialized
 	 */
@@ -216,7 +216,7 @@ public abstract class AbstractFactoryBean<T>
 	/**
 	 * Return an array of interfaces that a singleton object exposed by this
 	 * FactoryBean is supposed to implement, for use with an 'early singleton
-	 * proxy' that will be exposed in case of a circular reference.
+	 * staticProxy' that will be exposed in case of a circular reference.
 	 * <p>The default implementation returns this FactoryBean's object type,
 	 * provided that it is an interface, or {@code null} else. The latter
 	 * indicates that early singleton access is not supported by this FactoryBean.
@@ -255,11 +255,11 @@ public abstract class AbstractFactoryBean<T>
 				return (proxy == args[0]);
 			}
 			else if (ReflectionUtils.isHashCodeMethod(method)) {
-				// Use hashCode of reference proxy.
+				// Use hashCode of reference staticProxy.
 				return System.identityHashCode(proxy);
 			}
 			else if (!initialized && ReflectionUtils.isToStringMethod(method)) {
-				return "Early singleton proxy for interfaces " +
+				return "Early singleton staticProxy for interfaces " +
 						ObjectUtils.nullSafeToString(getEarlySingletonInterfaces());
 			}
 			try {

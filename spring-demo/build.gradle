@@ -15,5 +15,10 @@ dependencies {
     compile(project(":spring-context"))
     compile(project(":spring-instrument"))
     compile(project(":spring-expression"))
+    compile(project(":spring-aop"))
+//    compile(project(":spring-aspects"))
+    // https://mvnrepository.com/artifact/org.springframework/spring-aspects
+    compile group: 'org.springframework', name: 'spring-aspects', version: '4.3.0.RELEASE'
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

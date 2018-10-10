@@ -303,13 +303,13 @@ public class ProxyFactoryTests {
 		ProxyFactory pf = new ProxyFactory();
 		pf.setTargetClass(ITestBean.class);
 		Object proxy = pf.getProxy();
-		assertTrue("Proxy is a JDK proxy", AopUtils.isJdkDynamicProxy(proxy));
+		assertTrue("Proxy is a JDK staticProxy", AopUtils.isJdkDynamicProxy(proxy));
 		assertTrue(proxy instanceof ITestBean);
 		assertEquals(ITestBean.class, AopProxyUtils.ultimateTargetClass(proxy));
 
 		ProxyFactory pf2 = new ProxyFactory(proxy);
 		Object proxy2 = pf2.getProxy();
-		assertTrue("Proxy is a JDK proxy", AopUtils.isJdkDynamicProxy(proxy2));
+		assertTrue("Proxy is a JDK staticProxy", AopUtils.isJdkDynamicProxy(proxy2));
 		assertTrue(proxy2 instanceof ITestBean);
 		assertEquals(ITestBean.class, AopProxyUtils.ultimateTargetClass(proxy2));
 	}
@@ -319,14 +319,14 @@ public class ProxyFactoryTests {
 		ProxyFactory pf = new ProxyFactory();
 		pf.setTargetClass(TestBean.class);
 		Object proxy = pf.getProxy();
-		assertTrue("Proxy is a CGLIB proxy", AopUtils.isCglibProxy(proxy));
+		assertTrue("Proxy is a CGLIB staticProxy", AopUtils.isCglibProxy(proxy));
 		assertTrue(proxy instanceof TestBean);
 		assertEquals(TestBean.class, AopProxyUtils.ultimateTargetClass(proxy));
 
 		ProxyFactory pf2 = new ProxyFactory(proxy);
 		pf2.setProxyTargetClass(true);
 		Object proxy2 = pf2.getProxy();
-		assertTrue("Proxy is a CGLIB proxy", AopUtils.isCglibProxy(proxy2));
+		assertTrue("Proxy is a CGLIB staticProxy", AopUtils.isCglibProxy(proxy2));
 		assertTrue(proxy2 instanceof TestBean);
 		assertEquals(TestBean.class, AopProxyUtils.ultimateTargetClass(proxy2));
 	}

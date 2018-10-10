@@ -39,7 +39,7 @@ import org.springframework.util.ClassUtils;
  * associated with the target method. Any caching attribute associated with
  * the target method completely overrides a class caching attribute.
  * If none found on the target class, the interface that the invoked method
- * has been called through (in case of a JDK proxy) will be checked.
+ * has been called through (in case of a JDK staticProxy) will be checked.
  *
  * <p>This implementation caches attributes by method after they are first
  * used. If it is ever desirable to allow dynamic changing of cacheable

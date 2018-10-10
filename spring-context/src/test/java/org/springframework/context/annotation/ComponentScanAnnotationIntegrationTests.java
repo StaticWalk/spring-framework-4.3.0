@@ -204,7 +204,7 @@ public class ComponentScanAnnotationIntegrationTests {
 		ctx.refresh();
 		// should cast to the interface
 		FooService bean = (FooService) ctx.getBean("scopedProxyTestBean");
-		// should be dynamic proxy
+		// should be dynamic staticProxy
 		assertThat(AopUtils.isJdkDynamicProxy(bean), is(true));
 		// test serializability
 		assertThat(bean.foo(1), equalTo("bar"));
@@ -221,7 +221,7 @@ public class ComponentScanAnnotationIntegrationTests {
 		ctx.refresh();
 		// should cast to the interface
 		FooService bean = (FooService) ctx.getBean("scopedProxyTestBean");
-		// should be dynamic proxy
+		// should be dynamic staticProxy
 		assertThat(AopUtils.isJdkDynamicProxy(bean), is(true));
 	}
 
@@ -233,7 +233,7 @@ public class ComponentScanAnnotationIntegrationTests {
 		ctx.refresh();
 		// should cast to the interface
 		FooService bean = (FooService) ctx.getBean("scopedProxyTestBean");
-		// should be dynamic proxy
+		// should be dynamic staticProxy
 		assertThat(AopUtils.isJdkDynamicProxy(bean), is(true));
 	}
 

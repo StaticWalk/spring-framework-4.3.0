@@ -50,7 +50,7 @@ import org.springframework.util.ObjectUtils;
 
 /**
  * {@link org.springframework.beans.factory.FactoryBean} implementation that builds an
- * AOP proxy based on beans in Spring {@link org.springframework.beans.factory.BeanFactory}.
+ * AOP staticProxy based on beans in Spring {@link org.springframework.beans.factory.BeanFactory}.
  *
  * <p>{@link org.aopalliance.intercept.MethodInterceptor MethodInterceptors} and
  * {@link org.springframework.aop.Advisor Advisors} are identified by a list of bean
@@ -66,11 +66,11 @@ import org.springframework.util.ObjectUtils;
  * interceptors get applied according to their returned order value, if they implement
  * the {@link org.springframework.core.Ordered} interface.
  *
- * <p>Creates a JDK proxy when proxy interfaces are given, and a CGLIB proxy for the
+ * <p>Creates a JDK staticProxy when staticProxy interfaces are given, and a CGLIB staticProxy for the
  * actual target class if not. Note that the latter will only work if the target class
  * does not have final methods, as a dynamic subclass will be created at runtime.
  *
- * <p>It's possible to cast a proxy obtained from this factory to {@link Advised},
+ * <p>It's possible to cast a staticProxy obtained from this factory to {@link Advised},
  * or to obtain the ProxyFactoryBean reference and programmatically manipulate it.
  * This won't work for existing prototype references, which are independent. However,
  * it will work for prototypes subsequently obtained from the factory. Changes to
@@ -121,7 +121,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	/** Whether the advisor chain has already been initialized */
 	private boolean advisorChainInitialized = false;
 
-	/** If this is a singleton, the cached singleton proxy instance */
+	/** If this is a singleton, the cached singleton staticProxy instance */
 	private Object singletonInstance;
 
 
@@ -172,9 +172,9 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	}
 
 	/**
-	 * Set whether to autodetect proxy interfaces if none specified.
+	 * Set whether to autodetect staticProxy interfaces if none specified.
 	 * <p>Default is "true". Turn this flag off to create a CGLIB
-	 * proxy for the full target class if no interfaces specified.
+	 * staticProxy for the full target class if no interfaces specified.
 	 * @see #setProxyTargetClass
 	 */
 	public void setAutodetectInterfaces(boolean autodetectInterfaces) {
@@ -183,7 +183,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 
 	/**
 	 * Set the value of the singleton property. Governs whether this factory
-	 * should always return the same proxy instance (which implies the same target)
+	 * should always return the same staticProxy instance (which implies the same target)
 	 * or whether it should return a new prototype instance, which implies that
 	 * the target and interceptors may be new instances also, if they are obtained
 	 * from prototype bean definitions. This allows for fine control of
@@ -208,7 +208,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	}
 
 	/**
-	 * Set the ClassLoader to generate the proxy class in.
+	 * Set the ClassLoader to generate the staticProxy class in.
 	 * <p>Default is the bean ClassLoader, i.e. the ClassLoader used by the
 	 * containing BeanFactory for loading all bean classes. This can be
 	 * overridden here for specific proxies.
@@ -233,11 +233,11 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 
 
 	/**
-	 * Return a proxy. Invoked when clients obtain beans from this factory bean.
-	 * Create an instance of the AOP proxy to be returned by this factory.
+	 * Return a staticProxy. Invoked when clients obtain beans from this factory bean.
+	 * Create an instance of the AOP staticProxy to be returned by this factory.
 	 * The instance will be cached for a singleton, and create on each call to
-	 * {@code getObject()} for a proxy.
-	 * @return a fresh AOP proxy reflecting the current state of this factory
+	 * {@code getObject()} for a staticProxy.
+	 * @return a fresh AOP staticProxy reflecting the current state of this factory
 	 */
 	@Override
 	public Object getObject() throws BeansException {
@@ -255,8 +255,8 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	}
 
 	/**
-	 * Return the type of the proxy. Will check the singleton instance if
-	 * already created, else fall back to the proxy interface (in case of just
+	 * Return the type of the staticProxy. Will check the singleton instance if
+	 * already created, else fall back to the staticProxy interface (in case of just
 	 * a single one), the target bean type, or the TargetSource's target class.
 	 * @see org.springframework.aop.TargetSource#getTargetClass
 	 */
@@ -291,7 +291,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	/**
 	 * Create a composite interface Class for the given interfaces,
 	 * implementing the given interfaces in one single Class.
-	 * <p>The default implementation builds a JDK proxy class for the
+	 * <p>The default implementation builds a JDK staticProxy class for the
 	 * given interfaces.
 	 * @param interfaces the interfaces to merge
 	 * @return the merged interface as Class
@@ -302,18 +302,18 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	}
 
 	/**
-	 * Return the singleton instance of this class's proxy object,
+	 * Return the singleton instance of this class's staticProxy object,
 	 * lazily creating it if it hasn't been created already.
-	 * @return the shared singleton proxy
+	 * @return the shared singleton staticProxy
 	 */
 	private synchronized Object getSingletonInstance() {
 		if (this.singletonInstance == null) {
 			this.targetSource = freshTargetSource();
 			if (this.autodetectInterfaces && getProxiedInterfaces().length == 0 && !isProxyTargetClass()) {
-				// Rely on AOP infrastructure to tell us what interfaces to proxy.
+				// Rely on AOP infrastructure to tell us what interfaces to staticProxy.
 				Class<?> targetClass = getTargetClass();
 				if (targetClass == null) {
-					throw new FactoryBeanNotInitializedException("Cannot determine target class for proxy");
+					throw new FactoryBeanNotInitializedException("Cannot determine target class for staticProxy");
 				}
 				setInterfaces(ClassUtils.getAllInterfacesForClass(targetClass, this.proxyClassLoader));
 			}
@@ -325,14 +325,14 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	}
 
 	/**
-	 * Create a new prototype instance of this class's created proxy object,
+	 * Create a new prototype instance of this class's created staticProxy object,
 	 * backed by an independent AdvisedSupport configuration.
-	 * @return a totally independent proxy, whose advice we may manipulate in isolation
+	 * @return a totally independent staticProxy, whose advice we may manipulate in isolation
 	 */
 	private synchronized Object newPrototypeInstance() {
-		// In the case of a prototype, we need to give the proxy
+		// In the case of a prototype, we need to give the staticProxy
 		// an independent instance of the configuration.
-		// In this case, no proxy will have an instance of this object's configuration,
+		// In this case, no staticProxy will have an instance of this object's configuration,
 		// but will have an independent copy.
 		if (logger.isTraceEnabled()) {
 			logger.trace("Creating copy of prototype ProxyFactoryBean config: " + this);
@@ -343,7 +343,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 		TargetSource targetSource = freshTargetSource();
 		copy.copyConfigurationFrom(this, targetSource, freshAdvisorChain());
 		if (this.autodetectInterfaces && getProxiedInterfaces().length == 0 && !isProxyTargetClass()) {
-			// Rely on AOP infrastructure to tell us what interfaces to proxy.
+			// Rely on AOP infrastructure to tell us what interfaces to staticProxy.
 			copy.setInterfaces(
 					ClassUtils.getAllInterfacesForClass(targetSource.getTargetClass(), this.proxyClassLoader));
 		}
@@ -356,12 +356,12 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	}
 
 	/**
-	 * Return the proxy object to expose.
+	 * Return the staticProxy object to expose.
 	 * <p>The default implementation uses a {@code getProxy} call with
 	 * the factory's bean class loader. Can be overridden to specify a
 	 * custom class loader.
-	 * @param aopProxy the prepared AopProxy instance to get the proxy from
-	 * @return the proxy object to expose
+	 * @param aopProxy the prepared AopProxy instance to get the staticProxy from
+	 * @return the staticProxy object to expose
 	 * @see AopProxy#getProxy(ClassLoader)
 	 */
 	protected Object getProxy(AopProxy aopProxy) {
@@ -554,7 +554,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	}
 
 	/**
-	 * Return a TargetSource to use when creating a proxy. If the target was not
+	 * Return a TargetSource to use when creating a staticProxy. If the target was not
 	 * specified at the end of the interceptorNames list, the TargetSource will be
 	 * this class's TargetSource member. Otherwise, we get the target bean and wrap
 	 * it in a TargetSource if necessary.
@@ -626,7 +626,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 
 	/**
 	 * Used in the interceptor chain where we need to replace a bean with a prototype
-	 * on creating a proxy.
+	 * on creating a staticProxy.
 	 */
 	private static class PrototypePlaceholderAdvisor implements Advisor, Serializable {
 

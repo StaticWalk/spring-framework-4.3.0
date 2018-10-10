@@ -16,16 +16,12 @@
 
 package org.springframework.beans.factory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.BeansException;
 import org.springframework.core.ResolvableType;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
+
+import java.util.*;
 
 /**
  * Convenience methods operating on bean factories, in particular
@@ -201,7 +197,7 @@ public abstract class BeanFactoryUtils {
 	 * object created by the FactoryBean doesn't match, the raw FactoryBean itself
 	 * will be matched against the type. If "allowEagerInit" is not set,
 	 * only raw FactoryBeans will be checked (which doesn't require initialization
-	 * of each FactoryBean).
+	 * of each FactoryBean).getAdvisors
 	 * @param lbf the bean factory
 	 * @param includeNonSingletons whether to include prototype or scoped beans too
 	 * or just singletons (also applies to FactoryBeans)

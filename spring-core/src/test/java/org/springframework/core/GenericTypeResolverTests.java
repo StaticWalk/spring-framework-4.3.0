@@ -228,7 +228,7 @@ public class GenericTypeResolverTests {
 		}
 
 		/**
-		 * Simulates a factory method that wraps the supplied object in a proxy of the
+		 * Simulates a factory method that wraps the supplied object in a staticProxy of the
 		 * same type.
 		 */
 		public static <T> T createProxy(T object) {

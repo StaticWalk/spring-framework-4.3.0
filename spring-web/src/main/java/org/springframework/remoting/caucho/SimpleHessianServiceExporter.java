@@ -27,7 +27,7 @@ import org.springframework.util.FileCopyUtils;
 
 /**
  * HTTP request handler that exports the specified service bean as
- * Hessian service endpoint, accessible via a Hessian proxy.
+ * Hessian service endpoint, accessible via a Hessian staticProxy.
  * Designed for Sun's JRE 1.6 HTTP server, implementing the
  * {@link com.sun.net.httpserver.HttpHandler} interface.
  *

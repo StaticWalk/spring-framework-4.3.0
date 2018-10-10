@@ -135,7 +135,7 @@ public class HttpInvokerClientInterceptor extends RemoteInvocationBasedAccessor
 	@Override
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 		if (AopUtils.isToStringMethod(methodInvocation.getMethod())) {
-			return "HTTP invoker proxy for service URL [" + getServiceUrl() + "]";
+			return "HTTP invoker staticProxy for service URL [" + getServiceUrl() + "]";
 		}
 
 		RemoteInvocation invocation = createRemoteInvocation(methodInvocation);

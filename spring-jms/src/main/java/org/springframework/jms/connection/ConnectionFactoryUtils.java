@@ -86,10 +86,10 @@ public abstract class ConnectionFactoryUtils {
 
 	/**
 	 * Return the innermost target Session of the given Session. If the given
-	 * Session is a proxy, it will be unwrapped until a non-proxy Session is
+	 * Session is a staticProxy, it will be unwrapped until a non-staticProxy Session is
 	 * found. Otherwise, the passed-in Session will be returned as-is.
-	 * @param session the Session proxy to unwrap
-	 * @return the innermost target Session, or the passed-in one if no proxy
+	 * @param session the Session staticProxy to unwrap
+	 * @return the innermost target Session, or the passed-in one if no staticProxy
 	 * @see SessionProxy#getTargetSession()
 	 */
 	public static Session getTargetSession(Session session) {

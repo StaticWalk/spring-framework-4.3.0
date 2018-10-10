@@ -51,7 +51,7 @@ public final class AdvisedJRubyScriptFactoryTests {
 			new ClassPathXmlApplicationContext(FACTORYBEAN_CONTEXT, CLASS);
 		try {
 			Messenger bean = (Messenger) ctx.getBean("messenger");
-			assertTrue("Bean is not a proxy", AopUtils.isAopProxy(bean));
+			assertTrue("Bean is not a staticProxy", AopUtils.isAopProxy(bean));
 			assertTrue("Bean is not an Advised object", bean instanceof Advised);
 
 			CountingBeforeAdvice advice = (CountingBeforeAdvice) ctx.getBean("advice");
@@ -70,7 +70,7 @@ public final class AdvisedJRubyScriptFactoryTests {
 			new ClassPathXmlApplicationContext(APC_CONTEXT, CLASS);
 		try {
 			Messenger bean = (Messenger) ctx.getBean("messenger");
-			assertTrue("Bean is not a proxy", AopUtils.isAopProxy(bean));
+			assertTrue("Bean is not a staticProxy", AopUtils.isAopProxy(bean));
 			assertTrue("Bean is not an Advised object", bean instanceof Advised);
 
 			CountingBeforeAdvice advice = (CountingBeforeAdvice) ctx.getBean("advice");

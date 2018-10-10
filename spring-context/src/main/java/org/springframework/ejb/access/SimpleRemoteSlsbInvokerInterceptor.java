@@ -48,7 +48,7 @@ import org.springframework.remoting.rmi.RmiClientInterceptorUtils;
  *
  * <p>This invoker is typically used with an RMI business interface, which serves
  * as super-interface of the EJB component interface. Alternatively, this invoker
- * can also proxy a remote SLSB with a matching non-RMI business interface, i.e. an
+ * can also staticProxy a remote SLSB with a matching non-RMI business interface, i.e. an
  * interface that mirrors the EJB business methods but does not declare RemoteExceptions.
  * In the latter case, RemoteExceptions thrown by the EJB stub will automatically get
  * converted to Spring's unchecked RemoteAccessException.

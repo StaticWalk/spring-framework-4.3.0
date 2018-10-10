@@ -26,9 +26,9 @@ import org.springframework.util.Assert;
  * Proxy that implements the {@link javax.jdo.PersistenceManager} interface,
  * delegating to a thread-bound PersistenceManager on each invocation -
  * as defined by the JDO 3.0 specification. This class makes such a standard
- * JDO PersistenceManager proxy available for bean references.
+ * JDO PersistenceManager staticProxy available for bean references.
  *
- * <p>The main advantage of this proxy is that it allows DAOs to work with a
+ * <p>The main advantage of this staticProxy is that it allows DAOs to work with a
  * plain JDO PersistenceManager reference in JDO 3.0 style
  * (see {@link javax.jdo.PersistenceManagerFactory#getPersistenceManagerProxy()}),
  * exposing the exact behavior that the target JDO provider implements.
@@ -44,7 +44,7 @@ public class StandardPersistenceManagerProxyBean implements FactoryBean<Persiste
 
 
 	/**
-	 * Set the target JDO PersistenceManagerFactory that this proxy should
+	 * Set the target JDO PersistenceManagerFactory that this staticProxy should
 	 * delegate to. This should be the raw PersistenceManagerFactory, as
 	 * accessed by JdoTransactionManager.
 	 * @see org.springframework.orm.jdo.JdoTransactionManager

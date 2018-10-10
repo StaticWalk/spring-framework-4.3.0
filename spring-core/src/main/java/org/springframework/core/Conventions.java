@@ -47,7 +47,7 @@ public abstract class Conventions {
 
 	/**
 	 * Set of interfaces that are supposed to be ignored
-	 * when searching for the 'primary' interface of a proxy.
+	 * when searching for the 'primary' interface of a staticProxy.
 	 */
 	private static final Set<Class<?>> IGNORED_INTERFACES;
 	static {
@@ -252,8 +252,8 @@ public abstract class Conventions {
 	 * Determines the class to use for naming a variable that contains
 	 * the given value.
 	 * <p>Will return the class of the given value, except when
-	 * encountering a JDK proxy, in which case it will determine
-	 * the 'primary' interface implemented by that proxy.
+	 * encountering a JDK staticProxy, in which case it will determine
+	 * the 'primary' interface implemented by that staticProxy.
 	 * @param value the value to check
 	 * @return the class to use for naming a variable
 	 */

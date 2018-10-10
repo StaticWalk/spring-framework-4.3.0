@@ -26,7 +26,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 
 /**
- * Generic auto proxy creator that builds AOP proxies for specific beans
+ * Generic auto staticProxy creator that builds AOP proxies for specific beans
  * based on detected Advisors for each bean.
  *
  * <p>Subclasses must implement the abstract {@link #findCandidateAdvisors()}
@@ -159,7 +159,7 @@ public abstract class AbstractAdvisorAutoProxyCreator extends AbstractAutoProxyC
 	}
 
 	/**
-	 * This auto-proxy creator always returns pre-filtered Advisors.
+	 * This auto-staticProxy creator always returns pre-filtered Advisors.
 	 */
 	@Override
 	protected boolean advisorsPreFiltered() {

@@ -88,7 +88,7 @@ public class JndiObjectFactoryBean extends JndiObjectLocator
 
 
 	/**
-	 * Specify the proxy interface to use for the JNDI object.
+	 * Specify the staticProxy interface to use for the JNDI object.
 	 * <p>Typically used in conjunction with "lookupOnStartup"=false and/or "cache"=false.
 	 * Needs to be specified because the actual JNDI object type is not known
 	 * in advance in case of a lazy lookup.
@@ -101,9 +101,9 @@ public class JndiObjectFactoryBean extends JndiObjectLocator
 	}
 
 	/**
-	 * Specify multiple proxy interfaces to use for the JNDI object.
+	 * Specify multiple staticProxy interfaces to use for the JNDI object.
 	 * <p>Typically used in conjunction with "lookupOnStartup"=false and/or "cache"=false.
-	 * Note that proxy interfaces will be autodetected from a specified "expectedType",
+	 * Note that staticProxy interfaces will be autodetected from a specified "expectedType",
 	 * if necessary.
 	 * @see #setExpectedType
 	 * @see #setLookupOnStartup
@@ -117,7 +117,7 @@ public class JndiObjectFactoryBean extends JndiObjectLocator
 	 * Set whether to look up the JNDI object on startup. Default is "true".
 	 * <p>Can be turned off to allow for late availability of the JNDI object.
 	 * In this case, the JNDI object will be fetched on first access.
-	 * <p>For a lazy lookup, a proxy interface needs to be specified.
+	 * <p>For a lazy lookup, a staticProxy interface needs to be specified.
 	 * @see #setProxyInterface
 	 * @see #setCache
 	 */
@@ -130,7 +130,7 @@ public class JndiObjectFactoryBean extends JndiObjectLocator
 	 * Default is "true".
 	 * <p>Can be turned off to allow for hot redeployment of JNDI objects.
 	 * In this case, the JNDI object will be fetched for each invocation.
-	 * <p>For hot redeployment, a proxy interface needs to be specified.
+	 * <p>For hot redeployment, a staticProxy interface needs to be specified.
 	 * @see #setProxyInterface
 	 * @see #setLookupOnStartup
 	 */
@@ -191,12 +191,12 @@ public class JndiObjectFactoryBean extends JndiObjectLocator
 		super.afterPropertiesSet();
 
 		if (this.proxyInterfaces != null || !this.lookupOnStartup || !this.cache || this.exposeAccessContext) {
-			// We need to create a proxy for this...
+			// We need to create a staticProxy for this...
 			if (this.defaultObject != null) {
 				throw new IllegalArgumentException(
 						"'defaultObject' is not supported in combination with 'proxyInterface'");
 			}
-			// We need a proxy and a JndiObjectTargetSource.
+			// We need a staticProxy and a JndiObjectTargetSource.
 			this.jndiObject = JndiObjectProxyFactory.createJndiObjectProxy(this);
 		}
 		else {
@@ -290,7 +290,7 @@ public class JndiObjectFactoryBean extends JndiObjectLocator
 	/**
 	 * Create a composite interface Class for the given interfaces,
 	 * implementing the given interfaces in one single Class.
-	 * <p>The default implementation builds a JDK proxy class for the
+	 * <p>The default implementation builds a JDK staticProxy class for the
 	 * given interfaces.
 	 * @param interfaces the interfaces to merge
 	 * @return the merged interface as Class
@@ -302,7 +302,7 @@ public class JndiObjectFactoryBean extends JndiObjectLocator
 
 
 	/**
-	 * Inner class to just introduce an AOP dependency when actually creating a proxy.
+	 * Inner class to just introduce an AOP dependency when actually creating a staticProxy.
 	 */
 	private static class JndiObjectProxyFactory {
 
@@ -317,7 +317,7 @@ public class JndiObjectFactoryBean extends JndiObjectLocator
 			targetSource.setCache(jof.cache);
 			targetSource.afterPropertiesSet();
 
-			// Create a proxy with JndiObjectFactoryBean's proxy interface and the JndiObjectTargetSource.
+			// Create a staticProxy with JndiObjectFactoryBean's staticProxy interface and the JndiObjectTargetSource.
 			ProxyFactory proxyFactory = new ProxyFactory();
 			if (jof.proxyInterfaces != null) {
 				proxyFactory.setInterfaces(jof.proxyInterfaces);

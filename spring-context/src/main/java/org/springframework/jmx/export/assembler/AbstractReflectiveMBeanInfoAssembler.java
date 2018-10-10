@@ -239,13 +239,13 @@ public abstract class AbstractReflectiveMBeanInfoAssembler extends AbstractMBean
 	 * <p>Set this property to {@code true} for JMX implementations that
 	 * require the "class" field to be specified, for example WebLogic's.
 	 * In that case, Spring will expose the target class name there, in case of
-	 * a plain bean instance or a CGLIB proxy. When encountering a JDK dynamic
-	 * proxy, the <b>first</b> interface implemented by the proxy will be specified.
-	 * <p><b>WARNING:</b> Review your proxy definitions when exposing a JDK dynamic
-	 * proxy through JMX, in particular with this property turned to {@code true}:
+	 * a plain bean instance or a CGLIB staticProxy. When encountering a JDK dynamic
+	 * staticProxy, the <b>first</b> interface implemented by the staticProxy will be specified.
+	 * <p><b>WARNING:</b> Review your staticProxy definitions when exposing a JDK dynamic
+	 * staticProxy through JMX, in particular with this property turned to {@code true}:
 	 * the specified interface list should start with your management interface in
 	 * this case, with all other interfaces following. In general, consider exposing
-	 * your target bean directly or a CGLIB proxy for it instead.
+	 * your target bean directly or a CGLIB staticProxy for it instead.
 	 * @see #getClassForDescriptor(Object)
 	 */
 	public void setExposeClassDescriptor(boolean exposeClassDescriptor) {
@@ -282,7 +282,7 @@ public abstract class AbstractReflectiveMBeanInfoAssembler extends AbstractMBean
 	 * the chance to vote on the inclusion of both the accessor and mutator.
 	 * If a particular accessor or mutator is voted for inclusion, the appropriate
 	 * metadata is assembled and passed to the subclass for descriptor population.
-	 * @param managedBean the bean instance (might be an AOP proxy)
+	 * @param managedBean the bean instance (might be an AOP staticProxy)
 	 * @param beanKey the key associated with the MBean in the beans map
 	 * of the {@code MBeanExporter}
 	 * @return the attribute metadata
@@ -337,7 +337,7 @@ public abstract class AbstractReflectiveMBeanInfoAssembler extends AbstractMBean
 	 * or mutator of an attribute that is inclued in the managment interface, then
 	 * the corresponding operation is exposed with the &quot;role&quot; descriptor
 	 * field set to the appropriate value.
-	 * @param managedBean the bean instance (might be an AOP proxy)
+	 * @param managedBean the bean instance (might be an AOP staticProxy)
 	 * @param beanKey the key associated with the MBean in the beans map
 	 * of the {@code MBeanExporter}
 	 * @return the operation metadata
@@ -427,8 +427,8 @@ public abstract class AbstractReflectiveMBeanInfoAssembler extends AbstractMBean
 	 * Return the class to be used for the JMX descriptor field "class".
 	 * Only applied when the "exposeClassDescriptor" property is "true".
 	 * <p>The default implementation returns the first implemented interface
-	 * for a JDK proxy, and the target class else.
-	 * @param managedBean the bean instance (might be an AOP proxy)
+	 * for a JDK staticProxy, and the target class else.
+	 * @param managedBean the bean instance (might be an AOP staticProxy)
 	 * @return the class to expose in the descriptor field "class"
 	 * @see #setExposeClassDescriptor
 	 * @see #getClassToExpose(Class)
@@ -526,7 +526,7 @@ public abstract class AbstractReflectiveMBeanInfoAssembler extends AbstractMBean
 	 * <p>The default implementation sets the {@code currencyTimeLimit} field to
 	 * the specified "defaultCurrencyTimeLimit", if any (by default none).
 	 * @param descriptor the {@code Descriptor} for the MBean resource.
-	 * @param managedBean the bean instance (might be an AOP proxy)
+	 * @param managedBean the bean instance (might be an AOP staticProxy)
 	 * @param beanKey the key associated with the MBean in the beans map
 	 * of the {@code MBeanExporter}
 	 * @see #setDefaultCurrencyTimeLimit(Integer)

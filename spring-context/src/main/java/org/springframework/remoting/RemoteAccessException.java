@@ -19,7 +19,7 @@ package org.springframework.remoting;
 import org.springframework.core.NestedRuntimeException;
 
 /**
- * Generic remote access exception. A service proxy for any remoting
+ * Generic remote access exception. A service staticProxy for any remoting
  * protocol should throw this exception or subclasses of it, in order
  * to transparently expose a plain Java business interface.
  *
@@ -35,7 +35,7 @@ import org.springframework.core.NestedRuntimeException;
  * In this case, the client code doesn't show any signs of being involved in
  * remote access, as there aren't any remoting-specific dependencies.
  *
- * <p>Even when switching from a remote service proxy to a local implementation
+ * <p>Even when switching from a remote service staticProxy to a local implementation
  * of the same interface, this amounts to just a matter of configuration. Obviously,
  * the client code should be somewhat aware that it <i>might be working</i>
  * against a remote service, for example in terms of repeated method calls that

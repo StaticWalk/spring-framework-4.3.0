@@ -68,7 +68,7 @@ public class AnnotationBeanWiringInfoResolver implements BeanWiringInfoResolver 
 	/**
 	 * Determine the default bean name for the specified bean instance.
 	 * <p>The default implementation returns the superclass name for a CGLIB
-	 * proxy and the name of the plain bean class else.
+	 * staticProxy and the name of the plain bean class else.
 	 * @param beanInstance the bean instance to build a default name for
 	 * @return the default bean name to use
 	 * @see org.springframework.util.ClassUtils#getUserClass(Class)

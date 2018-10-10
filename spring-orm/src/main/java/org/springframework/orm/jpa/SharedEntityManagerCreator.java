@@ -84,33 +84,33 @@ public abstract class SharedEntityManagerCreator {
 
 
 	/**
-	 * Create a transactional EntityManager proxy for the given EntityManagerFactory.
+	 * Create a transactional EntityManager staticProxy for the given EntityManagerFactory.
 	 * @param emf the EntityManagerFactory to delegate to.
-	 * @return a shareable transaction EntityManager proxy
+	 * @return a shareable transaction EntityManager staticProxy
 	 */
 	public static EntityManager createSharedEntityManager(EntityManagerFactory emf) {
 		return createSharedEntityManager(emf, null, true);
 	}
 
 	/**
-	 * Create a transactional EntityManager proxy for the given EntityManagerFactory.
+	 * Create a transactional EntityManager staticProxy for the given EntityManagerFactory.
 	 * @param emf the EntityManagerFactory to delegate to.
 	 * @param properties the properties to be passed into the
 	 * {@code createEntityManager} call (may be {@code null})
-	 * @return a shareable transaction EntityManager proxy
+	 * @return a shareable transaction EntityManager staticProxy
 	 */
 	public static EntityManager createSharedEntityManager(EntityManagerFactory emf, Map<?, ?> properties) {
 		return createSharedEntityManager(emf, properties, true);
 	}
 
 	/**
-	 * Create a transactional EntityManager proxy for the given EntityManagerFactory.
+	 * Create a transactional EntityManager staticProxy for the given EntityManagerFactory.
 	 * @param emf the EntityManagerFactory to delegate to.
 	 * @param properties the properties to be passed into the
 	 * {@code createEntityManager} call (may be {@code null})
 	 * @param synchronizedWithTransaction whether to automatically join ongoing
 	 * transactions (according to the JPA 2.1 SynchronizationType rules)
-	 * @return a shareable transaction EntityManager proxy
+	 * @return a shareable transaction EntityManager staticProxy
 	 * @since 4.0
 	 */
 	public static EntityManager createSharedEntityManager(
@@ -123,13 +123,13 @@ public abstract class SharedEntityManagerCreator {
 	}
 
 	/**
-	 * Create a transactional EntityManager proxy for the given EntityManagerFactory.
+	 * Create a transactional EntityManager staticProxy for the given EntityManagerFactory.
 	 * @param emf EntityManagerFactory to obtain EntityManagers from as needed
 	 * @param properties the properties to be passed into the
 	 * {@code createEntityManager} call (may be {@code null})
 	 * @param entityManagerInterfaces the interfaces to be implemented by the
 	 * EntityManager. Allows the addition or specification of proprietary interfaces.
-	 * @return a shareable transactional EntityManager proxy
+	 * @return a shareable transactional EntityManager staticProxy
 	 */
 	public static EntityManager createSharedEntityManager(
 			EntityManagerFactory emf, Map<?, ?> properties, Class<?>... entityManagerInterfaces) {
@@ -138,7 +138,7 @@ public abstract class SharedEntityManagerCreator {
 	}
 
 	/**
-	 * Create a transactional EntityManager proxy for the given EntityManagerFactory.
+	 * Create a transactional EntityManager staticProxy for the given EntityManagerFactory.
 	 * @param emf EntityManagerFactory to obtain EntityManagers from as needed
 	 * @param properties the properties to be passed into the
 	 * {@code createEntityManager} call (may be {@code null})
@@ -146,7 +146,7 @@ public abstract class SharedEntityManagerCreator {
 	 * transactions (according to the JPA 2.1 SynchronizationType rules)
 	 * @param entityManagerInterfaces the interfaces to be implemented by the
 	 * EntityManager. Allows the addition or specification of proprietary interfaces.
-	 * @return a shareable transactional EntityManager proxy
+	 * @return a shareable transactional EntityManager staticProxy
 	 * @since 4.0
 	 */
 	public static EntityManager createSharedEntityManager(EntityManagerFactory emf, Map<?, ?> properties,
@@ -209,12 +209,12 @@ public abstract class SharedEntityManagerCreator {
 				return (proxy == args[0]);
 			}
 			else if (method.getName().equals("hashCode")) {
-				// Use hashCode of EntityManager proxy.
+				// Use hashCode of EntityManager staticProxy.
 				return hashCode();
 			}
 			else if (method.getName().equals("toString")) {
 				// Deliver toString without touching a target EntityManager.
-				return "Shared EntityManager proxy for target factory [" + this.targetFactory + "]";
+				return "Shared EntityManager staticProxy for target factory [" + this.targetFactory + "]";
 			}
 			else if (method.getName().equals("getEntityManagerFactory")) {
 				// JPA 2.0: return EntityManagerFactory without creating an EntityManager.
@@ -230,7 +230,7 @@ public abstract class SharedEntityManagerCreator {
 				}
 			}
 			else if (method.getName().equals("unwrap")) {
-				// JPA 2.0: handle unwrap method - could be a proxy match.
+				// JPA 2.0: handle unwrap method - could be a staticProxy match.
 				Class<?> targetClass = (Class<?>) args[0];
 				if (targetClass != null && targetClass.isInstance(proxy)) {
 					return proxy;
@@ -353,11 +353,11 @@ public abstract class SharedEntityManagerCreator {
 				return (proxy == args[0]);
 			}
 			else if (method.getName().equals("hashCode")) {
-				// Use hashCode of EntityManager proxy.
+				// Use hashCode of EntityManager staticProxy.
 				return hashCode();
 			}
 			else if (method.getName().equals("unwrap")) {
-				// Handle JPA 2.0 unwrap method - could be a proxy match.
+				// Handle JPA 2.0 unwrap method - could be a staticProxy match.
 				Class<?> targetClass = (Class<?>) args[0];
 				if (targetClass == null) {
 					return this.target;

@@ -78,7 +78,7 @@ import org.springframework.util.StringUtils;
  * transactions which span multiple databases.
  *
  * <p>This factory bean will by default expose a transaction-aware SessionFactory
- * proxy, letting data access code work with the plain Hibernate SessionFactory
+ * staticProxy, letting data access code work with the plain Hibernate SessionFactory
  * and its {@code getCurrentSession()} method, while still being able to
  * participate in current Spring-managed transactions: with any transaction
  * management strategy, either local or JTA / EJB CMT, and any transaction

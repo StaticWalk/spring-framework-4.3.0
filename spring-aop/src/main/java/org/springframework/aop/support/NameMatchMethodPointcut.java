@@ -65,8 +65,8 @@ public class NameMatchMethodPointcut extends StaticMethodMatcherPointcut impleme
 	/**
 	 * Add another eligible method name, in addition to those already named.
 	 * Like the set methods, this method is for use when configuring proxies,
-	 * before a proxy is used.
-	 * <p><b>NB:</b> This method does not work after the proxy is in
+	 * before a staticProxy is used.
+	 * <p><b>NB:</b> This method does not work after the staticProxy is in
 	 * use, as advice chains will be cached.
 	 * @param name name of the additional method that will match
 	 * @return this pointcut to allow for multiple additions in one line

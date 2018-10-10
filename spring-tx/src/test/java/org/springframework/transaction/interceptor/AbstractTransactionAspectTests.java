@@ -245,7 +245,7 @@ public abstract class AbstractTransactionAspectTests {
 		TestBean inner = new TestBean() {
 			@Override
 			public String getName() {
-				// Assert that we're in the inner proxy
+				// Assert that we're in the inner staticProxy
 				TransactionInfo ti = TransactionAspectSupport.currentTransactionInfo();
 				assertFalse(ti.hasTransaction());
 				return spouseName;
@@ -299,7 +299,7 @@ public abstract class AbstractTransactionAspectTests {
 		TestBean inner = new TestBean() {
 			@Override
 			public String getName() {
-				// Assert that we're in the inner proxy
+				// Assert that we're in the inner staticProxy
 				TransactionInfo ti = TransactionAspectSupport.currentTransactionInfo();
 				// Has nested transaction
 				assertTrue(ti.hasTransaction());
@@ -558,8 +558,8 @@ public abstract class AbstractTransactionAspectTests {
 	/**
 	 * Subclasses must implement this to create an advised object based on the
 	 * given target. In the case of AspectJ, the  advised object will already
-	 * have been created, as there's no distinction between target and proxy.
-	 * In the case of Spring's own AOP framework, a proxy must be created
+	 * have been created, as there's no distinction between target and staticProxy.
+	 * In the case of Spring's own AOP framework, a staticProxy must be created
 	 * using a suitably configured transaction interceptor
 	 * @param target target if there's a distinct target. If not (AspectJ),
 	 * return target.

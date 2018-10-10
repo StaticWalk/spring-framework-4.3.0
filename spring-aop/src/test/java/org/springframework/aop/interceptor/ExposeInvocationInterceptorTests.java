@@ -43,7 +43,7 @@ public final class ExposeInvocationInterceptorTests {
 	public void testXmlConfig() {
 		DefaultListableBeanFactory bf = new DefaultListableBeanFactory();
 		new XmlBeanDefinitionReader(bf).loadBeanDefinitions(CONTEXT);
-		ITestBean tb = (ITestBean) bf.getBean("proxy");
+		ITestBean tb = (ITestBean) bf.getBean("staticProxy");
 		String name = "tony";
 		tb.setName(name);
 		// Fires context checks

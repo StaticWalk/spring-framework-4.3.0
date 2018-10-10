@@ -75,7 +75,7 @@ public abstract class JRubyScriptUtils {
 	 * Create a new JRuby-scripted object from the given script source.
 	 * @param scriptSource the script source text
 	 * @param interfaces the interfaces that the scripted Java object is to implement
-	 * @param classLoader the {@link ClassLoader} to create the script proxy with
+	 * @param classLoader the {@link ClassLoader} to create the script staticProxy with
 	 * @return the scripted Java object
 	 * @throws JumpException in case of JRuby parsing failure
 	 */

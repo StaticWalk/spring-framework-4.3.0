@@ -62,32 +62,32 @@ import static org.junit.Assert.*;
 @RunWith(Parameterized.class)
 public class HandlerMethodAnnotationDetectionTests {
 
-	@Parameters(name = "controller [{0}], auto-proxy [{1}]")
+	@Parameters(name = "controller [{0}], auto-staticProxy [{1}]")
 	public static Object[][] handlerTypes() {
 		return new Object[][] {
 
-			{ SimpleController.class, true }, // CGLib proxy
+			{ SimpleController.class, true }, // CGLib staticProxy
 			{ SimpleController.class, false },
 
-			{ AbstractClassController.class, true }, // CGLib proxy
+			{ AbstractClassController.class, true }, // CGLib staticProxy
 			{ AbstractClassController.class, false },
 
-			{ ParameterizedAbstractClassController.class, true }, // CGLib proxy
+			{ ParameterizedAbstractClassController.class, true }, // CGLib staticProxy
 			{ ParameterizedAbstractClassController.class, false },
 
-			{ ParameterizedSubclassOverridesDefaultMappings.class, true }, // CGLib proxy
+			{ ParameterizedSubclassOverridesDefaultMappings.class, true }, // CGLib staticProxy
 			{ ParameterizedSubclassOverridesDefaultMappings.class, false },
 
 			// TODO [SPR-9517] Enable ParameterizedSubclassDoesNotOverrideConcreteImplementationsFromGenericAbstractSuperclass test cases
-			// { ParameterizedSubclassDoesNotOverrideConcreteImplementationsFromGenericAbstractSuperclass.class, true }, // CGLib proxy
+			// { ParameterizedSubclassDoesNotOverrideConcreteImplementationsFromGenericAbstractSuperclass.class, true }, // CGLib staticProxy
 			// { ParameterizedSubclassDoesNotOverrideConcreteImplementationsFromGenericAbstractSuperclass.class, false },
 
-			{ InterfaceController.class, true }, // JDK dynamic proxy
+			{ InterfaceController.class, true }, // JDK dynamic staticProxy
 			{ InterfaceController.class, false },
 
 			{ ParameterizedInterfaceController.class, false }, // no AOP
 
-			{ SupportClassController.class, true }, // CGLib proxy
+			{ SupportClassController.class, true }, // CGLib staticProxy
 			{ SupportClassController.class, false }
 
 		};
@@ -254,7 +254,7 @@ public class HandlerMethodAnnotationDetectionTests {
 	/**
 	 * CONTROLLER WITH INTERFACE
 	 *
-	 * JDK Dynamic proxy:
+	 * JDK Dynamic staticProxy:
 	 * All annotations must be on the interface.
 	 *
 	 * Without AOP:
@@ -446,7 +446,7 @@ public class HandlerMethodAnnotationDetectionTests {
 	 *
 	 * <p>All annotations can be on interface except parameter annotations.
 	 *
-	 * <p>Cannot be used as JDK dynamic proxy since parameterized interface does not contain type information.
+	 * <p>Cannot be used as JDK dynamic staticProxy since parameterized interface does not contain type information.
 	 */
 	static class ParameterizedInterfaceController implements MappingGenericInterface<String, Date, Date> {
 

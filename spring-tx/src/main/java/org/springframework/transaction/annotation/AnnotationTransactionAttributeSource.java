@@ -80,7 +80,7 @@ public class AnnotationTransactionAttributeSource extends AbstractFallbackTransa
 	 * or the EJB3 {@link javax.ejb.TransactionAttribute} annotation.
 	 * @param publicMethodsOnly whether to support public methods that carry
 	 * the {@code Transactional} annotation only (typically for use
-	 * with proxy-based AOP), or protected/private methods as well
+	 * with staticProxy-based AOP), or protected/private methods as well
 	 * (typically used with AspectJ class weaving)
 	 */
 	public AnnotationTransactionAttributeSource(boolean publicMethodsOnly) {

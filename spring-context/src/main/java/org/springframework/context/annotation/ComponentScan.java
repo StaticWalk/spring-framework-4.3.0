@@ -104,7 +104,7 @@ public @interface ComponentScan {
 
 	/**
 	 * Indicates whether proxies should be generated for detected components, which may be
-	 * necessary when using scopes in a proxy-style fashion.
+	 * necessary when using scopes in a staticProxy-style fashion.
 	 * <p>The default is defer to the default behavior of the component scanner used to
 	 * execute the actual scan.
 	 * <p>Note that setting this attribute overrides any value set for {@link #scopeResolver}.

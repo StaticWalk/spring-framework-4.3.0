@@ -157,7 +157,7 @@ public final class DelegatingIntroductionInterceptorTests {
 		TimeStamped ts = (TimeStamped) pf.getProxy();
 
 		assertThat(ts, instanceOf(TimeStamped.class));
-		// Shoulnd't proxy framework interfaces
+		// Shoulnd't staticProxy framework interfaces
 		assertTrue(!(ts instanceof MethodInterceptor));
 		assertTrue(!(ts instanceof IntroductionInterceptor));
 
@@ -167,8 +167,8 @@ public final class DelegatingIntroductionInterceptorTests {
 
 		// Test removal
 		ii.suppressInterface(TimeStamped.class);
-		// Note that we need to construct a new proxy factory,
-		// or suppress the interface on the proxy factory
+		// Note that we need to construct a new staticProxy factory,
+		// or suppress the interface on the staticProxy factory
 		pf = new ProxyFactory(target);
 		pf.addAdvisor(0, new DefaultIntroductionAdvisor(ii));
 		Object o = pf.getProxy();
@@ -214,8 +214,8 @@ public final class DelegatingIntroductionInterceptorTests {
 
 		assertEquals(company, proxy.getCompany());
 		ITestBean introduction = (ITestBean) proxy;
-		assertSame("Introduced method returning delegate returns proxy", introduction, introduction.getSpouse());
-		assertTrue("Introduced method returning delegate returns proxy", AopUtils.isAopProxy(introduction.getSpouse()));
+		assertSame("Introduced method returning delegate returns staticProxy", introduction, introduction.getSpouse());
+		assertTrue("Introduced method returning delegate returns staticProxy", AopUtils.isAopProxy(introduction.getSpouse()));
 	}
 
 	@Test

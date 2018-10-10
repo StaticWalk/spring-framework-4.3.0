@@ -47,7 +47,7 @@ import org.springframework.util.Assert;
  * <a href="http://www.caucho.com/hessian">Hessian website</a>
  * <b>Note: As of Spring 4.0, this client requires Hessian 4.0 or above.</b>
  *
- * <p>Note: There is no requirement for services accessed with this proxy factory
+ * <p>Note: There is no requirement for services accessed with this staticProxy factory
  * to have been exported using Spring's {@link HessianServiceExporter}, as there is
  * no special handling involved. As a consequence, you can also access services that
  * have been exported using Caucho's {@link com.caucho.hessian.server.HessianServlet}.
@@ -211,7 +211,7 @@ public class HessianClientInterceptor extends UrlBasedRemoteAccessor implements 
 	}
 
 	/**
-	 * Initialize the Hessian proxy for this interceptor.
+	 * Initialize the Hessian staticProxy for this interceptor.
 	 * @throws RemoteLookupFailureException if the service URL is invalid
 	 */
 	public void prepare() throws RemoteLookupFailureException {
@@ -224,10 +224,10 @@ public class HessianClientInterceptor extends UrlBasedRemoteAccessor implements 
 	}
 
 	/**
-	 * Create the Hessian proxy that is wrapped by this interceptor.
-	 * @param proxyFactory the proxy factory to use
-	 * @return the Hessian proxy
-	 * @throws MalformedURLException if thrown by the proxy factory
+	 * Create the Hessian staticProxy that is wrapped by this interceptor.
+	 * @param proxyFactory the staticProxy factory to use
+	 * @return the Hessian staticProxy
+	 * @throws MalformedURLException if thrown by the staticProxy factory
 	 * @see com.caucho.hessian.client.HessianProxyFactory#create
 	 */
 	protected Object createHessianProxy(HessianProxyFactory proxyFactory) throws MalformedURLException {
@@ -270,7 +270,7 @@ public class HessianClientInterceptor extends UrlBasedRemoteAccessor implements 
 		}
 		catch (Throwable ex) {
 			throw new RemoteProxyFailureException(
-					"Failed to invoke Hessian proxy for remote service [" + getServiceUrl() + "]", ex);
+					"Failed to invoke Hessian staticProxy for remote service [" + getServiceUrl() + "]", ex);
 		}
 		finally {
 			resetThreadContextClassLoader(originalClassLoader);

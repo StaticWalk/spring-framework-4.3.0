@@ -221,9 +221,9 @@ public abstract class JmxUtils {
 	 * Return the class or interface to expose for the given bean.
 	 * This is the class that will be searched for attributes and operations
 	 * (for example, checked for annotations).
-	 * <p>This implementation returns the superclass for a CGLIB proxy and
-	 * the class of the given bean else (for a JDK proxy or a plain bean class).
-	 * @param managedBean the bean instance (might be an AOP proxy)
+	 * <p>This implementation returns the superclass for a CGLIB staticProxy and
+	 * the class of the given bean else (for a JDK staticProxy or a plain bean class).
+	 * @param managedBean the bean instance (might be an AOP staticProxy)
 	 * @return the bean class to expose
 	 * @see org.springframework.util.ClassUtils#getUserClass(Object)
 	 */
@@ -235,9 +235,9 @@ public abstract class JmxUtils {
 	 * Return the class or interface to expose for the given bean class.
 	 * This is the class that will be searched for attributes and operations
 	 * (for example, checked for annotations).
-	 * <p>This implementation returns the superclass for a CGLIB proxy and
-	 * the class of the given bean else (for a JDK proxy or a plain bean class).
-	 * @param clazz the bean class (might be an AOP proxy class)
+	 * <p>This implementation returns the superclass for a CGLIB staticProxy and
+	 * the class of the given bean else (for a JDK staticProxy or a plain bean class).
+	 * @param clazz the bean class (might be an AOP staticProxy class)
 	 * @return the bean class to expose
 	 * @see org.springframework.util.ClassUtils#getUserClass(Class)
 	 */

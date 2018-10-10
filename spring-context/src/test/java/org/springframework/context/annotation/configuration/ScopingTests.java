@@ -44,7 +44,7 @@ import static org.junit.Assert.*;
 
 /**
  * Tests that scopes are properly supported by using a custom Scope implementations
- * and scoped proxy {@link Bean} declarations.
+ * and scoped staticProxy {@link Bean} declarations.
  *
  * @author Costin Leau
  * @author Chris Beams
@@ -160,7 +160,7 @@ public class ScopingTests {
 	public void testScopedProxyConfiguration() throws Exception {
 		TestBean singleton = (TestBean) ctx.getBean("singletonWithScopedInterfaceDep");
 		ITestBean spouse = singleton.getSpouse();
-		assertTrue("scoped bean is not wrapped by the scoped-proxy", spouse instanceof ScopedObject);
+		assertTrue("scoped bean is not wrapped by the scoped-staticProxy", spouse instanceof ScopedObject);
 
 		String beanName = "scopedProxyInterface";
 
@@ -171,7 +171,7 @@ public class ScopingTests {
 
 		ITestBean spouseFromBF = (ITestBean) ctx.getBean(scopedBeanName);
 		assertEquals(spouse.getName(), spouseFromBF.getName());
-		// the scope proxy has kicked in
+		// the scope staticProxy has kicked in
 		assertNotSame(spouse, spouseFromBF);
 
 		// create a new bean
@@ -192,7 +192,7 @@ public class ScopingTests {
 	public void testScopedProxyConfigurationWithClasses() throws Exception {
 		TestBean singleton = (TestBean) ctx.getBean("singletonWithScopedClassDep");
 		ITestBean spouse = singleton.getSpouse();
-		assertTrue("scoped bean is not wrapped by the scoped-proxy", spouse instanceof ScopedObject);
+		assertTrue("scoped bean is not wrapped by the scoped-staticProxy", spouse instanceof ScopedObject);
 
 		String beanName = "scopedProxyClass";
 
@@ -203,7 +203,7 @@ public class ScopingTests {
 
 		TestBean spouseFromBF = (TestBean) ctx.getBean(scopedBeanName);
 		assertEquals(spouse.getName(), spouseFromBF.getName());
-		// the scope proxy has kicked in
+		// the scope staticProxy has kicked in
 		assertNotSame(spouse, spouseFromBF);
 
 		// create a new bean

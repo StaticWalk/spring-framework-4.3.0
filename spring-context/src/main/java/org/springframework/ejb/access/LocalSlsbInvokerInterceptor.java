@@ -167,7 +167,7 @@ public class LocalSlsbInvokerInterceptor extends AbstractSlsbInvokerInterceptor 
 				ejb.remove();
 			}
 			catch (Throwable ex) {
-				logger.warn("Could not invoke 'remove' on local EJB proxy", ex);
+				logger.warn("Could not invoke 'remove' on local EJB staticProxy", ex);
 			}
 		}
 	}

@@ -102,25 +102,25 @@ public final class ProxyFactoryBeanTests {
 	@Test
 	public void testIsDynamicProxyWhenInterfaceSpecified() {
 		ITestBean test1 = (ITestBean) factory.getBean("test1");
-		assertTrue("test1 is a dynamic proxy", Proxy.isProxyClass(test1.getClass()));
+		assertTrue("test1 is a dynamic staticProxy", Proxy.isProxyClass(test1.getClass()));
 	}
 
 	@Test
 	public void testIsDynamicProxyWhenInterfaceSpecifiedForPrototype() {
 		ITestBean test1 = (ITestBean) factory.getBean("test2");
-		assertTrue("test2 is a dynamic proxy", Proxy.isProxyClass(test1.getClass()));
+		assertTrue("test2 is a dynamic staticProxy", Proxy.isProxyClass(test1.getClass()));
 	}
 
 	@Test
 	public void testIsDynamicProxyWhenAutodetectingInterfaces() {
 		ITestBean test1 = (ITestBean) factory.getBean("test3");
-		assertTrue("test3 is a dynamic proxy", Proxy.isProxyClass(test1.getClass()));
+		assertTrue("test3 is a dynamic staticProxy", Proxy.isProxyClass(test1.getClass()));
 	}
 
 	@Test
 	public void testIsDynamicProxyWhenAutodetectingInterfacesForPrototype() {
 		ITestBean test1 = (ITestBean) factory.getBean("test4");
-		assertTrue("test4 is a dynamic proxy", Proxy.isProxyClass(test1.getClass()));
+		assertTrue("test4 is a dynamic staticProxy", Proxy.isProxyClass(test1.getClass()));
 	}
 
 	/**
@@ -282,8 +282,8 @@ public final class ProxyFactoryBeanTests {
 	@Test
 	public void testCglibPrototypeInstance() {
 		Object prototype = testPrototypeInstancesAreIndependent("cglibPrototype");
-		assertTrue("It's a cglib proxy", AopUtils.isCglibProxy(prototype));
-		assertFalse("It's not a dynamic proxy", AopUtils.isJdkDynamicProxy(prototype));
+		assertTrue("It's a cglib staticProxy", AopUtils.isCglibProxy(prototype));
+		assertFalse("It's not a dynamic staticProxy", AopUtils.isJdkDynamicProxy(prototype));
 	}
 
 	/**
@@ -336,7 +336,7 @@ public final class ProxyFactoryBeanTests {
 
 	/**
 	 * Test that inner bean for target means that we can use
-	 * autowire without ambiguity from target and proxy
+	 * autowire without ambiguity from target and staticProxy
 	 */
 	@Test
 	public void testTargetAsInnerBean() {
@@ -344,7 +344,7 @@ public final class ProxyFactoryBeanTests {
 		new XmlBeanDefinitionReader(bf).loadBeanDefinitions(new ClassPathResource(INNER_BEAN_TARGET_CONTEXT, CLASS));
 		ITestBean itb = (ITestBean) bf.getBean("testBean");
 		assertEquals("innerBeanTarget", itb.getName());
-		assertEquals("Only have proxy and interceptor: no target", 3, bf.getBeanDefinitionCount());
+		assertEquals("Only have staticProxy and interceptor: no target", 3, bf.getBeanDefinitionCount());
 		DependsOnITestBean doit = (DependsOnITestBean) bf.getBean("autowireCheck");
 		assertSame(itb, doit.tb);
 	}
@@ -694,7 +694,7 @@ public final class ProxyFactoryBeanTests {
 		new XmlBeanDefinitionReader(bf).loadBeanDefinitions(new ClassPathResource(FROZEN_CONTEXT, CLASS));
 
 		Advised advised = (Advised)bf.getBean("frozen");
-		assertTrue("The proxy should be frozen", advised.isFrozen());
+		assertTrue("The staticProxy should be frozen", advised.isFrozen());
 	}
 
 	@Test

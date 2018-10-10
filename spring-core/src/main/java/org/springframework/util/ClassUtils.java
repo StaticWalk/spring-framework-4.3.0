@@ -1150,7 +1150,7 @@ public abstract class ClassUtils {
 	/**
 	 * Create a composite interface Class for the given interfaces,
 	 * implementing the given interfaces in one single Class.
-	 * <p>This implementation builds a JDK proxy class for the given interfaces.
+	 * <p>This implementation builds a JDK staticProxy class for the given interfaces.
 	 * @param interfaces the interfaces to merge
 	 * @param classLoader the ClassLoader to create the composite Class in
 	 * @return the merged interface as Class
@@ -1217,7 +1217,7 @@ public abstract class ClassUtils {
 	}
 
 	/**
-	 * Check whether the given object is a CGLIB proxy.
+	 * Check whether the given object is a CGLIB staticProxy.
 	 * @param object the object to check
 	 * @see org.springframework.aop.support.AopUtils#isCglibProxy(Object)
 	 */

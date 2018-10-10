@@ -45,7 +45,7 @@ import java.lang.annotation.Target;
  * <p>In addition to its role for component initialization, this annotation may also be placed
  * on injection points marked with {@link org.springframework.beans.factory.annotation.Autowired}
  * or {@link javax.inject.Inject}: In that context, it leads to the creation of a
- * lazy-resolution proxy for all affected dependencies, as an alternative to using
+ * lazy-resolution staticProxy for all affected dependencies, as an alternative to using
  * {@link org.springframework.beans.factory.ObjectFactory} or {@link javax.inject.Provider}.
  *
  * @author Chris Beams

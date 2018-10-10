@@ -169,10 +169,10 @@ public class SimpleClientHttpRequestFactory implements ClientHttpRequestFactory,
 
 	/**
 	 * Opens and returns a connection to the given URL.
-	 * <p>The default implementation uses the given {@linkplain #setProxy(java.net.Proxy) proxy} -
+	 * <p>The default implementation uses the given {@linkplain #setProxy(java.net.Proxy) staticProxy} -
 	 * if any - to open a connection.
 	 * @param url the URL to open a connection to
-	 * @param proxy the proxy to use, may be {@code null}
+	 * @param proxy the staticProxy to use, may be {@code null}
 	 * @return the opened connection
 	 * @throws IOException in case of I/O errors
 	 */

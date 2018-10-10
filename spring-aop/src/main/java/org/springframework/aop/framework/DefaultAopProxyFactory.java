@@ -22,19 +22,19 @@ import java.lang.reflect.Proxy;
 import org.springframework.aop.SpringProxy;
 
 /**
- * Default {@link AopProxyFactory} implementation, creating either a CGLIB proxy
- * or a JDK dynamic proxy.
+ * Default {@link AopProxyFactory} implementation, creating either a CGLIB staticProxy
+ * or a JDK dynamic staticProxy.
  *
- * <p>Creates a CGLIB proxy if one the following is true for a given
+ * <p>Creates a CGLIB staticProxy if one the following is true for a given
  * {@link AdvisedSupport} instance:
  * <ul>
  * <li>the {@code optimize} flag is set
  * <li>the {@code proxyTargetClass} flag is set
- * <li>no proxy interfaces have been specified
+ * <li>no staticProxy interfaces have been specified
  * </ul>
  *
- * <p>In general, specify {@code proxyTargetClass} to enforce a CGLIB proxy,
- * or specify one or more interfaces to use a JDK dynamic proxy.
+ * <p>In general, specify {@code proxyTargetClass} to enforce a CGLIB staticProxy,
+ * or specify one or more interfaces to use a JDK dynamic staticProxy.
  *
  * @author Rod Johnson
  * @author Juergen Hoeller
@@ -52,7 +52,7 @@ public class DefaultAopProxyFactory implements AopProxyFactory, Serializable {
 			Class<?> targetClass = config.getTargetClass();
 			if (targetClass == null) {
 				throw new AopConfigException("TargetSource cannot determine target class: " +
-						"Either an interface or a target is required for proxy creation.");
+						"Either an interface or a target is required for staticProxy creation.");
 			}
 			if (targetClass.isInterface() || Proxy.isProxyClass(targetClass)) {
 				return new JdkDynamicAopProxy(config);
@@ -67,7 +67,7 @@ public class DefaultAopProxyFactory implements AopProxyFactory, Serializable {
 	/**
 	 * Determine whether the supplied {@link AdvisedSupport} has only the
 	 * {@link org.springframework.aop.SpringProxy} interface specified
-	 * (or no proxy interfaces specified at all).
+	 * (or no staticProxy interfaces specified at all).
 	 */
 	private boolean hasNoUserSuppliedProxyInterfaces(AdvisedSupport config) {
 		Class<?>[] ifcs = config.getProxiedInterfaces();

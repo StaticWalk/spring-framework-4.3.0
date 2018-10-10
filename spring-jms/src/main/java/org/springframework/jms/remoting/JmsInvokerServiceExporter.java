@@ -33,7 +33,7 @@ import org.springframework.remoting.support.RemoteInvocationResult;
 
 /**
  * JMS message listener that exports the specified service bean as a
- * JMS service endpoint, accessible via a JMS invoker proxy.
+ * JMS service endpoint, accessible via a JMS invoker staticProxy.
  *
  * <p>Note that this class implements Spring's
  * {@link org.springframework.jms.listener.SessionAwareMessageListener}

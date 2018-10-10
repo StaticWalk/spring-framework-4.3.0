@@ -86,7 +86,7 @@ import org.springframework.core.io.support.ResourcePatternUtils;
  * from a Spring BeanFactory/ApplicationContext, but can handle only newInstance()
  * style object creation, then some extra work is required to actually access and
  * use object from a BeanFactory/ApplicationContext. One solutions is to make the
- * class created by the third party code be just a stub or proxy, which gets the
+ * class created by the third party code be just a stub or staticProxy, which gets the
  * real object from a BeanFactory/ApplicationContext, and delegates to it. However,
  * it is not normally workable for the stub to create the BeanFactory on each
  * use, as depending on what is inside it, that can be an expensive operation.

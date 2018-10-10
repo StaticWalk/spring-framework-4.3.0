@@ -28,7 +28,7 @@ import org.springframework.util.ClassUtils;
 
 /**
  * Convenient superclass for {@link FactoryBean} types that produce singleton-scoped
- * proxy objects.
+ * staticProxy objects.
  *
  * <p>Manages pre- and post-interceptors (references, rather than
  * interceptor names, as in {@link ProxyFactoryBean}) and provides
@@ -58,7 +58,7 @@ public abstract class AbstractSingletonProxyFactoryBean extends ProxyConfig
 
 
 	/**
-	 * Set the target object, that is, the bean to be wrapped with a transactional proxy.
+	 * Set the target object, that is, the bean to be wrapped with a transactional staticProxy.
 	 * <p>The target may be any object, in which case a SingletonTargetSource will
 	 * be created. If it is a TargetSource, no wrapper TargetSource is created:
 	 * This enables the use of a pooling or prototype TargetSource etc.
@@ -113,7 +113,7 @@ public abstract class AbstractSingletonProxyFactoryBean extends ProxyConfig
 	}
 
 	/**
-	 * Set the ClassLoader to generate the proxy class in.
+	 * Set the ClassLoader to generate the staticProxy class in.
 	 * <p>Default is the bean ClassLoader, i.e. the ClassLoader used by the
 	 * containing BeanFactory for loading all bean classes. This can be
 	 * overridden here for specific proxies.
@@ -168,7 +168,7 @@ public abstract class AbstractSingletonProxyFactoryBean extends ProxyConfig
 			proxyFactory.setInterfaces(this.proxyInterfaces);
 		}
 		else if (!isProxyTargetClass()) {
-			// Rely on AOP infrastructure to tell us what interfaces to proxy.
+			// Rely on AOP infrastructure to tell us what interfaces to staticProxy.
 			proxyFactory.setInterfaces(
 					ClassUtils.getAllInterfacesForClass(targetSource.getTargetClass(), this.proxyClassLoader));
 		}
@@ -195,7 +195,7 @@ public abstract class AbstractSingletonProxyFactoryBean extends ProxyConfig
 
 	/**
 	 * A hook for subclasses to post-process the {@link ProxyFactory}
-	 * before creating the proxy instance with it.
+	 * before creating the staticProxy instance with it.
 	 * @param proxyFactory the AOP ProxyFactory about to be used
 	 * @since 4.2
 	 */
@@ -235,7 +235,7 @@ public abstract class AbstractSingletonProxyFactoryBean extends ProxyConfig
 
 
 	/**
-	 * Create the "main" interceptor for this proxy factory bean.
+	 * Create the "main" interceptor for this staticProxy factory bean.
 	 * Typically an Advisor, but can also be any type of Advice.
 	 * <p>Pre-interceptors will be applied before, post-interceptors
 	 * will be applied after this interceptor.

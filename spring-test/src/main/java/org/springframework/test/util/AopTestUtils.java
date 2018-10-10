@@ -39,14 +39,14 @@ public class AopTestUtils {
 	/**
 	 * Get the <em>target</em> object of the supplied {@code candidate} object.
 	 * <p>If the supplied {@code candidate} is a Spring
-	 * {@linkplain AopUtils#isAopProxy proxy}, the target of the proxy will
+	 * {@linkplain AopUtils#isAopProxy staticProxy}, the target of the staticProxy will
 	 * be returned; otherwise, the {@code candidate} will be returned
 	 * <em>as is</em>.
 	 *
-	 * @param candidate the instance to check (potentially a Spring AOP proxy);
+	 * @param candidate the instance to check (potentially a Spring AOP staticProxy);
 	 * never {@code null}
 	 * @return the target object or the {@code candidate}; never {@code null}
-	 * @throws IllegalStateException if an error occurs while unwrapping a proxy
+	 * @throws IllegalStateException if an error occurs while unwrapping a staticProxy
 	 * @see Advised#getTargetSource()
 	 * @see #getUltimateTargetObject
 	 */
@@ -66,18 +66,18 @@ public class AopTestUtils {
 
 	/**
 	 * Get the ultimate <em>target</em> object of the supplied {@code candidate}
-	 * object, unwrapping not only a top-level proxy but also any number of
+	 * object, unwrapping not only a top-level staticProxy but also any number of
 	 * nested proxies.
 	 * <p>If the supplied {@code candidate} is a Spring
-	 * {@linkplain AopUtils#isAopProxy proxy}, the ultimate target of all
+	 * {@linkplain AopUtils#isAopProxy staticProxy}, the ultimate target of all
 	 * nested proxies will be returned; otherwise, the {@code candidate}
 	 * will be returned <em>as is</em>.
 	 *
-	 * @param candidate the instance to check (potentially a Spring AOP proxy);
+	 * @param candidate the instance to check (potentially a Spring AOP staticProxy);
 	 * never {@code null}
 	 * @return the ultimate target object or the {@code candidate}; never
 	 * {@code null}
-	 * @throws IllegalStateException if an error occurs while unwrapping a proxy
+	 * @throws IllegalStateException if an error occurs while unwrapping a staticProxy
 	 * @see Advised#getTargetSource()
 	 * @see org.springframework.aop.framework.AopProxyUtils#ultimateTargetClass
 	 */

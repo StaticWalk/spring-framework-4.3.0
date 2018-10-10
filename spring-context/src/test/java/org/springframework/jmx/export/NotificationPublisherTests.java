@@ -111,7 +111,7 @@ public class NotificationPublisherTests extends AbstractMBeanServerTests {
 		ConfigurableApplicationContext ctx = loadContext("org/springframework/jmx/export/notificationPublisherLazyTests.xml");
 		assertFalse("Should not have instantiated the bean yet", ctx.getBeanFactory().containsSingleton("publisher"));
 
-		// need to touch the MBean proxy
+		// need to touch the MBean staticProxy
 		server.getAttribute(ObjectNameManager.getInstance("spring:type=Publisher"), "Name");
 		this.server.addNotificationListener(ObjectNameManager.getInstance("spring:type=Publisher"), listener, null,
 				null);

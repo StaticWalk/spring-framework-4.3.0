@@ -69,7 +69,7 @@ public abstract class AbstractAdvisingBeanPostProcessor extends ProxyProcessorSu
 		if (bean instanceof Advised) {
 			Advised advised = (Advised) bean;
 			if (!advised.isFrozen() && isEligible(AopUtils.getTargetClass(bean))) {
-				// Add our local Advisor to the existing proxy's Advisor chain...
+				// Add our local Advisor to the existing staticProxy's Advisor chain...
 				if (this.beforeExistingAdvisors) {
 					advised.addAdvisor(0, this.advisor);
 				}
@@ -90,7 +90,7 @@ public abstract class AbstractAdvisingBeanPostProcessor extends ProxyProcessorSu
 			return proxyFactory.getProxy(getProxyClassLoader());
 		}
 
-		// No async proxy needed.
+		// No async staticProxy needed.
 		return bean;
 	}
 
@@ -100,10 +100,10 @@ public abstract class AbstractAdvisingBeanPostProcessor extends ProxyProcessorSu
 	 * <p>Delegates to {@link #isEligible(Class)} for target class checking.
 	 * Can be overridden e.g. to specifically exclude certain beans by name.
 	 * <p>Note: Only called for regular bean instances but not for existing
-	 * proxy instances which implement {@link Advised} and allow for adding
-	 * the local {@link Advisor} to the existing proxy's {@link Advisor} chain.
+	 * staticProxy instances which implement {@link Advised} and allow for adding
+	 * the local {@link Advisor} to the existing staticProxy's {@link Advisor} chain.
 	 * For the latter, {@link #isEligible(Class)} is being called directly,
-	 * with the actual target class behind the existing proxy (as determined
+	 * with the actual target class behind the existing staticProxy (as determined
 	 * by {@link AopUtils#getTargetClass(Object)}).
 	 * @param bean the bean instance
 	 * @param beanName the name of the bean
@@ -136,8 +136,8 @@ public abstract class AbstractAdvisingBeanPostProcessor extends ProxyProcessorSu
 	 * particular the exposure of the target class. The default introspection
 	 * of interfaces for non-target-class proxies and the configured advisor
 	 * will be applied afterwards; {@link #customizeProxyFactory} allows for
-	 * late customizations of those parts right before proxy creation.
-	 * @param bean the bean instance to create a proxy for
+	 * late customizations of those parts right before staticProxy creation.
+	 * @param bean the bean instance to create a staticProxy for
 	 * @param beanName the corresponding bean name
 	 * @return the ProxyFactory, initialized with this processor's
 	 * {@link ProxyConfig} settings and the specified bean
@@ -156,7 +156,7 @@ public abstract class AbstractAdvisingBeanPostProcessor extends ProxyProcessorSu
 	 * to change the interfaces exposed.
 	 * <p>The default implementation is empty.
 	 * @param proxyFactory ProxyFactory that is already configured with
-	 * target, advisor and interfaces and will be used to create the proxy
+	 * target, advisor and interfaces and will be used to create the staticProxy
 	 * immediately after this method returns
 	 * @since 4.2.3
 	 * @see #prepareProxyFactory

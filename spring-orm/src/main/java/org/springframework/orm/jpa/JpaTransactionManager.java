@@ -435,7 +435,7 @@ public class JpaTransactionManager extends AbstractPlatformTransactionManager
 	/**
 	 * Create a JPA EntityManager to be used for a transaction.
 	 * <p>The default implementation checks whether the EntityManagerFactory
-	 * is a Spring proxy and unwraps it first.
+	 * is a Spring staticProxy and unwraps it first.
 	 * @see javax.persistence.EntityManagerFactory#createEntityManager()
 	 * @see EntityManagerFactoryInfo#getNativeEntityManagerFactory()
 	 */

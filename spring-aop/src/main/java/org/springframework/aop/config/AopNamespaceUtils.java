@@ -24,13 +24,13 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.xml.ParserContext;
 
 /**
- * Utility class for handling registration of auto-proxy creators used internally
+ * Utility class for handling registration of auto-staticProxy creators used internally
  * by the '{@code aop}' namespace tags.
  *
- * <p>Only a single auto-proxy creator can be registered and multiple tags may wish
+ * <p>Only a single auto-staticProxy creator can be registered and multiple tags may wish
  * to register different concrete implementations. As such this class delegates to
  * {@link AopConfigUtils} which wraps a simple escalation protocol. Therefore classes
- * may request a particular auto-proxy creator and know that class, <i>or a subclass
+ * may request a particular auto-staticProxy creator and know that class, <i>or a subclass
  * thereof</i>, will eventually be resident in the application context.
  *
  * @author Rob Harrop
@@ -42,14 +42,14 @@ import org.springframework.beans.factory.xml.ParserContext;
 public abstract class AopNamespaceUtils {
 
 	/**
-	 * The {@code proxy-target-class} attribute as found on AOP-related XML tags.
+	 * The {@code staticProxy-target-class} attribute as found on AOP-related XML tags.
 	 */
-	public static final String PROXY_TARGET_CLASS_ATTRIBUTE = "proxy-target-class";
+	public static final String PROXY_TARGET_CLASS_ATTRIBUTE = "staticProxy-target-class";
 
 	/**
-	 * The {@code expose-proxy} attribute as found on AOP-related XML tags.
+	 * The {@code expose-staticProxy} attribute as found on AOP-related XML tags.
 	 */
-	private static final String EXPOSE_PROXY_ATTRIBUTE = "expose-proxy";
+	private static final String EXPOSE_PROXY_ATTRIBUTE = "expose-staticProxy";
 
 
 	public static void registerAutoProxyCreatorIfNecessary(
@@ -73,9 +73,14 @@ public abstract class AopNamespaceUtils {
 	public static void registerAspectJAnnotationAutoProxyCreatorIfNecessary(
 			ParserContext parserContext, Element sourceElement) {
 
+		//注册或者升级AutoProxyCreator定义beanName为internalAutoProxyCreator的BeanDefinition
 		BeanDefinition beanDefinition = AopConfigUtils.registerAspectJAnnotationAutoProxyCreatorIfNecessary(
 				parserContext.getRegistry(), parserContext.extractSource(sourceElement));
+
+		//对于proxy-target-class以及expose-proxy属性的增强
 		useClassProxyingIfNecessary(parserContext.getRegistry(), sourceElement);
+		//注册组件并通知，便于监听器做进一步的处理
+		//其中beanDefinition的className为AnnotationAwareAspectJAutoProxyCreator
 		registerComponentIfNecessary(beanDefinition, parserContext);
 	}
 

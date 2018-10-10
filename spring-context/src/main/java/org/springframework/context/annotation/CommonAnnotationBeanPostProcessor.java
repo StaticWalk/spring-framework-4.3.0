@@ -438,7 +438,7 @@ public class CommonAnnotationBeanPostProcessor extends InitDestroyAnnotationBean
 	}
 
 	/**
-	 * Obtain a lazily resolving resource proxy for the given name and type,
+	 * Obtain a lazily resolving resource staticProxy for the given name and type,
 	 * delegating to {@link #getResource} on demand once a method call comes in.
 	 * @param element the descriptor for the annotated field/method
 	 * @param requestingBeanName the name of the requesting bean

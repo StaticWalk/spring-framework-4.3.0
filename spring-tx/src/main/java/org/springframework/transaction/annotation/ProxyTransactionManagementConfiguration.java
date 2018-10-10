@@ -27,7 +27,7 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
 
 /**
  * {@code @Configuration} class that registers the Spring infrastructure beans
- * necessary to enable proxy-based annotation-driven transaction management.
+ * necessary to enable staticProxy-based annotation-driven transaction management.
  *
  * @author Chris Beams
  * @since 3.1

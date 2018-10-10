@@ -344,11 +344,11 @@ public abstract class DataSourceUtils {
 
 	/**
 	 * Determine whether the given two Connections are equal, asking the target
-	 * Connection in case of a proxy. Used to detect equality even if the
-	 * user passed in a raw target Connection while the held one is a proxy.
-	 * @param conHolder the ConnectionHolder for the held Connection (potentially a proxy)
+	 * Connection in case of a staticProxy. Used to detect equality even if the
+	 * user passed in a raw target Connection while the held one is a staticProxy.
+	 * @param conHolder the ConnectionHolder for the held Connection (potentially a staticProxy)
 	 * @param passedInCon the Connection passed-in by the user
-	 * (potentially a target Connection without proxy)
+	 * (potentially a target Connection without staticProxy)
 	 * @return whether the given Connections are equal
 	 * @see #getTargetConnection
 	 */
@@ -365,10 +365,10 @@ public abstract class DataSourceUtils {
 
 	/**
 	 * Return the innermost target Connection of the given Connection. If the given
-	 * Connection is a proxy, it will be unwrapped until a non-proxy Connection is
+	 * Connection is a staticProxy, it will be unwrapped until a non-staticProxy Connection is
 	 * found. Otherwise, the passed-in Connection will be returned as-is.
-	 * @param con the Connection proxy to unwrap
-	 * @return the innermost target Connection, or the passed-in one if no proxy
+	 * @param con the Connection staticProxy to unwrap
+	 * @return the innermost target Connection, or the passed-in one if no staticProxy
 	 * @see ConnectionProxy#getTargetConnection()
 	 */
 	public static Connection getTargetConnection(Connection con) {

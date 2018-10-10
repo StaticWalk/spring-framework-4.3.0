@@ -16,18 +16,17 @@
 
 package org.springframework.context.annotation;
 
-import java.util.Set;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.aop.config.AopConfigUtils;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 
+import java.util.Set;
+
 /**
- * Registers an auto proxy creator against the current {@link BeanDefinitionRegistry}
+ * Registers an auto staticProxy creator against the current {@link BeanDefinitionRegistry}
  * as appropriate based on an {@code @Enable*} annotation having {@code mode} and
  * {@code proxyTargetClass} attributes set to the correct values.
  *
@@ -40,7 +39,7 @@ public class AutoProxyRegistrar implements ImportBeanDefinitionRegistrar {
 	private final Log logger = LogFactory.getLog(getClass());
 
 	/**
-	 * Register, escalate, and configure the standard auto proxy creator (APC) against the
+	 * Register, escalate, and configure the standard auto staticProxy creator (APC) against the
 	 * given registry. Works by finding the nearest annotation declared on the importing
 	 * {@code @Configuration} class that has both {@code mode} and {@code proxyTargetClass}
 	 * attributes. If {@code mode} is set to {@code PROXY}, the APC is registered; if
@@ -78,7 +77,7 @@ public class AutoProxyRegistrar implements ImportBeanDefinitionRegistrar {
 			String name = getClass().getSimpleName();
 			logger.warn(String.format("%s was imported but no annotations were found " +
 					"having both 'mode' and 'proxyTargetClass' attributes of type " +
-					"AdviceMode and boolean respectively. This means that auto proxy " +
+					"AdviceMode and boolean respectively. This means that auto staticProxy " +
 					"creator registration and configuration may not have occured as " +
 					"intended, and components may not be proxied as expected. Check to " +
 					"ensure that %s has been @Import'ed on the same class where these " +

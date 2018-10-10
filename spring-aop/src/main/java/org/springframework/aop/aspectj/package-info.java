@@ -6,6 +6,6 @@
  *
  * <p>Note that use of this package does <i>not</i> require the use of the {@code ajc} compiler
  * or AspectJ load-time weaver. It is intended to enable the use of a valuable subset of AspectJ
- * functionality, with consistent semantics, with the proxy-based Spring AOP framework.
+ * functionality, with consistent semantics, with the staticProxy-based Spring AOP framework.
  */
 package org.springframework.aop.aspectj;

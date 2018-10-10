@@ -18,7 +18,7 @@ package org.springframework.remoting;
 
 /**
  * RemoteAccessException subclass to be thrown in case of a failure
- * within the client-side proxy for a remote service, for example
+ * within the client-side staticProxy for a remote service, for example
  * when a method was not found on the underlying RMI stub.
  *
  * @author Juergen Hoeller

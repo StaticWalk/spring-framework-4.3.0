@@ -26,7 +26,7 @@ import java.util.Hashtable;
  * Adapter that implements WebLogic ClassPreProcessor interface, delegating to a
  * standard JDK {@link ClassFileTransformer} underneath.
  *
- * <p>To avoid compile time checks again the vendor API, a dynamic proxy is
+ * <p>To avoid compile time checks again the vendor API, a dynamic staticProxy is
  * being used.
  *
  * @author Costin Leau

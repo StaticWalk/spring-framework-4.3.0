@@ -145,12 +145,12 @@ public abstract class AbstractSlsbInvokerInterceptor extends JndiObjectLocator
 	/**
 	 * Return the EJB home object to use. Called for each invocation.
 	 * <p>Default implementation returns the home created on initialization,
-	 * if any; else, it invokes lookup to get a new proxy for each invocation.
+	 * if any; else, it invokes lookup to get a new staticProxy for each invocation.
 	 * <p>Can be overridden in subclasses, for example to cache a home object
 	 * for a given amount of time before recreating it, or to test the home
 	 * object whether it is still alive.
 	 * @return the EJB home object to use for an invocation
-	 * @throws NamingException if proxy creation failed
+	 * @throws NamingException if staticProxy creation failed
 	 * @see #lookup
 	 * @see #getCreateMethod
 	 */

@@ -70,8 +70,8 @@ public class GroovyScriptFactoryTests {
 		Calculator calc = (Calculator) ctx.getBean("calculator");
 		Messenger messenger = (Messenger) ctx.getBean("messenger");
 
-		assertFalse("Shouldn't get proxy when refresh is disabled", AopUtils.isAopProxy(calc));
-		assertFalse("Shouldn't get proxy when refresh is disabled", AopUtils.isAopProxy(messenger));
+		assertFalse("Shouldn't get staticProxy when refresh is disabled", AopUtils.isAopProxy(calc));
+		assertFalse("Shouldn't get staticProxy when refresh is disabled", AopUtils.isAopProxy(messenger));
 
 		assertFalse("Scripted object should not be instance of Refreshable", calc instanceof Refreshable);
 		assertFalse("Scripted object should not be instance of Refreshable", messenger instanceof Refreshable);
@@ -99,8 +99,8 @@ public class GroovyScriptFactoryTests {
 		Calculator calc = (Calculator) ctx.getBean("calculator");
 		Messenger messenger = (Messenger) ctx.getBean("messenger");
 
-		assertFalse("Shouldn't get proxy when refresh is disabled", AopUtils.isAopProxy(calc));
-		assertFalse("Shouldn't get proxy when refresh is disabled", AopUtils.isAopProxy(messenger));
+		assertFalse("Shouldn't get staticProxy when refresh is disabled", AopUtils.isAopProxy(calc));
+		assertFalse("Shouldn't get staticProxy when refresh is disabled", AopUtils.isAopProxy(messenger));
 
 		assertFalse("Scripted object should not be instance of Refreshable", calc instanceof Refreshable);
 		assertFalse("Scripted object should not be instance of Refreshable", messenger instanceof Refreshable);
@@ -124,7 +124,7 @@ public class GroovyScriptFactoryTests {
 		ConfigurableMessenger messenger = (ConfigurableMessenger) ctx.getBean("messengerPrototype");
 		ConfigurableMessenger messenger2 = (ConfigurableMessenger) ctx.getBean("messengerPrototype");
 
-		assertFalse("Shouldn't get proxy when refresh is disabled", AopUtils.isAopProxy(messenger));
+		assertFalse("Shouldn't get staticProxy when refresh is disabled", AopUtils.isAopProxy(messenger));
 		assertFalse("Scripted object should not be instance of Refreshable", messenger instanceof Refreshable);
 
 		assertNotSame(messenger, messenger2);
@@ -143,7 +143,7 @@ public class GroovyScriptFactoryTests {
 		ConfigurableMessenger messenger = (ConfigurableMessenger) ctx.getBean("messengerPrototype");
 		ConfigurableMessenger messenger2 = (ConfigurableMessenger) ctx.getBean("messengerPrototype");
 
-		assertFalse("Shouldn't get proxy when refresh is disabled", AopUtils.isAopProxy(messenger));
+		assertFalse("Shouldn't get staticProxy when refresh is disabled", AopUtils.isAopProxy(messenger));
 		assertFalse("Scripted object should not be instance of Refreshable", messenger instanceof Refreshable);
 
 		assertNotSame(messenger, messenger2);
@@ -162,7 +162,7 @@ public class GroovyScriptFactoryTests {
 		assertTrue(Arrays.asList(ctx.getBeanNamesForType(Messenger.class)).contains("messengerInstance"));
 		Messenger messenger = (Messenger) ctx.getBean("messengerInstance");
 
-		assertFalse("Shouldn't get proxy when refresh is disabled", AopUtils.isAopProxy(messenger));
+		assertFalse("Shouldn't get staticProxy when refresh is disabled", AopUtils.isAopProxy(messenger));
 		assertFalse("Scripted object should not be instance of Refreshable", messenger instanceof Refreshable);
 
 		String desiredMessage = "Hello World!";
@@ -176,7 +176,7 @@ public class GroovyScriptFactoryTests {
 		assertTrue(Arrays.asList(ctx.getBeanNamesForType(Messenger.class)).contains("messengerInstance"));
 		Messenger messenger = (Messenger) ctx.getBean("messengerInstance");
 
-		assertFalse("Shouldn't get proxy when refresh is disabled", AopUtils.isAopProxy(messenger));
+		assertFalse("Shouldn't get staticProxy when refresh is disabled", AopUtils.isAopProxy(messenger));
 		assertFalse("Scripted object should not be instance of Refreshable", messenger instanceof Refreshable);
 
 		String desiredMessage = "Hello World!";
@@ -190,7 +190,7 @@ public class GroovyScriptFactoryTests {
 		assertTrue(Arrays.asList(ctx.getBeanNamesForType(Messenger.class)).contains("messengerInstanceInline"));
 		Messenger messenger = (Messenger) ctx.getBean("messengerInstanceInline");
 
-		assertFalse("Shouldn't get proxy when refresh is disabled", AopUtils.isAopProxy(messenger));
+		assertFalse("Shouldn't get staticProxy when refresh is disabled", AopUtils.isAopProxy(messenger));
 		assertFalse("Scripted object should not be instance of Refreshable", messenger instanceof Refreshable);
 
 		String desiredMessage = "Hello World!";
@@ -204,7 +204,7 @@ public class GroovyScriptFactoryTests {
 		assertTrue(Arrays.asList(ctx.getBeanNamesForType(Messenger.class)).contains("messengerInstanceInline"));
 		Messenger messenger = (Messenger) ctx.getBean("messengerInstanceInline");
 
-		assertFalse("Shouldn't get proxy when refresh is disabled", AopUtils.isAopProxy(messenger));
+		assertFalse("Shouldn't get staticProxy when refresh is disabled", AopUtils.isAopProxy(messenger));
 		assertFalse("Scripted object should not be instance of Refreshable", messenger instanceof Refreshable);
 
 		String desiredMessage = "Hello World!";
@@ -217,7 +217,7 @@ public class GroovyScriptFactoryTests {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("groovyRefreshableContext.xml", getClass());
 		Messenger messenger = (Messenger) ctx.getBean("messenger");
 
-		assertTrue("Should be a proxy for refreshable scripts", AopUtils.isAopProxy(messenger));
+		assertTrue("Should be a staticProxy for refreshable scripts", AopUtils.isAopProxy(messenger));
 		assertTrue("Should be an instance of Refreshable", messenger instanceof Refreshable);
 
 		String desiredMessage = "Hello World!";
@@ -236,7 +236,7 @@ public class GroovyScriptFactoryTests {
 		ConfigurableMessenger messenger = (ConfigurableMessenger) ctx.getBean("messengerPrototype");
 		ConfigurableMessenger messenger2 = (ConfigurableMessenger) ctx.getBean("messengerPrototype");
 
-		assertTrue("Should be a proxy for refreshable scripts", AopUtils.isAopProxy(messenger));
+		assertTrue("Should be a staticProxy for refreshable scripts", AopUtils.isAopProxy(messenger));
 		assertTrue("Should be an instance of Refreshable", messenger instanceof Refreshable);
 
 		assertEquals("Hello World!", messenger.getMessage());
@@ -447,7 +447,7 @@ public class GroovyScriptFactoryTests {
 
 	@Test  // SPR-6268
 	public void testRefreshableFromTagProxyTargetClass() throws Exception {
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("groovy-with-xsd-proxy-target-class.xml",
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("groovy-with-xsd-staticProxy-target-class.xml",
 				getClass());
 		assertTrue(Arrays.asList(ctx.getBeanNamesForType(Messenger.class)).contains("refreshableMessenger"));
 
@@ -466,7 +466,7 @@ public class GroovyScriptFactoryTests {
 	@Test  // SPR-6268
 	public void testProxyTargetClassNotAllowedIfNotGroovy() throws Exception {
 		try {
-			new ClassPathXmlApplicationContext("jruby-with-xsd-proxy-target-class.xml", getClass());
+			new ClassPathXmlApplicationContext("jruby-with-xsd-staticProxy-target-class.xml", getClass());
 		}
 		catch (BeanCreationException ex) {
 			assertTrue(ex.getMessage().contains("Cannot use proxyTargetClass=true"));

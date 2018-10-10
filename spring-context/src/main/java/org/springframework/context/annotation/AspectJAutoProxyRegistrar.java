@@ -33,7 +33,7 @@ import org.springframework.core.type.AnnotationMetadata;
 class AspectJAutoProxyRegistrar implements ImportBeanDefinitionRegistrar {
 
 	/**
-	 * Register, escalate, and configure the AspectJ auto proxy creator based on the value
+	 * Register, escalate, and configure the AspectJ auto staticProxy creator based on the value
 	 * of the @{@link EnableAspectJAutoProxy#proxyTargetClass()} attribute on the importing
 	 * {@code @Configuration} class.
 	 */

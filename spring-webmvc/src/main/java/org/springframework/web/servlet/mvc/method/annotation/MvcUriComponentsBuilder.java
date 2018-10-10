@@ -618,7 +618,7 @@ public class MvcUriComponentsBuilder {
 					proxy = objenesis.newInstance(proxyClass, enhancer.getUseCache());
 				}
 				catch (ObjenesisException ex) {
-					logger.debug("Unable to instantiate controller proxy using Objenesis, " +
+					logger.debug("Unable to instantiate controller staticProxy using Objenesis, " +
 							"falling back to regular construction", ex);
 				}
 			}
@@ -628,7 +628,7 @@ public class MvcUriComponentsBuilder {
 					proxy = proxyClass.newInstance();
 				}
 				catch (Exception ex) {
-					throw new IllegalStateException("Unable to instantiate controller proxy using Objenesis, " +
+					throw new IllegalStateException("Unable to instantiate controller staticProxy using Objenesis, " +
 							"and regular controller instantiation via default constructor fails as well", ex);
 				}
 			}

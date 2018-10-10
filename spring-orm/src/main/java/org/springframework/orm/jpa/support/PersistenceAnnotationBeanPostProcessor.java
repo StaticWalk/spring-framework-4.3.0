@@ -711,7 +711,7 @@ public class PersistenceAnnotationBeanPostProcessor
 					// Need to search for EntityManagerFactory beans.
 					emf = findEntityManagerFactory(this.unitName, requestingBeanName);
 				}
-				// Inject a shared transactional EntityManager proxy.
+				// Inject a shared transactional EntityManager staticProxy.
 				if (emf instanceof EntityManagerFactoryInfo &&
 						((EntityManagerFactoryInfo) emf).getEntityManagerInterface() != null) {
 					// Create EntityManager based on the info's vendor-specific type

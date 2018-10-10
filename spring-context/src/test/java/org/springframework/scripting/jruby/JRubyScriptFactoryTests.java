@@ -94,7 +94,7 @@ public class JRubyScriptFactoryTests {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("jrubyRefreshableContext.xml", getClass());
 		Messenger messenger = (Messenger) ctx.getBean("messenger");
 
-		assertTrue("Should be a proxy for refreshable scripts", AopUtils.isAopProxy(messenger));
+		assertTrue("Should be a staticProxy for refreshable scripts", AopUtils.isAopProxy(messenger));
 		assertTrue("Should be an instance of Refreshable", messenger instanceof Refreshable);
 
 		String desiredMessage = "Hello World!";

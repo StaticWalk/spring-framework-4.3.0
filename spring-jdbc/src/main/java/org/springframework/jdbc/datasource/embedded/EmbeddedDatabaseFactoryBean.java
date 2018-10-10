@@ -30,7 +30,7 @@ import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
  * provides connectivity to the embedded database to Spring.
  *
  * <p>The target {@link DataSource} is returned instead of an {@link EmbeddedDatabase}
- * proxy since the {@link FactoryBean} will manage the initialization and destruction
+ * staticProxy since the {@link FactoryBean} will manage the initialization and destruction
  * lifecycle of the embedded database instance.
  *
  * <p>Implements {@link DisposableBean} to shutdown the embedded database when the

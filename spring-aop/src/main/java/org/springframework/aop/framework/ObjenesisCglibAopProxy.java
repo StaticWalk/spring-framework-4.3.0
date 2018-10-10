@@ -25,7 +25,7 @@ import org.springframework.cglib.proxy.Factory;
 import org.springframework.objenesis.SpringObjenesis;
 
 /**
- * Objenesis-based extension of {@link CglibAopProxy} to create proxy instances
+ * Objenesis-based extension of {@link CglibAopProxy} to create staticProxy instances
  * without invoking the constructor of the class.
  *
  * @author Oliver Gierke
@@ -60,8 +60,8 @@ class ObjenesisCglibAopProxy extends CglibAopProxy {
 				proxyInstance = objenesis.newInstance(proxyClass, enhancer.getUseCache());
 			}
 			catch (Throwable ex) {
-				logger.debug("Unable to instantiate proxy using Objenesis, " +
-						"falling back to regular proxy construction", ex);
+				logger.debug("Unable to instantiate staticProxy using Objenesis, " +
+						"falling back to regular staticProxy construction", ex);
 			}
 		}
 
@@ -73,8 +73,8 @@ class ObjenesisCglibAopProxy extends CglibAopProxy {
 						proxyClass.newInstance());
 			}
 			catch (Throwable ex) {
-				throw new AopConfigException("Unable to instantiate proxy using Objenesis, " +
-						"and regular proxy instantiation via default constructor fails as well", ex);
+				throw new AopConfigException("Unable to instantiate staticProxy using Objenesis, " +
+						"and regular staticProxy instantiation via default constructor fails as well", ex);
 			}
 		}
 

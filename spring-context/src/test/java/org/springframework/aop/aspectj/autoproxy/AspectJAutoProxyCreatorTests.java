@@ -179,7 +179,7 @@ public final class AspectJAutoProxyCreatorTests {
 		bd.getPropertyValues().addPropertyValue(new PropertyValue("name", "Adrian"))
 				.addPropertyValue(new PropertyValue("age", new Integer(34)));
 		childAc.registerBeanDefinition("adrian2", bd);
-		// Register the advisor auto proxy creator with subclass
+		// Register the advisor auto staticProxy creator with subclass
 		childAc.registerBeanDefinition(AnnotationAwareAspectJAutoProxyCreator.class.getName(), new RootBeanDefinition(
 				AnnotationAwareAspectJAutoProxyCreator.class));
 		childAc.refresh();
@@ -322,7 +322,7 @@ public final class AspectJAutoProxyCreatorTests {
 
 		ProxyConfig pc = (ProxyConfig) bf.getBean(AopConfigUtils.AUTO_PROXY_CREATOR_BEAN_NAME);
 		assertTrue("should be proxying classes", pc.isProxyTargetClass());
-		assertTrue("should expose proxy", pc.isExposeProxy());
+		assertTrue("should expose staticProxy", pc.isExposeProxy());
 	}
 
 	@Test

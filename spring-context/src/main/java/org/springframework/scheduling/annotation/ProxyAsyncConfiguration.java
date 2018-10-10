@@ -28,7 +28,7 @@ import org.springframework.util.Assert;
 
 /**
  * {@code @Configuration} class that registers the Spring infrastructure beans necessary
- * to enable proxy-based asynchronous method execution.
+ * to enable staticProxy-based asynchronous method execution.
  *
  * @author Chris Beams
  * @author Stephane Nicoll

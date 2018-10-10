@@ -250,7 +250,7 @@ class CachedMessageProducer implements MessageProducer, QueueSender, TopicPublis
 
 
 	/**
-	 * Build a dynamic proxy that reflectively adapts to JMS 2.0 API methods, if necessary.
+	 * Build a dynamic staticProxy that reflectively adapts to JMS 2.0 API methods, if necessary.
 	 * Otherwise simply return this CachedMessageProducer instance itself.
 	 */
 	public MessageProducer getProxyIfNecessary() {

@@ -53,7 +53,7 @@ public abstract class AbstractRemoteSlsbInvokerInterceptor extends AbstractSlsbI
 	/**
 	 * Set a home interface that this invoker will narrow to before performing
 	 * the parameterless SLSB {@code create()} call that returns the actual
-	 * SLSB proxy.
+	 * SLSB staticProxy.
 	 * <p>Default is none, which will work on all J2EE servers that are not based
 	 * on CORBA. A plain {@code javax.ejb.EJBHome} interface is known to be
 	 * sufficient to make a WebSphere 5.0 Remote SLSB work. On other servers,
@@ -240,7 +240,7 @@ public abstract class AbstractRemoteSlsbInvokerInterceptor extends AbstractSlsbI
 				ejb.remove();
 			}
 			catch (Throwable ex) {
-				logger.warn("Could not invoke 'remove' on remote EJB proxy", ex);
+				logger.warn("Could not invoke 'remove' on remote EJB staticProxy", ex);
 			}
 		}
 	}

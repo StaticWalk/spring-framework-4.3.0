@@ -121,7 +121,7 @@ public abstract class AbstractEntityManagerFactoryBean implements
 	/** Future for lazily initializing raw target EntityManagerFactory */
 	private Future<EntityManagerFactory> nativeEntityManagerFactoryFuture;
 
-	/** Exposed client-level EntityManagerFactory proxy */
+	/** Exposed client-level EntityManagerFactory staticProxy */
 	private EntityManagerFactory entityManagerFactory;
 
 
@@ -210,7 +210,7 @@ public abstract class AbstractEntityManagerFactoryBean implements
 
 	/**
 	 * Specify the (potentially vendor-specific) EntityManagerFactory interface
-	 * that this EntityManagerFactory proxy is supposed to implement.
+	 * that this EntityManagerFactory staticProxy is supposed to implement.
 	 * <p>The default will be taken from the specific JpaVendorAdapter, if any,
 	 * or set to the standard {@code javax.persistence.EntityManagerFactory}
 	 * interface else.
@@ -278,7 +278,7 @@ public abstract class AbstractEntityManagerFactoryBean implements
 	 * Specify an asynchronous executor for background bootstrapping,
 	 * e.g. a {@link org.springframework.core.task.SimpleAsyncTaskExecutor}.
 	 * <p>{@code EntityManagerFactory} initialization will then switch into background
-	 * bootstrap mode, with a {@code EntityManagerFactory} proxy immediately returned for
+	 * bootstrap mode, with a {@code EntityManagerFactory} staticProxy immediately returned for
 	 * injection purposes instead of waiting for the JPA provider's bootstrapping to complete.
 	 * However, note that the first actual call to a {@code EntityManagerFactory} method will
 	 * then block until the JPA provider's bootstrapping completed, if not ready by then.
@@ -364,7 +364,7 @@ public abstract class AbstractEntityManagerFactoryBean implements
 
 		// Wrap the EntityManagerFactory in a factory implementing all its interfaces.
 		// This allows interception of createEntityManager methods to return an
-		// application-managed EntityManager proxy that automatically joins
+		// application-managed EntityManager staticProxy that automatically joins
 		// existing transactions.
 		this.entityManagerFactory = createEntityManagerFactoryProxy(this.nativeEntityManagerFactory);
 	}
@@ -385,11 +385,11 @@ public abstract class AbstractEntityManagerFactoryBean implements
 	}
 
 	/**
-	 * Create a proxy of the given EntityManagerFactory. We do this to be able
+	 * Create a staticProxy of the given EntityManagerFactory. We do this to be able
 	 * to return transaction-aware proxies for application-managed
 	 * EntityManagers, and to introduce the NamedEntityManagerFactory interface
 	 * @param emf EntityManagerFactory as returned by the persistence provider
-	 * @return proxy entity manager
+	 * @return staticProxy entity manager
 	 */
 	protected EntityManagerFactory createEntityManagerFactoryProxy(EntityManagerFactory emf) {
 		Set<Class<?>> ifcs = new LinkedHashSet<Class<?>>();
@@ -423,7 +423,7 @@ public abstract class AbstractEntityManagerFactoryBean implements
 	}
 
 	/**
-	 * Delegate an incoming invocation from the proxy, dispatching to EntityManagerFactoryInfo
+	 * Delegate an incoming invocation from the staticProxy, dispatching to EntityManagerFactoryInfo
 	 * or the native EntityManagerFactory accordingly.
 	 */
 	Object invokeProxyMethod(Method method, Object[] args) throws Throwable {
@@ -433,7 +433,7 @@ public abstract class AbstractEntityManagerFactoryBean implements
 		else if (method.getName().equals("createEntityManager") && args != null && args.length > 0 &&
 				args[0] != null && args[0].getClass().isEnum() && "SYNCHRONIZED".equals(args[0].toString())) {
 			// JPA 2.1's createEntityManager(SynchronizationType, Map)
-			// Redirect to plain createEntityManager and add synchronization semantics through Spring proxy
+			// Redirect to plain createEntityManager and add synchronization semantics through Spring staticProxy
 			EntityManager rawEntityManager = (args.length > 1 ?
 					getNativeEntityManagerFactory().createEntityManager((Map<?, ?>) args[1]) :
 					getNativeEntityManagerFactory().createEntityManager());
@@ -445,7 +445,7 @@ public abstract class AbstractEntityManagerFactoryBean implements
 			for (int i = 0; i < args.length; i++) {
 				Object arg = args[i];
 				if (arg instanceof Query && Proxy.isProxyClass(arg.getClass())) {
-					// Assumably a Spring-generated proxy from SharedEntityManagerCreator:
+					// Assumably a Spring-generated staticProxy from SharedEntityManagerCreator:
 					// since we're passing it back to the native EntityManagerFactory,
 					// let's unwrap it to the original Query object from the provider.
 					try {
@@ -596,8 +596,8 @@ public abstract class AbstractEntityManagerFactoryBean implements
 
 
 	/**
-	 * Dynamic proxy invocation handler proxying an EntityManagerFactory to
-	 * return a proxy EntityManager if necessary from createEntityManager()
+	 * Dynamic staticProxy invocation handler proxying an EntityManagerFactory to
+	 * return a staticProxy EntityManager if necessary from createEntityManager()
 	 * methods.
 	 */
 	@SuppressWarnings("serial")
@@ -617,11 +617,11 @@ public abstract class AbstractEntityManagerFactoryBean implements
 					return (proxy == args[0]);
 				}
 				else if (method.getName().equals("hashCode")) {
-					// Use hashCode of EntityManagerFactory proxy.
+					// Use hashCode of EntityManagerFactory staticProxy.
 					return System.identityHashCode(proxy);
 				}
 				else if (method.getName().equals("unwrap")) {
-					// Handle JPA 2.1 unwrap method - could be a proxy match.
+					// Handle JPA 2.1 unwrap method - could be a staticProxy match.
 					Class<?> targetClass = (Class<?>) args[0];
 					if (targetClass == null) {
 						return this.entityManagerFactoryBean.getNativeEntityManagerFactory();

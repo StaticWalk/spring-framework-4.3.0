@@ -20,9 +20,9 @@ import org.aopalliance.intercept.MethodInvocation;
 
 /**
  * Extension of the AOP Alliance {@link org.aopalliance.intercept.MethodInvocation}
- * interface, allowing access to the proxy that the method invocation was made through.
+ * interface, allowing access to the staticProxy that the method invocation was made through.
  *
- * <p>Useful to be able to substitute return values with the proxy,
+ * <p>Useful to be able to substitute return values with the staticProxy,
  * if necessary, for example if the invocation target returned itself.
  *
  * @author Juergen Hoeller
@@ -34,8 +34,8 @@ import org.aopalliance.intercept.MethodInvocation;
 public interface ProxyMethodInvocation extends MethodInvocation {
 
 	/**
-	 * Return the proxy that this method invocation was made through.
-	 * @return the original proxy object
+	 * Return the staticProxy that this method invocation was made through.
+	 * @return the original staticProxy object
 	 */
 	Object getProxy();
 

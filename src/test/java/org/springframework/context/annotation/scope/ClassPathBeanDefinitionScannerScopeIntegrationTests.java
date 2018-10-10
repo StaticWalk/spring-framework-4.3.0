@@ -82,14 +82,14 @@ public class ClassPathBeanDefinitionScannerScopeIntegrationTests {
 		ApplicationContext context = createContext(NO);
 		ScopedTestBean bean = (ScopedTestBean) context.getBean("singleton");
 
-		// should not be a proxy
+		// should not be a staticProxy
 		assertFalse(AopUtils.isAopProxy(bean));
 
 		assertEquals(DEFAULT_NAME, bean.getName());
 		bean.setName(MODIFIED_NAME);
 
 		RequestContextHolder.setRequestAttributes(newRequestAttributes);
-		// not a proxy so this should not have changed
+		// not a staticProxy so this should not have changed
 		assertEquals(MODIFIED_NAME, bean.getName());
 
 		// singleton bean, so name should be modified even after lookup
@@ -103,14 +103,14 @@ public class ClassPathBeanDefinitionScannerScopeIntegrationTests {
 		ApplicationContext context = createContext(INTERFACES);
 		ScopedTestBean bean = (ScopedTestBean) context.getBean("singleton");
 
-		// should not be a proxy
+		// should not be a staticProxy
 		assertFalse(AopUtils.isAopProxy(bean));
 
 		assertEquals(DEFAULT_NAME, bean.getName());
 		bean.setName(MODIFIED_NAME);
 
 		RequestContextHolder.setRequestAttributes(newRequestAttributes);
-		// not a proxy so this should not have changed
+		// not a staticProxy so this should not have changed
 		assertEquals(MODIFIED_NAME, bean.getName());
 
 		// singleton bean, so name should be modified even after lookup
@@ -124,14 +124,14 @@ public class ClassPathBeanDefinitionScannerScopeIntegrationTests {
 		ApplicationContext context = createContext(TARGET_CLASS);
 		ScopedTestBean bean = (ScopedTestBean) context.getBean("singleton");
 
-		// should not be a proxy
+		// should not be a staticProxy
 		assertFalse(AopUtils.isAopProxy(bean));
 
 		assertEquals(DEFAULT_NAME, bean.getName());
 		bean.setName(MODIFIED_NAME);
 
 		RequestContextHolder.setRequestAttributes(newRequestAttributes);
-		// not a proxy so this should not have changed
+		// not a staticProxy so this should not have changed
 		assertEquals(MODIFIED_NAME, bean.getName());
 
 		// singleton bean, so name should be modified even after lookup
@@ -145,14 +145,14 @@ public class ClassPathBeanDefinitionScannerScopeIntegrationTests {
 		ApplicationContext context = createContext(NO);
 		ScopedTestBean bean = (ScopedTestBean) context.getBean("request");
 
-		// should not be a proxy
+		// should not be a staticProxy
 		assertFalse(AopUtils.isAopProxy(bean));
 
 		assertEquals(DEFAULT_NAME, bean.getName());
 		bean.setName(MODIFIED_NAME);
 
 		RequestContextHolder.setRequestAttributes(newRequestAttributes);
-		// not a proxy so this should not have changed
+		// not a staticProxy so this should not have changed
 		assertEquals(MODIFIED_NAME, bean.getName());
 
 		// but a newly retrieved bean should have the default name
@@ -166,7 +166,7 @@ public class ClassPathBeanDefinitionScannerScopeIntegrationTests {
 		ApplicationContext context = createContext(INTERFACES);
 		IScopedTestBean bean = (IScopedTestBean) context.getBean("request");
 
-		// should be dynamic proxy, implementing both interfaces
+		// should be dynamic staticProxy, implementing both interfaces
 		assertTrue(AopUtils.isJdkDynamicProxy(bean));
 		assertTrue(bean instanceof AnotherScopeTestInterface);
 
@@ -174,7 +174,7 @@ public class ClassPathBeanDefinitionScannerScopeIntegrationTests {
 		bean.setName(MODIFIED_NAME);
 
 		RequestContextHolder.setRequestAttributes(newRequestAttributes);
-		// this is a proxy so it should be reset to default
+		// this is a staticProxy so it should be reset to default
 		assertEquals(DEFAULT_NAME, bean.getName());
 
 		RequestContextHolder.setRequestAttributes(oldRequestAttributes);
@@ -187,7 +187,7 @@ public class ClassPathBeanDefinitionScannerScopeIntegrationTests {
 		ApplicationContext context = createContext(TARGET_CLASS);
 		IScopedTestBean bean = (IScopedTestBean) context.getBean("request");
 
-		// should be a class-based proxy
+		// should be a class-based staticProxy
 		assertTrue(AopUtils.isCglibProxy(bean));
 		assertTrue(bean instanceof RequestScopedTestBean);
 
@@ -195,7 +195,7 @@ public class ClassPathBeanDefinitionScannerScopeIntegrationTests {
 		bean.setName(MODIFIED_NAME);
 
 		RequestContextHolder.setRequestAttributes(newRequestAttributes);
-		// this is a proxy so it should be reset to default
+		// this is a staticProxy so it should be reset to default
 		assertEquals(DEFAULT_NAME, bean.getName());
 
 		RequestContextHolder.setRequestAttributes(oldRequestAttributes);
@@ -208,14 +208,14 @@ public class ClassPathBeanDefinitionScannerScopeIntegrationTests {
 		ApplicationContext context = createContext(NO);
 		ScopedTestBean bean = (ScopedTestBean) context.getBean("session");
 
-		// should not be a proxy
+		// should not be a staticProxy
 		assertFalse(AopUtils.isAopProxy(bean));
 
 		assertEquals(DEFAULT_NAME, bean.getName());
 		bean.setName(MODIFIED_NAME);
 
 		RequestContextHolder.setRequestAttributes(newRequestAttributesWithSession);
-		// not a proxy so this should not have changed
+		// not a staticProxy so this should not have changed
 		assertEquals(MODIFIED_NAME, bean.getName());
 
 		// but a newly retrieved bean should have the default name
@@ -229,7 +229,7 @@ public class ClassPathBeanDefinitionScannerScopeIntegrationTests {
 		ApplicationContext context = createContext(INTERFACES);
 		IScopedTestBean bean = (IScopedTestBean) context.getBean("session");
 
-		// should be dynamic proxy, implementing both interfaces
+		// should be dynamic staticProxy, implementing both interfaces
 		assertTrue(AopUtils.isJdkDynamicProxy(bean));
 		assertTrue(bean instanceof AnotherScopeTestInterface);
 
@@ -237,7 +237,7 @@ public class ClassPathBeanDefinitionScannerScopeIntegrationTests {
 		bean.setName(MODIFIED_NAME);
 
 		RequestContextHolder.setRequestAttributes(newRequestAttributesWithSession);
-		// this is a proxy so it should be reset to default
+		// this is a staticProxy so it should be reset to default
 		assertEquals(DEFAULT_NAME, bean.getName());
 		bean.setName(MODIFIED_NAME);
 
@@ -256,7 +256,7 @@ public class ClassPathBeanDefinitionScannerScopeIntegrationTests {
 		ApplicationContext context = createContext(TARGET_CLASS);
 		IScopedTestBean bean = (IScopedTestBean) context.getBean("session");
 
-		// should be a class-based proxy
+		// should be a class-based staticProxy
 		assertTrue(AopUtils.isCglibProxy(bean));
 		assertTrue(bean instanceof ScopedTestBean);
 		assertTrue(bean instanceof SessionScopedTestBean);
@@ -265,7 +265,7 @@ public class ClassPathBeanDefinitionScannerScopeIntegrationTests {
 		bean.setName(MODIFIED_NAME);
 
 		RequestContextHolder.setRequestAttributes(newRequestAttributesWithSession);
-		// this is a proxy so it should be reset to default
+		// this is a staticProxy so it should be reset to default
 		assertEquals(DEFAULT_NAME, bean.getName());
 		bean.setName(MODIFIED_NAME);
 

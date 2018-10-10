@@ -34,7 +34,7 @@ import org.springframework.web.context.support.ServletContextResource;
  *
  * <p>A further usage of this servlet is the ability to apply last-modified
  * timestamps to quasi-static resources (typically JSPs). This can happen
- * as bridge to parameter-specified resources, or as proxy for a specific
+ * as bridge to parameter-specified resources, or as staticProxy for a specific
  * target resource (or a list of specific target resources to combine).
  *
  * <p>A typical usage would map a URL like "/ResourceServlet" onto an instance

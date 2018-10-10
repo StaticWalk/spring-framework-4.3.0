@@ -39,7 +39,7 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
  * <p>By default, all proxies are created as JDK proxies. This may cause some
  * problems if you are injecting objects as concrete classes rather than
  * interfaces. To overcome this restriction you can set the
- * '{@code proxy-target-class}' attribute to '{@code true}', which
+ * '{@code staticProxy-target-class}' attribute to '{@code true}', which
  * will result in class-based proxies being created.
  *
  * @author Juergen Hoeller
@@ -64,7 +64,7 @@ class AnnotationDrivenBeanDefinitionParser implements BeanDefinitionParser {
 			registerTransactionAspect(element, parserContext);
 		}
 		else {
-			// mode="proxy"
+			// mode="staticProxy"
 			AopAutoProxyConfigurer.configureAutoProxyCreator(element, parserContext);
 		}
 		return null;
@@ -96,7 +96,7 @@ class AnnotationDrivenBeanDefinitionParser implements BeanDefinitionParser {
 
 
 	/**
-	 * Inner class to just introduce an AOP framework dependency when actually in proxy mode.
+	 * Inner class to just introduce an AOP framework dependency when actually in staticProxy mode.
 	 */
 	private static class AopAutoProxyConfigurer {
 

@@ -52,7 +52,7 @@ import org.springframework.remoting.support.RemoteInvocationUtils;
  * Of course, in and out parameters have to be serializable.
  *
  * <p>With conventional RMI services, this invoker is typically used with the RMI
- * service interface. Alternatively, this invoker can also proxy a remote RMI service
+ * service interface. Alternatively, this invoker can also staticProxy a remote RMI service
  * with a matching non-RMI business interface, i.e. an interface that mirrors the RMI
  * service methods but does not declare RemoteExceptions. In the latter case,
  * RemoteExceptions thrown by the RMI stub will automatically get converted to
@@ -109,7 +109,7 @@ public class RmiClientInterceptor extends RemoteInvocationBasedAccessor
 	 * Default is "false".
 	 * <p>Can be turned on to allow for hot restart of the RMI server.
 	 * If a cached RMI stub throws an RMI exception that indicates a
-	 * remote connect failure, a fresh proxy will be fetched and the
+	 * remote connect failure, a fresh staticProxy will be fetched and the
 	 * invocation will be retried.
 	 * @see java.rmi.ConnectException
 	 * @see java.rmi.ConnectIOException
@@ -393,7 +393,7 @@ public class RmiClientInterceptor extends RemoteInvocationBasedAccessor
 		throws RemoteException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 
 		if (AopUtils.isToStringMethod(methodInvocation.getMethod())) {
-			return "RMI invoker proxy for service URL [" + getServiceUrl() + "]";
+			return "RMI invoker staticProxy for service URL [" + getServiceUrl() + "]";
 		}
 
 		return invocationHandler.invoke(createRemoteInvocation(methodInvocation));

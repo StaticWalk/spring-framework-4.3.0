@@ -37,7 +37,7 @@ import org.springframework.core.Constants;
  * actual Connection is fetched (if ever). Consequently, commit and rollback
  * calls will be ignored if no Statements have been created.
  *
- * <p>This DataSource proxy allows to avoid fetching JDBC Connections from
+ * <p>This DataSource staticProxy allows to avoid fetching JDBC Connections from
  * a pool unless actually necessary. JDBC transaction control can happen
  * without fetching a Connection from the pool or communicating with the
  * database; this will be done lazily on first creation of a JDBC Statement.
@@ -53,7 +53,7 @@ import org.springframework.core.Constants;
  * transactions on all methods that could potentially perform data access,
  * without paying a performance penalty if no actual data access happens.
  *
- * <p>This DataSource proxy gives you behavior analogous to JTA and a
+ * <p>This DataSource staticProxy gives you behavior analogous to JTA and a
  * transactional JNDI DataSource (as provided by the J2EE server), even
  * with a local transaction strategy like DataSourceTransactionManager or
  * HibernateTransactionManager. It does not add value with Spring's
@@ -66,7 +66,7 @@ import org.springframework.core.Constants;
  * You will get the same effect with non-transactional reads, but lazy fetching
  * of JDBC Connections allows you to still perform reads in transactions.
  *
- * <p><b>NOTE:</b> This DataSource proxy needs to return wrapped Connections
+ * <p><b>NOTE:</b> This DataSource staticProxy needs to return wrapped Connections
  * (which implement the {@link ConnectionProxy} interface) in order to handle
  * lazy fetching of an actual JDBC Connection. Therefore, the returned Connections
  * cannot be cast to a native JDBC Connection type such as OracleConnection or
@@ -285,7 +285,7 @@ public class LazyConnectionDataSourceProxy extends DelegatingDataSource {
 			else if (method.getName().equals("hashCode")) {
 				// We must avoid fetching a target Connection for "hashCode",
 				// and we must return the same hash code even when the target
-				// Connection has been fetched: use hashCode of Connection proxy.
+				// Connection has been fetched: use hashCode of Connection staticProxy.
 				return System.identityHashCode(proxy);
 			}
 			else if (method.getName().equals("unwrap")) {
@@ -309,7 +309,7 @@ public class LazyConnectionDataSourceProxy extends DelegatingDataSource {
 				// a physical JDBC Connection until absolutely necessary.
 
 				if (method.getName().equals("toString")) {
-					return "Lazy Connection proxy for target DataSource [" + getTargetDataSource() + "]";
+					return "Lazy Connection staticProxy for target DataSource [" + getTargetDataSource() + "]";
 				}
 				else if (method.getName().equals("isReadOnly")) {
 					return this.readOnly;
@@ -363,7 +363,7 @@ public class LazyConnectionDataSourceProxy extends DelegatingDataSource {
 					return this.closed;
 				}
 				else if (this.closed) {
-					// Connection proxy closed, without ever having fetched a
+					// Connection staticProxy closed, without ever having fetched a
 					// physical JDBC Connection: throw corresponding SQLException.
 					throw new SQLException("Illegal operation: connection is closed");
 				}
@@ -381,7 +381,7 @@ public class LazyConnectionDataSourceProxy extends DelegatingDataSource {
 		}
 
 		/**
-		 * Return whether the proxy currently holds a target Connection.
+		 * Return whether the staticProxy currently holds a target Connection.
 		 */
 		private boolean hasTargetConnection() {
 			return (this.target != null);

@@ -35,7 +35,7 @@ public interface MBeanInfoAssembler {
 
 	/**
 	 * Create the ModelMBeanInfo for the given managed resource.
-	 * @param managedBean the bean that will be exposed (might be an AOP proxy)
+	 * @param managedBean the bean that will be exposed (might be an AOP staticProxy)
 	 * @param beanKey the key associated with the managed bean
 	 * @return the ModelMBeanInfo metadata object
 	 * @throws JMException in case of errors

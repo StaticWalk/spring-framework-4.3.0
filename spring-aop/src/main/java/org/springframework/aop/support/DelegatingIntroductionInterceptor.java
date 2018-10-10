@@ -38,7 +38,7 @@ import org.springframework.util.Assert;
  *
  * <p>The {@code suppressInterface} method can be used to suppress interfaces
  * implemented by the delegate but which should not be introduced to the owning
- * AOP proxy.
+ * AOP staticProxy.
  *
  * <p>An instance of this class is serializable if the delegate is.
  *
@@ -108,7 +108,7 @@ public class DelegatingIntroductionInterceptor extends IntroductionInfoSupport
 			Object retVal = AopUtils.invokeJoinpointUsingReflection(this.delegate, mi.getMethod(), mi.getArguments());
 
 			// Massage return value if possible: if the delegate returned itself,
-			// we really want to return the proxy.
+			// we really want to return the staticProxy.
 			if (retVal == this.delegate && mi instanceof ProxyMethodInvocation) {
 				Object proxy = ((ProxyMethodInvocation) mi).getProxy();
 				if (mi.getMethod().getReturnType().isInstance(proxy)) {

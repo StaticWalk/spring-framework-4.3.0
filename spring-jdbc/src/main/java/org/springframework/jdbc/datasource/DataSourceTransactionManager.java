@@ -57,7 +57,7 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
  * J2EE-style lookup pattern {@link DataSource#getConnection()}, for example for
  * legacy code that is not aware of Spring at all. In that case, define a
  * {@link TransactionAwareDataSourceProxy} for your target DataSource, and pass
- * that proxy DataSource to your DAOs, which will automatically participate in
+ * that staticProxy DataSource to your DAOs, which will automatically participate in
  * Spring-managed transactions when accessing it.
  *
  * <p>Supports custom isolation levels, and timeouts which get applied as

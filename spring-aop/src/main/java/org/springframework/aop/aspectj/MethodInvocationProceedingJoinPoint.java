@@ -35,14 +35,14 @@ import org.springframework.util.Assert;
  * Implementation of AspectJ ProceedingJoinPoint interface
  * wrapping an AOP Alliance MethodInvocation.
  *
- * <p><b>Note</b>: the {@code getThis()} method returns the current Spring AOP proxy.
+ * <p><b>Note</b>: the {@code getThis()} method returns the current Spring AOP staticProxy.
  * The {@code getTarget()} method returns the current Spring AOP target (which may be
  * {@code null} if there is no target), and is a plain POJO without any advice.
  * <b>If you want to call the object and have the advice take effect, use
  * {@code getThis()}.</b> A common example is casting the object to an
  * introduced interface in the implementation of an introduction.
  *
- * <p>Of course there is no such distinction between target and proxy in AspectJ.
+ * <p>Of course there is no such distinction between target and staticProxy in AspectJ.
  *
  * @author Rod Johnson
  * @author Juergen Hoeller
@@ -98,7 +98,7 @@ public class MethodInvocationProceedingJoinPoint implements ProceedingJoinPoint,
 	}
 
 	/**
-	 * Returns the Spring AOP proxy. Cannot be {@code null}.
+	 * Returns the Spring AOP staticProxy. Cannot be {@code null}.
 	 */
 	@Override
 	public Object getThis() {

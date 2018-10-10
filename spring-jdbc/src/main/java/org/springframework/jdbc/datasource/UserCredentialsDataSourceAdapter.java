@@ -30,7 +30,7 @@ import org.springframework.util.StringUtils;
  * All other methods simply delegate to the corresponding methods of the
  * target DataSource.
  *
- * <p>Can be used to proxy a target JNDI DataSource that does not have user
+ * <p>Can be used to staticProxy a target JNDI DataSource that does not have user
  * credentials configured. Client code can work with this DataSource as usual,
  * using the standard {@code getConnection()} call.
  *
@@ -49,7 +49,7 @@ import org.springframework.util.StringUtils;
  *   &lt;property name="password" value="mypassword"/&gt;
  * &lt;/bean></pre>
  *
- * <p>If the "username" is empty, this proxy will simply delegate to the
+ * <p>If the "username" is empty, this staticProxy will simply delegate to the
  * standard {@code getConnection()} method of the target DataSource.
  * This can be used to keep a UserCredentialsDataSourceAdapter bean definition
  * just for the <i>option</i> of implicitly passing in user credentials if
@@ -95,9 +95,9 @@ public class UserCredentialsDataSourceAdapter extends DelegatingDataSource {
 
 
 	/**
-	 * Set user credententials for this proxy and the current thread.
+	 * Set user credententials for this staticProxy and the current thread.
 	 * The given username and password will be applied to all subsequent
-	 * {@code getConnection()} calls on this DataSource proxy.
+	 * {@code getConnection()} calls on this DataSource staticProxy.
 	 * <p>This will override any statically specified user credentials,
 	 * that is, values of the "username" and "password" bean properties.
 	 * @param username the username to apply
@@ -109,7 +109,7 @@ public class UserCredentialsDataSourceAdapter extends DelegatingDataSource {
 	}
 
 	/**
-	 * Remove any user credentials for this proxy from the current thread.
+	 * Remove any user credentials for this staticProxy from the current thread.
 	 * Statically specified user credentials apply again afterwards.
 	 * @see #setCredentialsForCurrentThread
 	 */

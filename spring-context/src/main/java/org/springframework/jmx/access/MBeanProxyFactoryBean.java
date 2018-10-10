@@ -24,18 +24,18 @@ import org.springframework.jmx.MBeanServerNotFoundException;
 import org.springframework.util.ClassUtils;
 
 /**
- * Creates a proxy to a managed resource running either locally or remotely.
+ * Creates a staticProxy to a managed resource running either locally or remotely.
  * The "proxyInterface" property defines the interface that the generated
- * proxy is supposed to implement. This interface should define methods and
+ * staticProxy is supposed to implement. This interface should define methods and
  * properties that correspond to operations and attributes in the management
- * interface of the resource you wish to proxy.
+ * interface of the resource you wish to staticProxy.
  *
- * <p>There is no need for the managed resource to implement the proxy interface,
+ * <p>There is no need for the managed resource to implement the staticProxy interface,
  * although you may find it convenient to do. It is not required that every
  * operation and attribute in the management interface is matched by a
- * corresponding property or method in the proxy interface.
+ * corresponding property or method in the staticProxy interface.
  *
- * <p>Attempting to invoke or access any method or property on the proxy
+ * <p>Attempting to invoke or access any method or property on the staticProxy
  * interface that does not correspond to the management interface will lead
  * to an {@code InvalidInvocationException}.
  *
@@ -56,7 +56,7 @@ public class MBeanProxyFactoryBean extends MBeanClientInterceptor
 
 
 	/**
-	 * Set the interface that the generated proxy will implement.
+	 * Set the interface that the generated staticProxy will implement.
 	 * <p>This will usually be a management interface that matches the target MBean,
 	 * exposing bean property setters and getters for MBean attributes and
 	 * conventional Java methods for MBean operations.
@@ -73,7 +73,7 @@ public class MBeanProxyFactoryBean extends MBeanClientInterceptor
 
 	/**
 	 * Checks that the {@code proxyInterface} has been specified and then
-	 * generates the proxy for the target MBean.
+	 * generates the staticProxy for the target MBean.
 	 */
 	@Override
 	public void afterPropertiesSet() throws MBeanServerNotFoundException, MBeanInfoRetrievalException {

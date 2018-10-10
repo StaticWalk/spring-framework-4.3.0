@@ -79,7 +79,7 @@ public abstract class RemoteInvocationSerializingExporter extends RemoteInvocati
 	}
 
 	/**
-	 * Set whether to accept deserialization of proxy classes.
+	 * Set whether to accept deserialization of staticProxy classes.
 	 * <p>Default is "true". May be deactivated as a security measure.
 	 */
 	public void setAcceptProxyClasses(boolean acceptProxyClasses) {
@@ -87,7 +87,7 @@ public abstract class RemoteInvocationSerializingExporter extends RemoteInvocati
 	}
 
 	/**
-	 * Return whether to accept deserialization of proxy classes.
+	 * Return whether to accept deserialization of staticProxy classes.
 	 */
 	public boolean isAcceptProxyClasses() {
 		return this.acceptProxyClasses;

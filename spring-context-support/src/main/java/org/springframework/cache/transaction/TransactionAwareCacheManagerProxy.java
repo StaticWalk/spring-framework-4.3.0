@@ -50,7 +50,7 @@ public class TransactionAwareCacheManagerProxy implements CacheManager, Initiali
 
 	/**
 	 * Create a new TransactionAwareCacheManagerProxy for the given target CacheManager.
-	 * @param targetCacheManager the target CacheManager to proxy
+	 * @param targetCacheManager the target CacheManager to staticProxy
 	 */
 	public TransactionAwareCacheManagerProxy(CacheManager targetCacheManager) {
 		Assert.notNull(targetCacheManager, "Target CacheManager must not be null");
@@ -59,7 +59,7 @@ public class TransactionAwareCacheManagerProxy implements CacheManager, Initiali
 
 
 	/**
-	 * Set the target CacheManager to proxy.
+	 * Set the target CacheManager to staticProxy.
 	 */
 	public void setTargetCacheManager(CacheManager targetCacheManager) {
 		this.targetCacheManager = targetCacheManager;

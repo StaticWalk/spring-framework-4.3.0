@@ -20,7 +20,7 @@ import java.io.Serializable;
 
 /**
  * Subclass of NopInterceptor that is serializable and
- * can be used to test proxy serialization.
+ * can be used to test staticProxy serialization.
  *
  * @author Rod Johnson
  */

@@ -138,7 +138,7 @@ public class CglibProxyTests extends AbstractAopProxyTests implements Serializab
 		PackageMethodTestBean proxy = (PackageMethodTestBean) aop.getProxy(child);
 		assertTrue(AopUtils.isCglibProxy(proxy));
 		assertNotEquals(proxy.getClass().getClassLoader(), bean.getClass().getClassLoader());
-		assertNull(proxy.getString());  // we're stuck in the proxy instance
+		assertNull(proxy.getString());  // we're stuck in the staticProxy instance
 	}
 
 	@Test
@@ -243,7 +243,7 @@ public class CglibProxyTests extends AbstractAopProxyTests implements Serializab
 
 		ITestBean proxy1 = getIntroductionAdvisorProxy(target1);
 		ITestBean proxy2 = getIntroductionAdvisorProxy(target2);
-		assertSame("Incorrect duplicate creation of proxy classes", proxy1.getClass(), proxy2.getClass());
+		assertSame("Incorrect duplicate creation of staticProxy classes", proxy1.getClass(), proxy2.getClass());
 	}
 
 	private ITestBean getIntroductionAdvisorProxy(TestBean target) {

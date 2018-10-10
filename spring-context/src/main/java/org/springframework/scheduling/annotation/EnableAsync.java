@@ -170,7 +170,7 @@ public @interface EnableAsync {
 	 * Spring-managed beans requiring proxying, not just those marked with {@code @Async}.
 	 * For example, other beans marked with Spring's {@code @Transactional} annotation
 	 * will be upgraded to subclass proxying at the same time. This approach has no
-	 * negative impact in practice unless one is explicitly expecting one type of proxy
+	 * negative impact in practice unless one is explicitly expecting one type of staticProxy
 	 * vs. another &mdash; for example, in tests.
 	 */
 	boolean proxyTargetClass() default false;
@@ -187,7 +187,7 @@ public @interface EnableAsync {
 	 * should be applied.
 	 * <p>The default is {@link Ordered#LOWEST_PRECEDENCE} in order to run
 	 * after all other post-processors, so that it can add an advisor to
-	 * existing proxies rather than double-proxy.
+	 * existing proxies rather than double-staticProxy.
 	 */
 	int order() default Ordered.LOWEST_PRECEDENCE;
 

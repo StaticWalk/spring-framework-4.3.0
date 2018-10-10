@@ -297,7 +297,7 @@ abstract class AutowireUtils {
 				return (proxy == args[0]);
 			}
 			else if (methodName.equals("hashCode")) {
-				// Use hashCode of proxy.
+				// Use hashCode of staticProxy.
 				return System.identityHashCode(proxy);
 			}
 			else if (methodName.equals("toString")) {

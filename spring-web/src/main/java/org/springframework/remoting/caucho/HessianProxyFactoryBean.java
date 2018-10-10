@@ -26,7 +26,7 @@ import org.springframework.beans.factory.FactoryBean;
  * <p>Hessian is a slim, binary RPC protocol.
  * For information on Hessian, see the
  * <a href="http://www.caucho.com/hessian">Hessian website</a>
- * <b>Note: As of Spring 4.0, this proxy factory requires Hessian 4.0 or above.</b>
+ * <b>Note: As of Spring 4.0, this staticProxy factory requires Hessian 4.0 or above.</b>
  *
  * <p>The service URL must be an HTTP URL exposing a Hessian service.
  * For details, see the {@link HessianClientInterceptor} javadoc.

@@ -17,9 +17,9 @@
 package org.springframework.aop;
 
 /**
- * Minimal interface for exposing the target class behind a proxy.
+ * Minimal interface for exposing the target class behind a staticProxy.
  *
- * <p>Implemented by AOP proxy objects and proxy factories
+ * <p>Implemented by AOP staticProxy objects and staticProxy factories
  * (via {@link org.springframework.aop.framework.Advised})
  * as well as by {@link TargetSource TargetSources}.
  *
@@ -31,7 +31,7 @@ public interface TargetClassAware {
 
 	/**
 	 * Return the target class behind the implementing object
-	 * (typically a proxy configuration or an actual proxy).
+	 * (typically a staticProxy configuration or an actual staticProxy).
 	 * @return the target Class, or {@code null} if not known
 	 */
 	Class<?> getTargetClass();

@@ -38,20 +38,20 @@ import org.springframework.util.ClassUtils;
  * Furthermore, {@code PersistenceManager.close} calls get forwarded to
  * {@link PersistenceManagerFactoryUtils#releasePersistenceManager}.
  *
- * <p>The main advantage of this proxy is that it allows DAOs to work with a
+ * <p>The main advantage of this staticProxy is that it allows DAOs to work with a
  * plain JDO PersistenceManagerFactory reference, while still participating in
  * Spring's (or a J2EE server's) resource and transaction management. DAOs will
  * only rely on the JDO API in such a scenario, without any Spring dependencies.
  *
- * <p>Note that the behavior of this proxy matches the behavior that the JDO spec
+ * <p>Note that the behavior of this staticProxy matches the behavior that the JDO spec
  * defines for a PersistenceManagerFactory as exposed by a JCA connector, when
  * deployed in a J2EE server. Hence, DAOs could seamlessly switch between a JNDI
- * PersistenceManagerFactory and this proxy for a local PersistenceManagerFactory,
+ * PersistenceManagerFactory and this staticProxy for a local PersistenceManagerFactory,
  * receiving the reference through Dependency Injection. This will work without
  * any Spring API dependencies in the DAO code!
  *
  * <p>Of course, you can still access the target PersistenceManagerFactory
- * even when your DAOs go through this proxy, by defining a bean reference
+ * even when your DAOs go through this staticProxy, by defining a bean reference
  * that points directly at your target PersistenceManagerFactory bean.
  *
  * @author Juergen Hoeller
@@ -71,7 +71,7 @@ public class TransactionAwarePersistenceManagerFactoryProxy implements FactoryBe
 
 
 	/**
-	 * Set the target JDO PersistenceManagerFactory that this proxy should
+	 * Set the target JDO PersistenceManagerFactory that this staticProxy should
 	 * delegate to. This should be the raw PersistenceManagerFactory, as
 	 * accessed by JdoTransactionManager.
 	 * @see org.springframework.orm.jdo.JdoTransactionManager
@@ -85,14 +85,14 @@ public class TransactionAwarePersistenceManagerFactoryProxy implements FactoryBe
 	}
 
 	/**
-	 * Return the target JDO PersistenceManagerFactory that this proxy delegates to.
+	 * Return the target JDO PersistenceManagerFactory that this staticProxy delegates to.
 	 */
 	public PersistenceManagerFactory getTargetPersistenceManagerFactory() {
 		return this.target;
 	}
 
 	/**
-	 * Set whether the PersistenceManagerFactory proxy is allowed to create
+	 * Set whether the PersistenceManagerFactory staticProxy is allowed to create
 	 * a non-transactional PersistenceManager when no transactional
 	 * PersistenceManager can be found for the current thread.
 	 * <p>Default is "true". Can be turned off to enforce access to
@@ -107,7 +107,7 @@ public class TransactionAwarePersistenceManagerFactoryProxy implements FactoryBe
 	}
 
 	/**
-	 * Return whether the PersistenceManagerFactory proxy is allowed to create
+	 * Return whether the PersistenceManagerFactory staticProxy is allowed to create
 	 * a non-transactional PersistenceManager when no transactional
 	 * PersistenceManager can be found for the current thread.
 	 */
@@ -134,7 +134,7 @@ public class TransactionAwarePersistenceManagerFactoryProxy implements FactoryBe
 
 	/**
 	 * Invocation handler that delegates getPersistenceManager calls on the
-	 * PersistenceManagerFactory proxy to PersistenceManagerFactoryUtils
+	 * PersistenceManagerFactory staticProxy to PersistenceManagerFactoryUtils
 	 * for being aware of thread-bound transactions.
 	 */
 	private class PersistenceManagerFactoryInvocationHandler implements InvocationHandler {
@@ -148,7 +148,7 @@ public class TransactionAwarePersistenceManagerFactoryProxy implements FactoryBe
 				return (proxy == args[0]);
 			}
 			else if (method.getName().equals("hashCode")) {
-				// Use hashCode of PersistenceManagerFactory proxy.
+				// Use hashCode of PersistenceManagerFactory staticProxy.
 				return System.identityHashCode(proxy);
 			}
 			else if (method.getName().equals("getPersistenceManager")) {
@@ -195,7 +195,7 @@ public class TransactionAwarePersistenceManagerFactoryProxy implements FactoryBe
 				return (proxy == args[0]);
 			}
 			else if (method.getName().equals("hashCode")) {
-				// Use hashCode of PersistenceManager proxy.
+				// Use hashCode of PersistenceManager staticProxy.
 				return System.identityHashCode(proxy);
 			}
 			else if (method.getName().equals("close")) {

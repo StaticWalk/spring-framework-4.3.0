@@ -17,7 +17,7 @@
 package org.springframework.context.annotation;
 
 /**
- * Enumeration used to determine whether JDK proxy-based or AspectJ weaving-based advice
+ * Enumeration used to determine whether JDK staticProxy-based or AspectJ weaving-based advice
  * should be applied.
  *
  * @author Chris Beams

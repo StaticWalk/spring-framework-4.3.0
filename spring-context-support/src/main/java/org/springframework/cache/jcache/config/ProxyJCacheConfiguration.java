@@ -26,7 +26,7 @@ import org.springframework.context.annotation.Role;
 
 /**
  * {@code @Configuration} class that registers the Spring infrastructure beans necessary
- * to enable proxy-based annotation-driven JSR-107 cache management.
+ * to enable staticProxy-based annotation-driven JSR-107 cache management.
  *
  * <p>Can safely be used alongside Spring's caching support.
  *

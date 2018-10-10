@@ -186,7 +186,7 @@ public class CacheControl {
 	}
 
 	/**
-	 * Add a "proxy-revalidate" directive.
+	 * Add a "staticProxy-revalidate" directive.
 	 * <p>This directive has the same meaning as the "must-revalidate" directive,
 	 * except that it does not apply to private caches (i.e. browsers, HTTP clients).
 	 * @return {@code this}, to facilitate method chaining
@@ -270,7 +270,7 @@ public class CacheControl {
 			appendDirective(ccValue, "private");
 		}
 		if (this.proxyRevalidate) {
-			appendDirective(ccValue, "proxy-revalidate");
+			appendDirective(ccValue, "staticProxy-revalidate");
 		}
 		if (this.sMaxAge != -1) {
 			appendDirective(ccValue, "s-maxage=" + Long.toString(this.sMaxAge));

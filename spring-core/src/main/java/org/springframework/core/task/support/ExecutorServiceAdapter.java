@@ -36,7 +36,7 @@ import org.springframework.util.Assert;
  * lifecycle methods in the {@code java.util.concurrent.ExecutorService} API
  * ("shutdown()" etc), similar to a server-wide {@code ManagedExecutorService}
  * in a Java EE 6 environment. The lifecycle is always up to the backend pool,
- * with this adapter acting as an access-only proxy for that target pool.
+ * with this adapter acting as an access-only staticProxy for that target pool.
  *
  * @author Juergen Hoeller
  * @since 3.0

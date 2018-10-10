@@ -27,7 +27,7 @@ import org.springframework.web.util.NestedServletException;
 
 /**
  * Servlet-API-based HTTP request handler that exports the specified service bean
- * as Burlap service endpoint, accessible via a Burlap proxy.
+ * as Burlap service endpoint, accessible via a Burlap staticProxy.
  *
  * <p><b>Note:</b> Spring also provides an alternative version of this exporter,
  * for Sun's JRE 1.6 HTTP server: {@link SimpleBurlapServiceExporter}.

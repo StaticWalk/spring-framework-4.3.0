@@ -57,7 +57,7 @@ import org.springframework.util.ReflectionUtils;
 public abstract class AopUtils {
 
 	/**
-	 * Check whether the given object is a JDK dynamic proxy or a CGLIB proxy.
+	 * Check whether the given object is a JDK dynamic staticProxy or a CGLIB staticProxy.
 	 * <p>This method additionally checks if the given object is an instance
 	 * of {@link SpringProxy}.
 	 * @param object the object to check
@@ -70,7 +70,7 @@ public abstract class AopUtils {
 	}
 
 	/**
-	 * Check whether the given object is a JDK dynamic proxy.
+	 * Check whether the given object is a JDK dynamic staticProxy.
 	 * <p>This method goes beyond the implementation of
 	 * {@link Proxy#isProxyClass(Class)} by additionally checking if the
 	 * given object is an instance of {@link SpringProxy}.
@@ -82,7 +82,7 @@ public abstract class AopUtils {
 	}
 
 	/**
-	 * Check whether the given object is a CGLIB proxy.
+	 * Check whether the given object is a CGLIB staticProxy.
 	 * <p>This method goes beyond the implementation of
 	 * {@link ClassUtils#isCglibProxy(Object)} by additionally checking if
 	 * the given object is an instance of {@link SpringProxy}.
@@ -94,9 +94,9 @@ public abstract class AopUtils {
 	}
 
 	/**
-	 * Determine the target class of the given bean instance which might be an AOP proxy.
-	 * <p>Returns the target class for an AOP proxy or the plain class otherwise.
-	 * @param candidate the instance to check (might be an AOP proxy)
+	 * Determine the target class of the given bean instance which might be an AOP staticProxy.
+	 * <p>Returns the target class for an AOP staticProxy or the plain class otherwise.
+	 * @param candidate the instance to check (might be an AOP staticProxy)
 	 * @return the target class (or the plain class of the given object as fallback;
 	 * never {@code null})
 	 * @see org.springframework.aop.TargetClassAware#getTargetClass()
@@ -119,10 +119,10 @@ public abstract class AopUtils {
 	 * if actually exposed on the target type, or otherwise a corresponding method
 	 * on one of the target type's interfaces or on the target type itself.
 	 * @param method the method to check
-	 * @param targetType the target type to search methods on (typically an AOP proxy)
+	 * @param targetType the target type to search methods on (typically an AOP staticProxy)
 	 * @return a corresponding invocable method on the target type
 	 * @throws IllegalStateException if the given method is not invocable on the given
-	 * target type (typically due to a proxy mismatch)
+	 * target type (typically due to a staticProxy mismatch)
 	 * @since 4.3
 	 * @see MethodIntrospector#selectInvocableMethod(Method, Class)
 	 */
@@ -131,7 +131,7 @@ public abstract class AopUtils {
 		if (Modifier.isPrivate(methodToUse.getModifiers()) && !Modifier.isStatic(methodToUse.getModifiers()) &&
 				SpringProxy.class.isAssignableFrom(targetType)) {
 			throw new IllegalStateException(String.format(
-					"Need to invoke method '%s' found on proxy for target class '%s' but cannot " +
+					"Need to invoke method '%s' found on staticProxy for target class '%s' but cannot " +
 					"be delegated to target bean. Switch its visibility to package or protected.",
 					method.getName(), method.getDeclaringClass().getSimpleName()));
 		}

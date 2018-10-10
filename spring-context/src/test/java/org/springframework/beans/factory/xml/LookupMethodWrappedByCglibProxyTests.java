@@ -27,7 +27,7 @@ import org.springframework.tests.sample.beans.ITestBean;
 import static org.junit.Assert.*;
 
 /**
- * Tests lookup methods wrapped by a CGLIB proxy (see SPR-391).
+ * Tests lookup methods wrapped by a CGLIB staticProxy (see SPR-391).
  *
  * @author Rod Johnson
  * @author Juergen Hoeller

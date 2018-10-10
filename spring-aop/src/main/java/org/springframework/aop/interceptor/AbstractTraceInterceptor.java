@@ -53,7 +53,7 @@ public abstract class AbstractTraceInterceptor implements MethodInterceptor, Ser
 	protected transient Log defaultLogger = LogFactory.getLog(getClass());
 
 	/**
-	 * Indicates whether or not proxy class names should be hidden when using dynamic loggers.
+	 * Indicates whether or not staticProxy class names should be hidden when using dynamic loggers.
 	 * @see #setUseDynamicLogger
 	 */
 	private boolean hideProxyClassNames = false;
@@ -92,7 +92,7 @@ public abstract class AbstractTraceInterceptor implements MethodInterceptor, Ser
 
 	/**
 	 * Set to "true" to have {@link #setUseDynamicLogger dynamic loggers} hide
-	 * proxy class names wherever possible. Default is "false".
+	 * staticProxy class names wherever possible. Default is "false".
 	 */
 	public void setHideProxyClassNames(boolean hideProxyClassNames) {
 		this.hideProxyClassNames = hideProxyClassNames;

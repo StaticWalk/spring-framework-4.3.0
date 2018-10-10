@@ -63,7 +63,7 @@ public class AnnotationCacheOperationSource extends AbstractFallbackCacheOperati
 	 * Create a default {@code AnnotationCacheOperationSource}, supporting public methods
 	 * that carry the {@code Cacheable} and {@code CacheEvict} annotations.
 	 * @param publicMethodsOnly whether to support only annotated public methods
-	 * typically for use with proxy-based AOP), or protected/private methods as well
+	 * typically for use with staticProxy-based AOP), or protected/private methods as well
 	 * (typically used with AspectJ class weaving)
 	 */
 	public AnnotationCacheOperationSource(boolean publicMethodsOnly) {

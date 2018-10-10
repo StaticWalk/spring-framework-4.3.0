@@ -36,7 +36,7 @@ import org.springframework.util.StringUtils;
  * on the target. All other methods simply delegate to the corresponding methods
  * of the target ConnectionFactory.
  *
- * <p>Can be used to proxy a target JNDI ConnectionFactory that does not have user
+ * <p>Can be used to staticProxy a target JNDI ConnectionFactory that does not have user
  * credentials configured. Client code can work with the ConnectionFactory without
  * passing in username and password on every {@code createConnection()} call.
  *
@@ -55,7 +55,7 @@ import org.springframework.util.StringUtils;
  *   &lt;property name="password" value="mypassword"/&gt;
  * &lt;/bean></pre>
  *
- * <p>If the "username" is empty, this proxy will simply delegate to the standard
+ * <p>If the "username" is empty, this staticProxy will simply delegate to the standard
  * {@code createConnection()} method of the target ConnectionFactory.
  * This can be used to keep a UserCredentialsConnectionFactoryAdapter bean
  * definition just for the <i>option</i> of implicitly passing in user credentials
@@ -113,9 +113,9 @@ public class UserCredentialsConnectionFactoryAdapter
 
 
 	/**
-	 * Set user credententials for this proxy and the current thread.
+	 * Set user credententials for this staticProxy and the current thread.
 	 * The given username and password will be applied to all subsequent
-	 * {@code createConnection()} calls on this ConnectionFactory proxy.
+	 * {@code createConnection()} calls on this ConnectionFactory staticProxy.
 	 * <p>This will override any statically specified user credentials,
 	 * that is, values of the "username" and "password" bean properties.
 	 * @param username the username to apply
@@ -127,7 +127,7 @@ public class UserCredentialsConnectionFactoryAdapter
 	}
 
 	/**
-	 * Remove any user credentials for this proxy from the current thread.
+	 * Remove any user credentials for this staticProxy from the current thread.
 	 * Statically specified user credentials apply again afterwards.
 	 * @see #setCredentialsForCurrentThread
 	 */

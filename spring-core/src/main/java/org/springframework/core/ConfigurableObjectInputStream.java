@@ -54,7 +54,7 @@ public class ConfigurableObjectInputStream extends ObjectInputStream {
 	 * Create a new ConfigurableObjectInputStream for the given InputStream and ClassLoader.
 	 * @param in the InputStream to read from
 	 * @param classLoader the ClassLoader to use for loading local classes
-	 * @param acceptProxyClasses whether to accept deserialization of proxy classes
+	 * @param acceptProxyClasses whether to accept deserialization of staticProxy classes
 	 * (may be deactivated as a security measure)
 	 * @see java.io.ObjectInputStream#ObjectInputStream(java.io.InputStream)
 	 */
@@ -87,10 +87,10 @@ public class ConfigurableObjectInputStream extends ObjectInputStream {
 	@Override
 	protected Class<?> resolveProxyClass(String[] interfaces) throws IOException, ClassNotFoundException {
 		if (!this.acceptProxyClasses) {
-			throw new NotSerializableException("Not allowed to accept serialized proxy classes");
+			throw new NotSerializableException("Not allowed to accept serialized staticProxy classes");
 		}
 		if (this.classLoader != null) {
-			// Use the specified ClassLoader to resolve local proxy classes.
+			// Use the specified ClassLoader to resolve local staticProxy classes.
 			Class<?>[] resolvedInterfaces = new Class<?>[interfaces.length];
 			for (int i = 0; i < interfaces.length; i++) {
 				try {

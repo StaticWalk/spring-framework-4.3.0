@@ -41,7 +41,7 @@ import org.springframework.util.ClassUtils;
  * <p>In terms of target method signatures, any parameter types are supported.
  * However, the return type is constrained to either {@code void} or
  * {@code java.util.concurrent.Future}. In the latter case, the Future handle
- * returned from the proxy will be an actual asynchronous Future that can be used
+ * returned from the staticProxy will be an actual asynchronous Future that can be used
  * to track the result of the asynchronous method execution. However, since the
  * target method needs to implement the same signature, it will have to return
  * a temporary Future handle that just passes the return value through

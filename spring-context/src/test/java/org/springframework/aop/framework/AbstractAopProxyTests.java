@@ -244,7 +244,7 @@ public abstract class AbstractAopProxyTests {
 		assertNotSame(p, p2);
 		assertEquals(p.getName(), p2.getName());
 		assertEquals(p.getAge(), p2.getAge());
-		assertTrue("Deserialized object is an AOP proxy", AopUtils.isAopProxy(p2));
+		assertTrue("Deserialized object is an AOP staticProxy", AopUtils.isAopProxy(p2));
 
 		Advised a1 = (Advised) p;
 		Advised a2 = (Advised) p2;
@@ -278,7 +278,7 @@ public abstract class AbstractAopProxyTests {
 	/**
 	 * Check that the two MethodInvocations necessary are independent and
 	 * don't conflict.
-	 * Check also proxy exposure.
+	 * Check also staticProxy exposure.
 	 */
 	@Test
 	public void testOneAdvisedObjectCallsAnother() {
@@ -287,7 +287,7 @@ public abstract class AbstractAopProxyTests {
 
 		TestBean target1 = new TestBean();
 		ProxyFactory pf1 = new ProxyFactory(target1);
-		// Permit proxy and invocation checkers to get context from AopContext
+		// Permit staticProxy and invocation checkers to get context from AopContext
 		pf1.setExposeProxy(true);
 		NopInterceptor di1 = new NopInterceptor();
 		pf1.addAdvice(0, di1);
@@ -366,11 +366,11 @@ public abstract class AbstractAopProxyTests {
 		assertEquals("Increment happened", 1, proxied.getCount());
 		proxied.incrementViaProxy(); // 2 invoocations
 		assertEquals("Increment happened", 2, target.getCount());
-		assertEquals("3 more invocations via AOP as the first call was reentrant through the proxy", 4, di.getCount());
+		assertEquals("3 more invocations via AOP as the first call was reentrant through the staticProxy", 4, di.getCount());
 	}
 
 	@Test(expected = IllegalStateException.class)
-	// Should fail to get proxy as exposeProxy wasn't set to true
+	// Should fail to get staticProxy as exposeProxy wasn't set to true
 	public void testTargetCantGetProxyByDefault() {
 		NeedsToSeeProxy et = new NeedsToSeeProxy();
 		ProxyFactory pf1 = new ProxyFactory(et);
@@ -425,7 +425,7 @@ public abstract class AbstractAopProxyTests {
 	}
 
 	/**
-	 * Test that the proxy returns itself when the
+	 * Test that the staticProxy returns itself when the
 	 * target returns {@code this}
 	 */
 	@Test
@@ -438,7 +438,7 @@ public abstract class AbstractAopProxyTests {
 		pc.setTarget(raw);
 
 		ITestBean tb = (ITestBean) createProxy(pc);
-		assertSame("this return is wrapped in proxy", tb, tb.getSpouse());
+		assertSame("this return is wrapped in staticProxy", tb, tb.getSpouse());
 	}
 
 	@Test
@@ -540,7 +540,7 @@ public abstract class AbstractAopProxyTests {
 
 	/**
 	 * Check that although a method is eligible for advice chain optimization and
-	 * direct reflective invocation, it doesn't happen if we've asked to see the proxy,
+	 * direct reflective invocation, it doesn't happen if we've asked to see the staticProxy,
 	 * so as to guarantee a consistent programming model.
 	 * @throws Throwable
 	 */
@@ -554,7 +554,7 @@ public abstract class AbstractAopProxyTests {
 		// Now let's try it with the special target
 		AopProxy aop = createAopProxy(pc);
 		INeedsToSeeProxy proxied = (INeedsToSeeProxy) aop.getProxy();
-		// It will complain if it can't get the proxy
+		// It will complain if it can't get the staticProxy
 		proxied.incrementViaProxy();
 	}
 
@@ -737,7 +737,7 @@ public abstract class AbstractAopProxyTests {
 		catch (AopConfigException ex) {
 			assertTrue(ex.getMessage().indexOf("ntroduction") > -1);
 		}
-		// Check it still works: proxy factory state shouldn't have been corrupted
+		// Check it still works: staticProxy factory state shouldn't have been corrupted
 		ITestBean proxied = (ITestBean) createProxy(pc);
 		assertEquals(target.getAge(), proxied.getAge());
 	}
@@ -756,7 +756,7 @@ public abstract class AbstractAopProxyTests {
 		}
 		catch (Exception ex) {
 			// TODO used to catch UnknownAdviceTypeException, but
-			// with CGLIB some errors are in proxy creation and are wrapped
+			// with CGLIB some errors are in staticProxy creation and are wrapped
 			// in aspect exception. Error message is still fine.
 			//assertTrue(ex.getMessage().indexOf("ntroduction") > -1);
 		}
@@ -778,7 +778,7 @@ public abstract class AbstractAopProxyTests {
 		catch (IllegalArgumentException ex) {
 			//assertTrue(ex.getMessage().indexOf("ntroduction") > -1);
 		}
-		// Check it still works: proxy factory state shouldn't have been corrupted
+		// Check it still works: staticProxy factory state shouldn't have been corrupted
 		ITestBean proxied = (ITestBean) createProxy(pc);
 		assertEquals(target.getAge(), proxied.getAge());
 	}
@@ -829,7 +829,7 @@ public abstract class AbstractAopProxyTests {
 		catch (IllegalArgumentException ex) {
 			assertTrue(ex.getMessage().contains("interface"));
 		}
-		// Check it still works: proxy factory state shouldn't have been corrupted
+		// Check it still works: staticProxy factory state shouldn't have been corrupted
 		ITestBean proxied = (ITestBean) createProxy(pc);
 		assertEquals(target.getAge(), proxied.getAge());
 	}
@@ -850,7 +850,7 @@ public abstract class AbstractAopProxyTests {
 		catch (AopConfigException ex) {
 			assertTrue(ex.getMessage().indexOf("frozen") > -1);
 		}
-		// Check it still works: proxy factory state shouldn't have been corrupted
+		// Check it still works: staticProxy factory state shouldn't have been corrupted
 		assertEquals(target.getAge(), proxied.getAge());
 		assertEquals(1, ((Advised) proxied).getAdvisors().length);
 	}
@@ -877,7 +877,7 @@ public abstract class AbstractAopProxyTests {
 		catch (AopConfigException ex) {
 			assertTrue(ex.getMessage().contains("frozen"));
 		}
-		// Check it still works: proxy factory state shouldn't have been corrupted
+		// Check it still works: staticProxy factory state shouldn't have been corrupted
 		assertEquals(target.getAge(), proxied.getAge());
 		assertEquals(1, advised.getAdvisors().length);
 	}
@@ -906,7 +906,7 @@ public abstract class AbstractAopProxyTests {
 		pc.setFrozen(false);
 		// Can now remove it
 		advised.removeAdvisor(0);
-		// Check it still works: proxy factory state shouldn't have been corrupted
+		// Check it still works: staticProxy factory state shouldn't have been corrupted
 		assertEquals(target.getAge(), proxied.getAge());
 		assertEquals(0, advised.getAdvisors().length);
 	}
@@ -1253,7 +1253,7 @@ public abstract class AbstractAopProxyTests {
 		final ITestBean proxy = (ITestBean) createProxy(pf);
 		Advised config = (Advised) proxy;
 
-		// This class just checks proxy is bound before getTarget() call
+		// This class just checks staticProxy is bound before getTarget() call
 		config.setTargetSource(new TargetSource() {
 			@Override
 			public Class<?> getTargetClass() {
@@ -1297,7 +1297,7 @@ public abstract class AbstractAopProxyTests {
 		assertEquals(proxyA.hashCode(), proxyB.hashCode());
 		assertFalse(proxyA.equals(a));
 
-		// Equality checks were handled by the proxy
+		// Equality checks were handled by the staticProxy
 		assertEquals(0, i1.getCount());
 
 		// When we invoke A, it's NopInterceptor will have count == 1
@@ -1653,9 +1653,9 @@ public abstract class AbstractAopProxyTests {
 
 
 	/**
-	 * Same thing for a proxy.
+	 * Same thing for a staticProxy.
 	 * Only works when exposeProxy is set to true.
-	 * Checks that the proxy is the same on the way in and out.
+	 * Checks that the staticProxy is the same on the way in and out.
 	 */
 	private static class ProxyMatcherInterceptor implements MethodInterceptor {
 

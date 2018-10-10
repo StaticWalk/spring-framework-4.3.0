@@ -34,7 +34,7 @@ import static org.springframework.util.ReflectionUtils.*;
 
 /**
  * {@link InvocationHandler} for an {@link Annotation} that Spring has
- * <em>synthesized</em> (i.e., wrapped in a dynamic proxy) with additional
+ * <em>synthesized</em> (i.e., wrapped in a dynamic staticProxy) with additional
  * functionality.
  *
  * @author Sam Brannen

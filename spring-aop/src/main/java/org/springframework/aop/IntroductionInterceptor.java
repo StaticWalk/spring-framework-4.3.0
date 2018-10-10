@@ -20,7 +20,7 @@ import org.aopalliance.intercept.MethodInterceptor;
 
 /**
  * Subinterface of AOP Alliance MethodInterceptor that allows additional interfaces
- * to be implemented by the interceptor, and available via a proxy using that
+ * to be implemented by the interceptor, and available via a staticProxy using that
  * interceptor. This is a fundamental AOP concept called <b>introduction</b>.
  *
  * <p>Introductions are often <b>mixins</b>, enabling the building of composite

@@ -27,7 +27,7 @@ import org.springframework.aop.support.DefaultPointcutAdvisor;
  * with a separate {@link CacheInterceptor} definition.
  *
  * <p>This class is designed to facilitate declarative cache demarcation: namely, wrapping
- * a singleton target object with a caching proxy, proxying all the interfaces that the
+ * a singleton target object with a caching staticProxy, proxying all the interfaces that the
  * target implements. Exists primarily for third-party framework integration.
  * <strong>Users should favor the {@code cache:} XML namespace
  * {@link org.springframework.cache.annotation.Cacheable @Cacheable} annotation.</strong>

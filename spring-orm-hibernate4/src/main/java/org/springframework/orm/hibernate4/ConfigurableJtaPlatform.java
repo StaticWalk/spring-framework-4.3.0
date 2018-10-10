@@ -150,7 +150,7 @@ class ConfigurableJtaPlatform implements InvocationHandler {
 	}
 
 	/**
-	 * Obtain a proxy that implements the current Hibernate version's JtaPlatform interface
+	 * Obtain a staticProxy that implements the current Hibernate version's JtaPlatform interface
 	 * in the right package location, delegating all invocations to the same-named methods
 	 * on this ConfigurableJtaPlatform class itself.
 	 */

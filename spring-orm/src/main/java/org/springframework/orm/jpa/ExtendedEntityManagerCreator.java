@@ -73,7 +73,7 @@ import org.springframework.util.CollectionUtils;
 public abstract class ExtendedEntityManagerCreator {
 
 	/**
-	 * Create an application-managed extended EntityManager proxy.
+	 * Create an application-managed extended EntityManager staticProxy.
 	 * @param rawEntityManager the raw EntityManager to decorate
 	 * @param emfInfo the EntityManagerFactoryInfo to obtain the JpaDialect
 	 * and PersistenceUnitInfo from
@@ -87,7 +87,7 @@ public abstract class ExtendedEntityManagerCreator {
 	}
 
 	/**
-	 * Create an application-managed extended EntityManager proxy.
+	 * Create an application-managed extended EntityManager staticProxy.
 	 * @param rawEntityManager the raw EntityManager to decorate
 	 * @param emfInfo the EntityManagerFactoryInfo to obtain the JpaDialect
 	 * and PersistenceUnitInfo from
@@ -104,7 +104,7 @@ public abstract class ExtendedEntityManagerCreator {
 	}
 
 	/**
-	 * Create a container-managed extended EntityManager proxy.
+	 * Create a container-managed extended EntityManager staticProxy.
 	 * @param rawEntityManager the raw EntityManager to decorate
 	 * @param emfInfo the EntityManagerFactoryInfo to obtain the JpaDialect
 	 * and PersistenceUnitInfo from
@@ -118,7 +118,7 @@ public abstract class ExtendedEntityManagerCreator {
 	}
 
 	/**
-	 * Create a container-managed extended EntityManager proxy.
+	 * Create a container-managed extended EntityManager staticProxy.
 	 * @param emf the EntityManagerFactory to create the EntityManager with.
 	 * If this implements the EntityManagerFactoryInfo interface, the corresponding
 	 * JpaDialect and PersistenceUnitInfo will be detected accordingly.
@@ -131,7 +131,7 @@ public abstract class ExtendedEntityManagerCreator {
 	}
 
 	/**
-	 * Create a container-managed extended EntityManager proxy.
+	 * Create a container-managed extended EntityManager staticProxy.
 	 * @param emf the EntityManagerFactory to create the EntityManager with.
 	 * If this implements the EntityManagerFactoryInfo interface, the corresponding
 	 * JpaDialect and PersistenceUnitInfo will be detected accordingly.
@@ -146,7 +146,7 @@ public abstract class ExtendedEntityManagerCreator {
 	}
 
 	/**
-	 * Create a container-managed extended EntityManager proxy.
+	 * Create a container-managed extended EntityManager staticProxy.
 	 * @param emf the EntityManagerFactory to create the EntityManager with.
 	 * If this implements the EntityManagerFactoryInfo interface, the corresponding
 	 * JpaDialect and PersistenceUnitInfo will be detected accordingly.
@@ -179,7 +179,7 @@ public abstract class ExtendedEntityManagerCreator {
 
 
 	/**
-	 * Actually create the EntityManager proxy.
+	 * Actually create the EntityManager staticProxy.
 	 * @param rawEntityManager raw EntityManager
 	 * @param emfInfo the EntityManagerFactoryInfo to obtain the JpaDialect
 	 * and PersistenceUnitInfo from
@@ -187,7 +187,7 @@ public abstract class ExtendedEntityManagerCreator {
 	 * or application-managed EntityManager semantics
 	 * @param synchronizedWithTransaction whether to automatically join ongoing
 	 * transactions (according to the JPA 2.1 SynchronizationType rules)
-	 * @return the EntityManager proxy
+	 * @return the EntityManager staticProxy
 	 */
 	private static EntityManager createProxy(EntityManager rawEntityManager,
 			EntityManagerFactoryInfo emfInfo, boolean containerManaged, boolean synchronizedWithTransaction) {
@@ -201,11 +201,11 @@ public abstract class ExtendedEntityManagerCreator {
 	}
 
 	/**
-	 * Actually create the EntityManager proxy.
+	 * Actually create the EntityManager staticProxy.
 	 * @param rawEm raw EntityManager
 	 * @param emIfc the (potentially vendor-specific) EntityManager
-	 * interface to proxy, or {@code null} for default detection of all interfaces
-	 * @param cl the ClassLoader to use for proxy creation (maybe {@code null})
+	 * interface to staticProxy, or {@code null} for default detection of all interfaces
+	 * @param cl the ClassLoader to use for staticProxy creation (maybe {@code null})
 	 * @param exceptionTranslator the PersistenceException translator to use
 	 * @param jta whether to create a JTA-aware EntityManager
 	 * (or {@code null} if not known in advance)
@@ -213,7 +213,7 @@ public abstract class ExtendedEntityManagerCreator {
 	 * or application-managed EntityManager semantics
 	 * @param synchronizedWithTransaction whether to automatically join ongoing
 	 * transactions (according to the JPA 2.1 SynchronizationType rules)
-	 * @return the EntityManager proxy
+	 * @return the EntityManager staticProxy
 	 */
 	private static EntityManager createProxy(
 			EntityManager rawEm, Class<? extends EntityManager> emIfc, ClassLoader cl,
@@ -286,7 +286,7 @@ public abstract class ExtendedEntityManagerCreator {
 				return (proxy == args[0]);
 			}
 			else if (method.getName().equals("hashCode")) {
-				// Use hashCode of EntityManager proxy.
+				// Use hashCode of EntityManager staticProxy.
 				return hashCode();
 			}
 			else if (method.getName().equals("getTargetEntityManager")) {
@@ -294,7 +294,7 @@ public abstract class ExtendedEntityManagerCreator {
 				return this.target;
 			}
 			else if (method.getName().equals("unwrap")) {
-				// Handle JPA 2.0 unwrap method - could be a proxy match.
+				// Handle JPA 2.0 unwrap method - could be a staticProxy match.
 				Class<?> targetClass = (Class<?>) args[0];
 				if (targetClass == null) {
 					return this.target;

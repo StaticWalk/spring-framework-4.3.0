@@ -90,7 +90,7 @@ public class ReflectiveMethodInvocation implements ProxyMethodInvocation, Clonea
 
 	/**
 	 * Construct a new ReflectiveMethodInvocation with the given arguments.
-	 * @param proxy the proxy object that the invocation was made on
+	 * @param proxy the staticProxy object that the invocation was made on
 	 * @param target the target object to invoke
 	 * @param method the method to invoke
 	 * @param arguments the arguments to invoke the method with

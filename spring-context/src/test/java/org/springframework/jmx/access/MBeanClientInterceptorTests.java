@@ -54,7 +54,7 @@ import static org.junit.Assume.*;
  */
 public class MBeanClientInterceptorTests extends AbstractMBeanServerTests {
 
-	protected static final String OBJECT_NAME = "spring:test=proxy";
+	protected static final String OBJECT_NAME = "spring:test=staticProxy";
 
 	protected JmxTestBean target;
 
@@ -92,7 +92,7 @@ public class MBeanClientInterceptorTests extends AbstractMBeanServerTests {
 	public void testProxyClassIsDifferent() throws Exception {
 		assumeTrue(runTests);
 		IJmxTestBean proxy = getProxy();
-		assertTrue("The proxy class should be different than the base class", (proxy.getClass() != IJmxTestBean.class));
+		assertTrue("The staticProxy class should be different than the base class", (proxy.getClass() != IJmxTestBean.class));
 	}
 
 	@Test
@@ -102,7 +102,7 @@ public class MBeanClientInterceptorTests extends AbstractMBeanServerTests {
 		IJmxTestBean proxy2 = getProxy();
 
 		assertNotSame("The proxies should NOT be the same", proxy1, proxy2);
-		assertSame("The proxy classes should be the same", proxy1.getClass(), proxy2.getClass());
+		assertSame("The staticProxy classes should be the same", proxy1.getClass(), proxy2.getClass());
 	}
 
 	@Test
@@ -202,7 +202,7 @@ public class MBeanClientInterceptorTests extends AbstractMBeanServerTests {
 			return;
 		}
 
-		// should now be able to access data via the lazy proxy
+		// should now be able to access data via the lazy staticProxy
 		try {
 			assertEquals("Rob Harrop", bean.getName());
 			assertEquals(100, bean.getAge());
@@ -221,7 +221,7 @@ public class MBeanClientInterceptorTests extends AbstractMBeanServerTests {
 		connector = JMXConnectorServerFactory.newJMXConnectorServer(url, null, getServer());
 		connector.start();
 
-		// should now be able to access data via the lazy proxy
+		// should now be able to access data via the lazy staticProxy
 		try {
 			assertEquals("Rob Harrop", bean.getName());
 			assertEquals(100, bean.getAge());
@@ -237,24 +237,24 @@ public class MBeanClientInterceptorTests extends AbstractMBeanServerTests {
 		interceptor.setServer(ManagementFactory.getPlatformMBeanServer());
 		interceptor.setObjectName("java.lang:type=Memory");
 		interceptor.setManagementInterface(MemoryMXBean.class);
-		MemoryMXBean proxy = ProxyFactory.getProxy(MemoryMXBean.class, interceptor);
-		assertTrue(proxy.getHeapMemoryUsage().getMax() > 0);
+		MemoryMXBean staticProxy = ProxyFactory.getProxy(MemoryMXBean.class, interceptor);
+		assertTrue(staticProxy.getHeapMemoryUsage().getMax() > 0);
 	}
 
 	public void testMXBeanOperationAccess() throws Exception {
 		MBeanClientInterceptor interceptor = new MBeanClientInterceptor();
 		interceptor.setServer(ManagementFactory.getPlatformMBeanServer());
 		interceptor.setObjectName("java.lang:type=Threading");
-		ThreadMXBean proxy = ProxyFactory.getProxy(ThreadMXBean.class, interceptor);
-		assertTrue(proxy.getThreadInfo(Thread.currentThread().getId()).getStackTrace() != null);
+		ThreadMXBean staticProxy = ProxyFactory.getProxy(ThreadMXBean.class, interceptor);
+		assertTrue(staticProxy.getThreadInfo(Thread.currentThread().getId()).getStackTrace() != null);
 	}
 
 	public void testMXBeanAttributeListAccess() throws Exception {
 		MBeanClientInterceptor interceptor = new MBeanClientInterceptor();
 		interceptor.setServer(ManagementFactory.getPlatformMBeanServer());
 		interceptor.setObjectName("com.sun.management:type=HotSpotDiagnostic");
-		HotSpotDiagnosticMXBean proxy = ProxyFactory.getProxy(HotSpotDiagnosticMXBean.class, interceptor);
-		assertFalse(proxy.getDiagnosticOptions().isEmpty());
+		HotSpotDiagnosticMXBean staticProxy = ProxyFactory.getProxy(HotSpotDiagnosticMXBean.class, interceptor);
+		assertFalse(staticProxy.getDiagnosticOptions().isEmpty());
 	}
 	*/
 

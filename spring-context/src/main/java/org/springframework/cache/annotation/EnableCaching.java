@@ -80,12 +80,12 @@ import org.springframework.core.Ordered;
  * <cache:annotation-driven/>} are responsible for registering the necessary Spring
  * components that power annotation-driven cache management, such as the
  * {@link org.springframework.cache.interceptor.CacheInterceptor CacheInterceptor} and the
- * proxy- or AspectJ-based advice that weaves the interceptor into the call stack when
+ * staticProxy- or AspectJ-based advice that weaves the interceptor into the call stack when
  * {@link org.springframework.cache.annotation.Cacheable @Cacheable} methods are invoked.
  *
  * <p>If the JSR-107 API and Spring's JCache implementation are present, the necessary
  * components to manage standard cache annotations are also registered. This creates the
- * proxy- or AspectJ-based advice that weaves the interceptor into the call stack when
+ * staticProxy- or AspectJ-based advice that weaves the interceptor into the call stack when
  * methods annotated with {@code CacheResult}, {@code CachePut}, {@code CacheRemove} or
  * {@code CacheRemoveAll} are invoked.
  *
@@ -177,7 +177,7 @@ public @interface EnableCaching {
 	 * Spring-managed beans requiring proxying, not just those marked with {@code @Cacheable}.
 	 * For example, other beans marked with Spring's {@code @Transactional} annotation will
 	 * be upgraded to subclass proxying at the same time. This approach has no negative
-	 * impact in practice unless one is explicitly expecting one type of proxy vs another,
+	 * impact in practice unless one is explicitly expecting one type of staticProxy vs another,
 	 * e.g. in tests.
 	 */
 	boolean proxyTargetClass() default false;

@@ -30,7 +30,7 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
  * to every {@code getConnection} call. Also applies the read-only flag,
  * if specified.
  *
- * <p>Can be used to proxy a target JNDI DataSource that does not have the
+ * <p>Can be used to staticProxy a target JNDI DataSource that does not have the
  * desired isolation level (and user credentials) configured. Client code
  * can work with this DataSource as usual, not worrying about such settings.
  *

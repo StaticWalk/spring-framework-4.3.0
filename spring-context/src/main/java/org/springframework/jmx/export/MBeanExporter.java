@@ -569,7 +569,7 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 	 * <p>This method is responsible for deciding <strong>how</strong> a bean
 	 * should be exposed to the {@code MBeanServer}. Specifically, if the
 	 * supplied {@code mapValue} is the name of a bean that is configured
-	 * for lazy initialization, then a proxy to the resource is registered with
+	 * for lazy initialization, then a staticProxy to the resource is registered with
 	 * the {@code MBeanServer} so that the lazy load behavior is
 	 * honored. If the bean is already an MBean then it will be registered
 	 * directly with the {@code MBeanServer} without any intervention. For
@@ -683,7 +683,7 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 
 	/**
 	 * Registers beans that are configured for lazy initialization with the
-	 * {@code MBeanServer} indirectly through a proxy.
+	 * {@code MBeanServer} indirectly through a staticProxy.
 	 * @param beanName the name of the bean in the {@code BeanFactory}
 	 * @param beanKey the key associated with this bean in the beans map
 	 * @return the {@code ObjectName} under which the bean was registered
@@ -695,7 +695,7 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 		proxyFactory.setFrozen(true);
 
 		if (isMBean(this.beanFactory.getType(beanName))) {
-			// A straight MBean... Let's create a simple lazy-init CGLIB proxy for it.
+			// A straight MBean... Let's create a simple lazy-init CGLIB staticProxy for it.
 			LazyInitTargetSource targetSource = new LazyInitTargetSource();
 			targetSource.setTargetBeanName(beanName);
 			targetSource.setBeanFactory(this.beanFactory);
@@ -712,7 +712,7 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 		}
 
 		else {
-			// A simple bean... Let's create a lazy-init ModelMBean proxy with notification support.
+			// A simple bean... Let's create a lazy-init ModelMBean staticProxy with notification support.
 			NotificationPublisherAwareLazyTargetSource targetSource = new NotificationPublisherAwareLazyTargetSource();
 			targetSource.setTargetBeanName(beanName);
 			targetSource.setBeanFactory(this.beanFactory);
@@ -769,8 +769,8 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 	/**
 	 * Build an adapted MBean for the given bean instance, if possible.
 	 * <p>The default implementation builds a JMX 1.2 StandardMBean
-	 * for the target's MBean/MXBean interface in case of an AOP proxy,
-	 * delegating the interface's management operations to the proxy.
+	 * for the target's MBean/MXBean interface in case of an AOP staticProxy,
+	 * delegating the interface's management operations to the staticProxy.
 	 * @param bean the original bean instance
 	 * @return the adapted MBean, or {@code null} if not possible
 	 */
@@ -782,7 +782,7 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 			if (ifc != null) {
 				if (!ifc.isInstance(bean)) {
 					throw new NotCompliantMBeanException("Managed bean [" + bean +
-							"] has a target class with an MXBean interface but does not expose it in the proxy");
+							"] has a target class with an MXBean interface but does not expose it in the staticProxy");
 				}
 				return new StandardMBean(bean, ((Class<Object>) ifc), true);
 			}
@@ -791,7 +791,7 @@ public class MBeanExporter extends MBeanRegistrationSupport implements MBeanExpo
 				if (ifc != null) {
 					if (!ifc.isInstance(bean)) {
 						throw new NotCompliantMBeanException("Managed bean [" + bean +
-								"] has a target class with an MBean interface but does not expose it in the proxy");
+								"] has a target class with an MBean interface but does not expose it in the staticProxy");
 					}
 					return new StandardMBean(bean, ((Class<Object>) ifc));
 				}

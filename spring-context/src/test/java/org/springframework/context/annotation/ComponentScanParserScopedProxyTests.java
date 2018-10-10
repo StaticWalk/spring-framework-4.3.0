@@ -50,7 +50,7 @@ public class ComponentScanParserScopedProxyTests {
 		context.getBeanFactory().registerScope("myScope", new SimpleMapScope());
 
 		ScopedProxyTestBean bean = (ScopedProxyTestBean) context.getBean("scopedProxyTestBean");
-		// should not be a proxy
+		// should not be a staticProxy
 		assertFalse(AopUtils.isAopProxy(bean));
 		context.close();
 	}
@@ -62,7 +62,7 @@ public class ComponentScanParserScopedProxyTests {
 		context.getBeanFactory().registerScope("myScope", new SimpleMapScope());
 
 		ScopedProxyTestBean bean = (ScopedProxyTestBean) context.getBean("scopedProxyTestBean");
-		// should not be a proxy
+		// should not be a staticProxy
 		assertFalse(AopUtils.isAopProxy(bean));
 		context.close();
 	}
@@ -75,7 +75,7 @@ public class ComponentScanParserScopedProxyTests {
 
 		// should cast to the interface
 		FooService bean = (FooService) context.getBean("scopedProxyTestBean");
-		// should be dynamic proxy
+		// should be dynamic staticProxy
 		assertTrue(AopUtils.isJdkDynamicProxy(bean));
 		// test serializability
 		assertEquals("bar", bean.foo(1));
@@ -92,7 +92,7 @@ public class ComponentScanParserScopedProxyTests {
 		context.getBeanFactory().registerScope("myScope", new SimpleMapScope());
 
 		ScopedProxyTestBean bean = (ScopedProxyTestBean) context.getBean("scopedProxyTestBean");
-		// should be a class-based proxy
+		// should be a class-based staticProxy
 		assertTrue(AopUtils.isCglibProxy(bean));
 		// test serializability
 		assertEquals("bar", bean.foo(1));
@@ -106,7 +106,7 @@ public class ComponentScanParserScopedProxyTests {
 	@SuppressWarnings("resource")
 	public void testInvalidConfigScopedProxy() throws Exception {
 		exception.expect(BeanDefinitionParsingException.class);
-		exception.expectMessage(containsString("Cannot define both 'scope-resolver' and 'scoped-proxy' on <component-scan> tag"));
+		exception.expectMessage(containsString("Cannot define both 'scope-resolver' and 'scoped-staticProxy' on <component-scan> tag"));
 		exception.expectMessage(containsString("Offending resource: class path resource [org/springframework/context/annotation/scopedProxyInvalidConfigTests.xml]"));
 
 		new ClassPathXmlApplicationContext("org/springframework/context/annotation/scopedProxyInvalidConfigTests.xml");

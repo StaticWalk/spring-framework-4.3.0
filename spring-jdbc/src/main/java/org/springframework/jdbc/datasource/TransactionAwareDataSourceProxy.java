@@ -34,14 +34,14 @@ import org.springframework.util.Assert;
  * as provided by a J2EE server.
  *
  * <p>Data access code that should remain unaware of Spring's data access support
- * can work with this proxy to seamlessly participate in Spring-managed transactions.
+ * can work with this staticProxy to seamlessly participate in Spring-managed transactions.
  * Note that the transaction manager, for example {@link DataSourceTransactionManager},
- * still needs to work with the underlying DataSource, <i>not</i> with this proxy.
+ * still needs to work with the underlying DataSource, <i>not</i> with this staticProxy.
  *
  * <p><b>Make sure that TransactionAwareDataSourceProxy is the outermost DataSource
  * of a chain of DataSource proxies/adapters.</b> TransactionAwareDataSourceProxy
  * can delegate either directly to the target connection pool or to some
- * intermediary proxy/adapter like {@link LazyConnectionDataSourceProxy} or
+ * intermediary staticProxy/adapter like {@link LazyConnectionDataSourceProxy} or
  * {@link UserCredentialsDataSourceAdapter}.
  *
  * <p>Delegates to {@link DataSourceUtils} for automatically participating in
@@ -50,18 +50,18 @@ import org.springframework.util.Assert;
  * will behave properly within a transaction, i.e. always operate on the transactional
  * Connection. If not within a transaction, normal DataSource behavior applies.
  *
- * <p>This proxy allows data access code to work with the plain JDBC API and still
+ * <p>This staticProxy allows data access code to work with the plain JDBC API and still
  * participate in Spring-managed transactions, similar to JDBC code in a J2EE/JTA
  * environment. However, if possible, use Spring's DataSourceUtils, JdbcTemplate or
- * JDBC operation objects to get transaction participation even without a proxy for
- * the target DataSource, avoiding the need to define such a proxy in the first place.
+ * JDBC operation objects to get transaction participation even without a staticProxy for
+ * the target DataSource, avoiding the need to define such a staticProxy in the first place.
  *
  * <p>As a further effect, using a transaction-aware DataSource will apply remaining
  * transaction timeouts to all created JDBC (Prepared/Callable)Statement. This means
  * that all operations performed through standard JDBC will automatically participate
  * in Spring-managed transaction timeouts.
  *
- * <p><b>NOTE:</b> This DataSource proxy needs to return wrapped Connections
+ * <p><b>NOTE:</b> This DataSource staticProxy needs to return wrapped Connections
  * (which implement the {@link ConnectionProxy} interface) in order to handle
  * close calls properly. Therefore, the returned Connections cannot be cast
  * to a native JDBC Connection type such as OracleConnection or to a connection
@@ -101,7 +101,7 @@ public class TransactionAwareDataSourceProxy extends DelegatingDataSource {
 	 * Specify whether to reobtain the target Connection for each operation
 	 * performed within a transaction.
 	 * <p>The default is "false". Specify "true" to reobtain transactional
-	 * Connections for every call on the Connection proxy; this is advisable
+	 * Connections for every call on the Connection staticProxy; this is advisable
 	 * on JBoss if you hold on to a Connection handle across transaction boundaries.
 	 * <p>The effect of this setting is similar to the
 	 * "hibernate.connection.release_mode" value "after_statement".
@@ -128,7 +128,7 @@ public class TransactionAwareDataSourceProxy extends DelegatingDataSource {
 	}
 
 	/**
-	 * Wraps the given Connection with a proxy that delegates every method call to it
+	 * Wraps the given Connection with a staticProxy that delegates every method call to it
 	 * but delegates {@code close()} calls to DataSourceUtils.
 	 * @param targetDataSource DataSource that the Connection came from
 	 * @return the wrapped Connection
@@ -143,7 +143,7 @@ public class TransactionAwareDataSourceProxy extends DelegatingDataSource {
 	}
 
 	/**
-	 * Determine whether to obtain a fixed target Connection for the proxy
+	 * Determine whether to obtain a fixed target Connection for the staticProxy
 	 * or to reobtain the target Connection for each operation.
 	 * <p>The default implementation returns {@code true} for all
 	 * standard cases. This can be overridden through the
@@ -183,12 +183,12 @@ public class TransactionAwareDataSourceProxy extends DelegatingDataSource {
 				return (proxy == args[0]);
 			}
 			else if (method.getName().equals("hashCode")) {
-				// Use hashCode of Connection proxy.
+				// Use hashCode of Connection staticProxy.
 				return System.identityHashCode(proxy);
 			}
 			else if (method.getName().equals("toString")) {
-				// Allow for differentiating between the proxy and the raw Connection.
-				StringBuilder sb = new StringBuilder("Transaction-aware proxy for target Connection ");
+				// Allow for differentiating between the staticProxy and the raw Connection.
+				StringBuilder sb = new StringBuilder("Transaction-aware staticProxy for target Connection ");
 				if (this.target != null) {
 					sb.append("[").append(this.target.toString()).append("]");
 				}

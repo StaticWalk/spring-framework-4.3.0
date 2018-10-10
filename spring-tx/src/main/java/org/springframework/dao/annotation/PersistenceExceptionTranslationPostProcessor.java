@@ -28,7 +28,7 @@ import org.springframework.util.Assert;
  * Bean post-processor that automatically applies persistence exception translation to any
  * bean marked with Spring's @{@link org.springframework.stereotype.Repository Repository}
  * annotation, adding a corresponding {@link PersistenceExceptionTranslationAdvisor} to
- * the exposed proxy (either an existing AOP proxy or a newly generated proxy that
+ * the exposed staticProxy (either an existing AOP staticProxy or a newly generated staticProxy that
  * implements all of the target's interfaces).
  *
  * <p>Translates native resource exceptions to Spring's

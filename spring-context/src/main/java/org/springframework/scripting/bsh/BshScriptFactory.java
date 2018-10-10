@@ -71,7 +71,7 @@ public class BshScriptFactory implements ScriptFactory, BeanClassLoaderAware {
 
 	/**
 	 * Create a new BshScriptFactory for the given script source.
-	 * <p>The script may either be a simple script that needs a corresponding proxy
+	 * <p>The script may either be a simple script that needs a corresponding staticProxy
 	 * generated (implementing the specified interfaces), or declare a full class
 	 * or return an actual instance of the scripted object (in which case the
 	 * specified interfaces, if any, need to be implemented by that class/instance).

@@ -49,7 +49,7 @@ public class Spr10744Tests {
 		Foo bean2 = context.getBean("foo", Foo.class);
 		assertThat(bean1, sameInstance(bean2));
 
-		// Should not have invoked constructor for the proxy instance
+		// Should not have invoked constructor for the staticProxy instance
 		assertThat(createCount, equalTo(0));
 		assertThat(scopeCount, equalTo(0));
 

@@ -1327,7 +1327,7 @@ public abstract class AnnotationUtils {
 
 	/**
 	 * <em>Synthesize</em> an annotation from the supplied {@code annotation}
-	 * by wrapping it in a dynamic proxy that transparently enforces
+	 * by wrapping it in a dynamic staticProxy that transparently enforces
 	 * <em>attribute alias</em> semantics for annotation attributes that are
 	 * annotated with {@link AliasFor @AliasFor}.
 	 * @param annotation the annotation to synthesize
@@ -1345,7 +1345,7 @@ public abstract class AnnotationUtils {
 
 	/**
 	 * <em>Synthesize</em> an annotation from the supplied {@code annotation}
-	 * by wrapping it in a dynamic proxy that transparently enforces
+	 * by wrapping it in a dynamic staticProxy that transparently enforces
 	 * <em>attribute alias</em> semantics for annotation attributes that are
 	 * annotated with {@link AliasFor @AliasFor}.
 	 * @param annotation the annotation to synthesize
@@ -1386,7 +1386,7 @@ public abstract class AnnotationUtils {
 
 	/**
 	 * <em>Synthesize</em> an annotation from the supplied map of annotation
-	 * attributes by wrapping the map in a dynamic proxy that implements an
+	 * attributes by wrapping the map in a dynamic staticProxy that implements an
 	 * annotation of the specified {@code annotationType} and transparently
 	 * enforces <em>attribute alias</em> semantics for annotation attributes
 	 * that are annotated with {@link AliasFor @AliasFor}.
@@ -1553,7 +1553,7 @@ public abstract class AnnotationUtils {
 
 	/**
 	 * Check whether we can expose our {@link SynthesizedAnnotation} marker for the given annotation type.
-	 * @param annotationType the annotation type that we are about to create a synthesized proxy for
+	 * @param annotationType the annotation type that we are about to create a synthesized staticProxy for
 	 */
 	private static boolean canExposeSynthesizedMarker(Class<? extends Annotation> annotationType) {
 		try {
@@ -1568,7 +1568,7 @@ public abstract class AnnotationUtils {
 	/**
 	 * Determine if annotations of the supplied {@code annotationType} are
 	 * <em>synthesizable</em> (i.e., in need of being wrapped in a dynamic
-	 * proxy that provides functionality above that of a standard JDK
+	 * staticProxy that provides functionality above that of a standard JDK
 	 * annotation).
 	 * <p>Specifically, an annotation is <em>synthesizable</em> if it declares
 	 * any attributes that are configured as <em>aliased pairs</em> via

@@ -63,7 +63,7 @@ public interface MethodMatcher {
 	 * Is this MethodMatcher dynamic, that is, must a final call be made on the
 	 * {@link #matches(java.lang.reflect.Method, Class, Object[])} method at
 	 * runtime even if the 2-arg matches method returns {@code true}?
-	 * <p>Can be invoked when an AOP proxy is created, and need not be invoked
+	 * <p>Can be invoked when an AOP staticProxy is created, and need not be invoked
 	 * again before each method invocation,
 	 * @return whether or not a runtime match via the 3-arg
 	 * {@link #matches(java.lang.reflect.Method, Class, Object[])} method

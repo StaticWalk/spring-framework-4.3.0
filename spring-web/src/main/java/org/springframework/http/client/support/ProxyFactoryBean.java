@@ -44,7 +44,7 @@ public class ProxyFactoryBean implements FactoryBean<Proxy>, InitializingBean {
 
 
 	/**
-	 * Set the proxy type.
+	 * Set the staticProxy type.
 	 * <p>Defaults to {@link java.net.Proxy.Type#HTTP}.
 	 */
 	public void setType(Proxy.Type type) {
@@ -52,14 +52,14 @@ public class ProxyFactoryBean implements FactoryBean<Proxy>, InitializingBean {
 	}
 
 	/**
-	 * Set the proxy host name.
+	 * Set the staticProxy host name.
 	 */
 	public void setHostname(String hostname) {
 		this.hostname = hostname;
 	}
 
 	/**
-	 * Set the proxy port.
+	 * Set the staticProxy port.
 	 */
 	public void setPort(int port) {
 		this.port = port;

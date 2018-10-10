@@ -32,7 +32,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
 /**
- * AspectJ-based proxy factory, allowing for programmatic building
+ * AspectJ-based staticProxy factory, allowing for programmatic building
  * of proxies which include AspectJ aspects (code style as well
  * Java 5 annotation style).
  *
@@ -63,7 +63,7 @@ public class AspectJProxyFactory extends ProxyCreatorSupport {
 
 	/**
 	 * Create a new AspectJProxyFactory.
-	 * <p>Will proxy all interfaces that the given target implements.
+	 * <p>Will staticProxy all interfaces that the given target implements.
 	 * @param target the target object to be proxied
 	 */
 	public AspectJProxyFactory(Object target) {
@@ -183,12 +183,12 @@ public class AspectJProxyFactory extends ProxyCreatorSupport {
 
 
 	/**
-	 * Create a new proxy according to the settings in this factory.
+	 * Create a new staticProxy according to the settings in this factory.
 	 * <p>Can be called repeatedly. Effect will vary if we've added
 	 * or removed interfaces. Can add and remove interceptors.
 	 * <p>Uses a default class loader: Usually, the thread context class loader
-	 * (if necessary for proxy creation).
-	 * @return the new proxy
+	 * (if necessary for staticProxy creation).
+	 * @return the new staticProxy
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T getProxy() {
@@ -196,12 +196,12 @@ public class AspectJProxyFactory extends ProxyCreatorSupport {
 	}
 
 	/**
-	 * Create a new proxy according to the settings in this factory.
+	 * Create a new staticProxy according to the settings in this factory.
 	 * <p>Can be called repeatedly. Effect will vary if we've added
 	 * or removed interfaces. Can add and remove interceptors.
-	 * <p>Uses the given class loader (if necessary for proxy creation).
-	 * @param classLoader the class loader to create the proxy with
-	 * @return the new proxy
+	 * <p>Uses the given class loader (if necessary for staticProxy creation).
+	 * @param classLoader the class loader to create the staticProxy with
+	 * @return the new staticProxy
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T getProxy(ClassLoader classLoader) {

@@ -138,9 +138,9 @@ public class ReflectionTestUtils {
 	 * Set the {@linkplain Field field} with the given {@code name}/{@code type}
 	 * on the provided {@code targetObject}/{@code targetClass} to the supplied
 	 * {@code value}.
-	 * <p>If the supplied {@code targetObject} is a <em>proxy</em>, it will
+	 * <p>If the supplied {@code targetObject} is a <em>staticProxy</em>, it will
 	 * be {@linkplain AopTestUtils#getUltimateTargetObject unwrapped} allowing
-	 * the field to be set on the ultimate target of the proxy.
+	 * the field to be set on the ultimate target of the staticProxy.
 	 * <p>This method traverses the class hierarchy in search of the desired
 	 * field. In addition, an attempt will be made to make non-{@code public}
 	 * fields <em>accessible</em>, thus allowing one to set {@code protected},
@@ -220,9 +220,9 @@ public class ReflectionTestUtils {
 	/**
 	 * Get the value of the {@linkplain Field field} with the given {@code name}
 	 * from the provided {@code targetObject}/{@code targetClass}.
-	 * <p>If the supplied {@code targetObject} is a <em>proxy</em>, it will
+	 * <p>If the supplied {@code targetObject} is a <em>staticProxy</em>, it will
 	 * be {@linkplain AopTestUtils#getUltimateTargetObject unwrapped} allowing
-	 * the field to be retrieved from the ultimate target of the proxy.
+	 * the field to be retrieved from the ultimate target of the staticProxy.
 	 * <p>This method traverses the class hierarchy in search of the desired
 	 * field. In addition, an attempt will be made to make non-{@code public}
 	 * fields <em>accessible</em>, thus allowing one to get {@code protected},

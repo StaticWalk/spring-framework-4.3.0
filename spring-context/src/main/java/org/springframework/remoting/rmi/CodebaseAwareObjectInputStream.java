@@ -87,7 +87,7 @@ public class CodebaseAwareObjectInputStream extends ConfigurableObjectInputStrea
 	 * @param in the InputStream to read from
 	 * @param classLoader the ClassLoader to use for loading local classes
 	 * (may be {@code null} to indicate RMI's default ClassLoader)
-	 * @param acceptProxyClasses whether to accept deserialization of proxy classes
+	 * @param acceptProxyClasses whether to accept deserialization of staticProxy classes
 	 * (may be deactivated as a security measure)
 	 * @see java.io.ObjectInputStream#ObjectInputStream(java.io.InputStream)
 	 */

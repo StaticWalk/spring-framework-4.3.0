@@ -31,7 +31,7 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.util.ClassUtils;
 
 /**
- * Convenient proxy factory bean for scoped objects.
+ * Convenient staticProxy factory bean for scoped objects.
  *
  * <p>Proxies created using this factory bean are thread-safe singletons
  * and may be injected into shared objects, with transparent scoping behavior.
@@ -58,7 +58,7 @@ public class ScopedProxyFactoryBean extends ProxyConfig implements FactoryBean<O
 	/** The name of the target bean */
 	private String targetBeanName;
 
-	/** The cached singleton proxy */
+	/** The cached singleton staticProxy */
 	private Object proxy;
 
 
@@ -93,8 +93,8 @@ public class ScopedProxyFactoryBean extends ProxyConfig implements FactoryBean<O
 
 		Class<?> beanType = beanFactory.getType(this.targetBeanName);
 		if (beanType == null) {
-			throw new IllegalStateException("Cannot create scoped proxy for bean '" + this.targetBeanName +
-					"': Target type could not be determined at the time of proxy creation.");
+			throw new IllegalStateException("Cannot create scoped staticProxy for bean '" + this.targetBeanName +
+					"': Target type could not be determined at the time of staticProxy creation.");
 		}
 		if (!isProxyTargetClass() || beanType.isInterface() || Modifier.isPrivate(beanType.getModifiers())) {
 			pf.setInterfaces(ClassUtils.getAllInterfacesForClass(beanType, cbf.getBeanClassLoader()));
@@ -104,7 +104,7 @@ public class ScopedProxyFactoryBean extends ProxyConfig implements FactoryBean<O
 		ScopedObject scopedObject = new DefaultScopedObject(cbf, this.scopedTargetSource.getTargetBeanName());
 		pf.addAdvice(new DelegatingIntroductionInterceptor(scopedObject));
 
-		// Add the AopInfrastructureBean marker to indicate that the scoped proxy
+		// Add the AopInfrastructureBean marker to indicate that the scoped staticProxy
 		// itself is not subject to auto-proxying! Only its target bean is.
 		pf.addInterface(AopInfrastructureBean.class);
 

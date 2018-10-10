@@ -70,7 +70,7 @@ public class SubProtocolWebSocketHandler
 	/**
 	 * Sessions connected to this handler use a sub-protocol. Hence we expect to
 	 * receive some client messages. If we don't receive any within a minute, the
-	 * connection isn't doing well (proxy issue, slow network?) and can be closed.
+	 * connection isn't doing well (staticProxy issue, slow network?) and can be closed.
 	 * @see #checkSessions()
 	 */
 	private static final int TIME_TO_FIRST_MESSAGE = 60 * 1000;

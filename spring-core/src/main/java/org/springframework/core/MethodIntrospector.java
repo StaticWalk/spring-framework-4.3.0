@@ -109,10 +109,10 @@ public abstract class MethodIntrospector {
 	 * to contain relevant metadata that corresponds to the method on the target class.
 	 * @param method the method to check
 	 * @param targetType the target type to search methods on
-	 * (typically an interface-based JDK proxy)
+	 * (typically an interface-based JDK staticProxy)
 	 * @return a corresponding invocable method on the target type
 	 * @throws IllegalStateException if the given method is not invocable on the given
-	 * target type (typically due to a proxy mismatch)
+	 * target type (typically due to a staticProxy mismatch)
 	 */
 	public static Method selectInvocableMethod(Method method, Class<?> targetType) {
 		if (method.getDeclaringClass().isAssignableFrom(targetType)) {
@@ -129,15 +129,15 @@ public abstract class MethodIntrospector {
 					// Alright, not on this interface then...
 				}
 			}
-			// A final desperate attempt on the proxy class itself...
+			// A final desperate attempt on the staticProxy class itself...
 			return targetType.getMethod(methodName, parameterTypes);
 		}
 		catch (NoSuchMethodException ex) {
 			throw new IllegalStateException(String.format(
 					"Need to invoke method '%s' declared on target class '%s', " +
-					"but not found in any interface(s) of the exposed proxy type. " +
+					"but not found in any interface(s) of the exposed staticProxy type. " +
 					"Either pull the method up to an interface or switch to CGLIB " +
-					"proxies by enforcing proxy-target-class mode in your configuration.",
+					"proxies by enforcing staticProxy-target-class mode in your configuration.",
 					method.getName(), method.getDeclaringClass().getSimpleName()));
 		}
 	}

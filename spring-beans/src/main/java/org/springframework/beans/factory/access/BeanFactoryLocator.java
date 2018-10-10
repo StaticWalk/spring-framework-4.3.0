@@ -36,7 +36,7 @@ import org.springframework.beans.BeansException;
  * example, third party code may try to construct new objects directly, without
  * the ability to force it to get these objects out of a {@code BeanFactory}.
  * If the object constructed by the third party code is just a small stub or
- * proxy, which then uses an implementation of this class to get a
+ * staticProxy, which then uses an implementation of this class to get a
  * {@code BeanFactory} from which it gets the real object, to which it
  * delegates, then proper Dependency Injection has been achieved.
  *

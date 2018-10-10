@@ -94,9 +94,9 @@ public class EventListenerMethodProcessor implements SmartInitializingSingleton,
 									ScopedProxyUtils.getTargetBeanName(beanName));
 						}
 						catch (Throwable ex) {
-							// An invalid scoped proxy arrangement - let's ignore it.
+							// An invalid scoped staticProxy arrangement - let's ignore it.
 							if (logger.isDebugEnabled()) {
-								logger.debug("Could not resolve target bean for scoped proxy '" + beanName + "'", ex);
+								logger.debug("Could not resolve target bean for scoped staticProxy '" + beanName + "'", ex);
 							}
 						}
 					}

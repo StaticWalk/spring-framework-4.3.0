@@ -67,7 +67,7 @@ import org.springframework.util.StringUtils;
  * <p>The pointcut expression value is an AspectJ expression. This can
  * reference other pointcuts and use composition and other operations.
  *
- * <p>Naturally, as this is to be processed by Spring AOP's proxy-based model,
+ * <p>Naturally, as this is to be processed by Spring AOP's staticProxy-based model,
  * only method execution pointcuts are supported.
  *
  * @author Rob Harrop
@@ -310,7 +310,7 @@ public class AspectJExpressionPointcut extends AbstractExpressionPointcut
 		ShadowMatch shadowMatch = getShadowMatch(AopUtils.getMostSpecificMethod(method, targetClass), method);
 		ShadowMatch originalShadowMatch = getShadowMatch(method, method);
 
-		// Bind Spring AOP proxy to AspectJ "this" and Spring AOP target to AspectJ target,
+		// Bind Spring AOP staticProxy to AspectJ "this" and Spring AOP target to AspectJ target,
 		// consistent with return of MethodInvocationProceedingJoinPoint
 		ProxyMethodInvocation pmi = null;
 		Object targetObject = null;
@@ -337,7 +337,7 @@ public class AspectJExpressionPointcut extends AbstractExpressionPointcut
 
 			/*
 			 * Do a final check to see if any this(TYPE) kind of residue match. For
-			 * this purpose, we use the original method's (proxy method's) shadow to
+			 * this purpose, we use the original method's (staticProxy method's) shadow to
 			 * ensure that 'this' is correctly checked against. Without this check,
 			 * we get incorrect match on this(TYPE) where TYPE matches the target
 			 * type but not 'this' (as would be the case of JDK dynamic proxies).
@@ -434,7 +434,7 @@ public class AspectJExpressionPointcut extends AbstractExpressionPointcut
 							shadowMatch = this.pointcutExpression.matchesMethodExecution(methodToMatch);
 						}
 						catch (ReflectionWorldException ex3) {
-							// Could neither introspect the target class nor the proxy class ->
+							// Could neither introspect the target class nor the staticProxy class ->
 							// let's try the original method's declaring class before we give up...
 							try {
 								fallbackExpression = getFallbackPointcutExpression(methodToMatch.getDeclaringClass());
@@ -540,7 +540,7 @@ public class AspectJExpressionPointcut extends AbstractExpressionPointcut
 	/**
 	 * Matcher class for the BeanNamePointcutDesignatorHandler.
 	 * <p>Dynamic match tests for this matcher always return true,
-	 * since the matching decision is made at the proxy creation time.
+	 * since the matching decision is made at the staticProxy creation time.
 	 * For static match tests, this matcher abstains to allow the overall
 	 * pointcut to match even when negation is used with the bean() pointcut.
 	 */
@@ -583,7 +583,7 @@ public class AspectJExpressionPointcut extends AbstractExpressionPointcut
 
 		private FuzzyBoolean contextMatch(Class<?> targetType) {
 			String advisedBeanName = getCurrentProxiedBeanName();
-			if (advisedBeanName == null) {  // no proxy creation in progress
+			if (advisedBeanName == null) {  // no staticProxy creation in progress
 				// abstain; can't return YES, since that will make pointcut with negation fail
 				return FuzzyBoolean.MAYBE;
 			}

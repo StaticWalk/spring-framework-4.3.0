@@ -77,7 +77,7 @@ class ScriptBeanDefinitionParser extends AbstractBeanDefinitionParser {
 
 	private static final String REFRESH_CHECK_DELAY_ATTRIBUTE = "refresh-check-delay";
 
-	private static final String PROXY_TARGET_CLASS_ATTRIBUTE = "proxy-target-class";
+	private static final String PROXY_TARGET_CLASS_ATTRIBUTE = "staticProxy-target-class";
 
 	private static final String CUSTOMIZER_REF_ATTRIBUTE = "customizer-ref";
 
@@ -179,7 +179,7 @@ class ScriptBeanDefinitionParser extends AbstractBeanDefinitionParser {
 			bd.setAttribute(ScriptFactoryPostProcessor.REFRESH_CHECK_DELAY_ATTRIBUTE, new Long(refreshCheckDelay));
 		}
 
-		// Attach any proxy target class metadata.
+		// Attach any staticProxy target class metadata.
 		String proxyTargetClass = element.getAttribute(PROXY_TARGET_CLASS_ATTRIBUTE);
 		if (StringUtils.hasText(proxyTargetClass)) {
 			Boolean flag = new Boolean(proxyTargetClass);

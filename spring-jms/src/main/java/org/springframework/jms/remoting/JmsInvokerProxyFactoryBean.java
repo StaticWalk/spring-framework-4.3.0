@@ -51,8 +51,8 @@ public class JmsInvokerProxyFactoryBean extends JmsInvokerClientInterceptor
 
 
 	/**
-	 * Set the interface that the proxy must implement.
-	 * @param serviceInterface the interface that the proxy must implement
+	 * Set the interface that the staticProxy must implement.
+	 * @param serviceInterface the interface that the staticProxy must implement
 	 * @throws IllegalArgumentException if the supplied {@code serviceInterface}
 	 * is {@code null}, or if the supplied {@code serviceInterface}
 	 * is not an interface type

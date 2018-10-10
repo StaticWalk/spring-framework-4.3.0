@@ -189,7 +189,7 @@ public class JmsInvokerClientInterceptor implements MethodInterceptor, Initializ
 	@Override
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 		if (AopUtils.isToStringMethod(methodInvocation.getMethod())) {
-			return "JMS invoker proxy for queue [" + this.queue + "]";
+			return "JMS invoker staticProxy for queue [" + this.queue + "]";
 		}
 
 		RemoteInvocation invocation = createRemoteInvocation(methodInvocation);

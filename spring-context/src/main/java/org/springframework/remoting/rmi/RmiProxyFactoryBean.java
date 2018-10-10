@@ -32,8 +32,8 @@ import org.springframework.beans.factory.FactoryBean;
  * or throw {@code java.rmi.RemoteException}. Of course, in and out parameters
  * have to be serializable.
  *
- * <p>With conventional RMI services, this proxy factory is typically used with the
- * RMI service interface. Alternatively, this factory can also proxy a remote RMI
+ * <p>With conventional RMI services, this staticProxy factory is typically used with the
+ * RMI service interface. Alternatively, this factory can also staticProxy a remote RMI
  * service with a matching non-RMI business interface, i.e. an interface that mirrors
  * the RMI service methods but does not declare RemoteExceptions. In the latter case,
  * RemoteExceptions thrown by the RMI stub will automatically get converted to

@@ -42,7 +42,7 @@ import org.springframework.util.Assert;
  * For information on Burlap, see the
  * <a href="http://www.caucho.com/burlap">Burlap website</a>
  *
- * <p>Note: There is no requirement for services accessed with this proxy factory
+ * <p>Note: There is no requirement for services accessed with this staticProxy factory
  * to have been exported using Spring's {@link BurlapServiceExporter}, as there is
  * no special handling involved. As a consequence, you can also access services that
  * have been exported using Caucho's {@link com.caucho.burlap.server.BurlapServlet}.
@@ -115,7 +115,7 @@ public class BurlapClientInterceptor extends UrlBasedRemoteAccessor implements M
 	}
 
 	/**
-	 * Initialize the Burlap proxy for this interceptor.
+	 * Initialize the Burlap staticProxy for this interceptor.
 	 * @throws RemoteLookupFailureException if the service URL is invalid
 	 */
 	public void prepare() throws RemoteLookupFailureException {
@@ -128,10 +128,10 @@ public class BurlapClientInterceptor extends UrlBasedRemoteAccessor implements M
 	}
 
 	/**
-	 * Create the Burlap proxy that is wrapped by this interceptor.
-	 * @param proxyFactory the proxy factory to use
-	 * @return the Burlap proxy
-	 * @throws MalformedURLException if thrown by the proxy factory
+	 * Create the Burlap staticProxy that is wrapped by this interceptor.
+	 * @param proxyFactory the staticProxy factory to use
+	 * @return the Burlap staticProxy
+	 * @throws MalformedURLException if thrown by the staticProxy factory
 	 * @see com.caucho.burlap.client.BurlapProxyFactory#create
 	 */
 	protected Object createBurlapProxy(BurlapProxyFactory proxyFactory) throws MalformedURLException {
@@ -167,7 +167,7 @@ public class BurlapClientInterceptor extends UrlBasedRemoteAccessor implements M
 		}
 		catch (Throwable ex) {
 			throw new RemoteProxyFailureException(
-					"Failed to invoke Burlap proxy for remote service [" + getServiceUrl() + "]", ex);
+					"Failed to invoke Burlap staticProxy for remote service [" + getServiceUrl() + "]", ex);
 		}
 		finally {
 			resetThreadContextClassLoader(originalClassLoader);

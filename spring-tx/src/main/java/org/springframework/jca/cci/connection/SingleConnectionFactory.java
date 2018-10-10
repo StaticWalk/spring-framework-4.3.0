@@ -202,7 +202,7 @@ public class SingleConnectionFactory extends DelegatingConnectionFactory impleme
 	}
 
 	/**
-	 * Wrap the given Connection with a proxy that delegates every method call to it
+	 * Wrap the given Connection with a staticProxy that delegates every method call to it
 	 * but suppresses close calls. This is useful for allowing application code to
 	 * handle a special framework Connection just like an ordinary Connection from a
 	 * CCI ConnectionFactory.
@@ -235,7 +235,7 @@ public class SingleConnectionFactory extends DelegatingConnectionFactory impleme
 				return (proxy == args[0]);
 			}
 			else if (method.getName().equals("hashCode")) {
-				// Use hashCode of Connection proxy.
+				// Use hashCode of Connection staticProxy.
 				return System.identityHashCode(proxy);
 			}
 			else if (method.getName().equals("close")) {

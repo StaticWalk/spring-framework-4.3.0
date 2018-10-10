@@ -321,7 +321,7 @@ public class LocalSessionFactoryBean extends HibernateExceptionTranslator
 	 * Specify an asynchronous executor for background bootstrapping,
 	 * e.g. a {@link org.springframework.core.task.SimpleAsyncTaskExecutor}.
 	 * <p>{@code SessionFactory} initialization will then switch into background
-	 * bootstrap mode, with a {@code SessionFactory} proxy immediately returned for
+	 * bootstrap mode, with a {@code SessionFactory} staticProxy immediately returned for
 	 * injection purposes instead of waiting for Hibernate's bootstrapping to complete.
 	 * However, note that the first actual call to a {@code SessionFactory} method will
 	 * then block until Hibernate's bootstrapping completed, if not ready by then.

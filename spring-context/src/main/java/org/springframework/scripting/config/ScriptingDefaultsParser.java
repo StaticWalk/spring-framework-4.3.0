@@ -32,7 +32,7 @@ public class ScriptingDefaultsParser implements BeanDefinitionParser {
 
 	private static final String REFRESH_CHECK_DELAY_ATTRIBUTE = "refresh-check-delay";
 
-	private static final String PROXY_TARGET_CLASS_ATTRIBUTE = "proxy-target-class";
+	private static final String PROXY_TARGET_CLASS_ATTRIBUTE = "staticProxy-target-class";
 
 
 	@Override

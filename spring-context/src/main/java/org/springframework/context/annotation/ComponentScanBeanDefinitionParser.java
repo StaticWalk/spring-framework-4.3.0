@@ -64,7 +64,7 @@ public class ComponentScanBeanDefinitionParser implements BeanDefinitionParser {
 
 	private static final String SCOPE_RESOLVER_ATTRIBUTE = "scope-resolver";
 
-	private static final String SCOPED_PROXY_ATTRIBUTE = "scoped-proxy";
+	private static final String SCOPED_PROXY_ATTRIBUTE = "scoped-staticProxy";
 
 	private static final String EXCLUDE_FILTER_ELEMENT = "exclude-filter";
 
@@ -170,7 +170,7 @@ public class ComponentScanBeanDefinitionParser implements BeanDefinitionParser {
 		if (element.hasAttribute(SCOPE_RESOLVER_ATTRIBUTE)) {
 			if (element.hasAttribute(SCOPED_PROXY_ATTRIBUTE)) {
 				throw new IllegalArgumentException(
-						"Cannot define both 'scope-resolver' and 'scoped-proxy' on <component-scan> tag");
+						"Cannot define both 'scope-resolver' and 'scoped-staticProxy' on <component-scan> tag");
 			}
 			ScopeMetadataResolver scopeMetadataResolver = (ScopeMetadataResolver) instantiateUserDefinedStrategy(
 					element.getAttribute(SCOPE_RESOLVER_ATTRIBUTE), ScopeMetadataResolver.class,
@@ -190,7 +190,7 @@ public class ComponentScanBeanDefinitionParser implements BeanDefinitionParser {
 				scanner.setScopedProxyMode(ScopedProxyMode.NO);
 			}
 			else {
-				throw new IllegalArgumentException("scoped-proxy only supports 'no', 'interfaces' and 'targetClass'");
+				throw new IllegalArgumentException("scoped-staticProxy only supports 'no', 'interfaces' and 'targetClass'");
 			}
 		}
 	}

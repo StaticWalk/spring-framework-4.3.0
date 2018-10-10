@@ -13,7 +13,7 @@
 
     <bean id="logUserAdvice" class="org.springframework.scripting.groovy.LogUserAdvice" />
 
-    <!-- N.B. the pointcut never matches if refresh-delay is set (because proxy-target-class is always false) -->
+    <!-- N.B. the pointcut never matches if refresh-delay is set (because staticProxy-target-class is always false) -->
     <lang:groovy id="groovyBean" script-source="classpath:/org/springframework/scripting/groovy/GroovyServiceImpl.grv" refresh-check-delay="1000"/>
 
 </beans>

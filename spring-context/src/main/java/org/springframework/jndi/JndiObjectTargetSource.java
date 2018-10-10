@@ -42,7 +42,7 @@ import org.springframework.aop.TargetSource;
  *   &lt;property name="targetSource" ref="queueConnectionFactoryTarget"/&gt;
  * &lt;/bean&gt;</pre>
  *
- * A {@code createQueueConnection} call on the "queueConnectionFactory" proxy will
+ * A {@code createQueueConnection} call on the "queueConnectionFactory" staticProxy will
  * cause a lazy JNDI lookup for "JmsQueueConnectionFactory" and a subsequent delegating
  * call to the retrieved QueueConnectionFactory's {@code createQueueConnection}.
  *

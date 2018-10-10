@@ -54,7 +54,7 @@ public abstract class BshScriptUtils {
 	/**
 	 * Create a new BeanShell-scripted object from the given script source,
 	 * using the default ClassLoader.
-	 * <p>The script may either be a simple script that needs a corresponding proxy
+	 * <p>The script may either be a simple script that needs a corresponding staticProxy
 	 * generated (implementing the specified interfaces), or declare a full class
 	 * or return an actual instance of the scripted object (in which case the
 	 * specified interfaces, if any, need to be implemented by that class/instance).
@@ -72,7 +72,7 @@ public abstract class BshScriptUtils {
 
 	/**
 	 * Create a new BeanShell-scripted object from the given script source.
-	 * <p>The script may either be a simple script that needs a corresponding proxy
+	 * <p>The script may either be a simple script that needs a corresponding staticProxy
 	 * generated (implementing the specified interfaces), or declare a full class
 	 * or return an actual instance of the scripted object (in which case the
 	 * specified interfaces, if any, need to be implemented by that class/instance).
@@ -133,7 +133,7 @@ public abstract class BshScriptUtils {
 	/**
 	 * Evaluate the specified BeanShell script based on the given script source,
 	 * keeping a returned script Class or script Object as-is.
-	 * <p>The script may either be a simple script that needs a corresponding proxy
+	 * <p>The script may either be a simple script that needs a corresponding staticProxy
 	 * generated (implementing the specified interfaces), or declare a full class
 	 * or return an actual instance of the scripted object (in which case the
 	 * specified interfaces, if any, need to be implemented by that class/instance).
@@ -156,9 +156,9 @@ public abstract class BshScriptUtils {
 			return result;
 		}
 		else {
-			// Simple BeanShell script: Let's create a proxy for it, implementing the given interfaces.
+			// Simple BeanShell script: Let's create a staticProxy for it, implementing the given interfaces.
 			Assert.notEmpty(scriptInterfaces,
-					"Given script requires a script proxy: At least one script interface is required.");
+					"Given script requires a script staticProxy: At least one script interface is required.");
 			XThis xt = (XThis) interpreter.eval("return this");
 			return Proxy.newProxyInstance(classLoader, scriptInterfaces, new BshObjectInvocationHandler(xt));
 		}

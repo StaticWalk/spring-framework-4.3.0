@@ -32,7 +32,7 @@ import org.springframework.util.Assert;
  * Bean post-processor that automatically applies asynchronous invocation
  * behavior to any bean that carries the {@link Async} annotation at class or
  * method-level by adding a corresponding {@link AsyncAnnotationAdvisor} to the
- * exposed proxy (either an existing AOP proxy or a newly generated proxy that
+ * exposed staticProxy (either an existing AOP staticProxy or a newly generated staticProxy that
  * implements all of the target's interfaces).
  *
  * <p>The {@link TaskExecutor} responsible for the asynchronous execution may

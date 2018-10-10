@@ -42,9 +42,9 @@ import org.springframework.util.Assert;
  * as provided by a Java EE application server.
  *
  * <p>Messaging code which should remain unaware of Spring's JMS support can work with
- * this proxy to seamlessly participate in Spring-managed transactions. Note that the
+ * this staticProxy to seamlessly participate in Spring-managed transactions. Note that the
  * transaction manager, for example {@link JmsTransactionManager}, still needs to work
- * with the underlying ConnectionFactory, <i>not</i> with this proxy.
+ * with the underlying ConnectionFactory, <i>not</i> with this staticProxy.
  *
  * <p><b>Make sure that TransactionAwareConnectionFactoryProxy is the outermost
  * ConnectionFactory of a chain of ConnectionFactory proxies/adapters.</b>
@@ -190,7 +190,7 @@ public class TransactionAwareConnectionFactoryProxy
 
 
 	/**
-	 * Wrap the given Connection with a proxy that delegates every method call to it
+	 * Wrap the given Connection with a staticProxy that delegates every method call to it
 	 * but handles Session lookup in a transaction-aware fashion.
 	 * @param target the original Connection to wrap
 	 * @return the wrapped Connection
@@ -231,7 +231,7 @@ public class TransactionAwareConnectionFactoryProxy
 				return (proxy == args[0]);
 			}
 			else if (method.getName().equals("hashCode")) {
-				// Use hashCode of Connection proxy.
+				// Use hashCode of Connection staticProxy.
 				return System.identityHashCode(proxy);
 			}
 			else if (Session.class == method.getReturnType()) {
@@ -304,7 +304,7 @@ public class TransactionAwareConnectionFactoryProxy
 				return (proxy == args[0]);
 			}
 			else if (method.getName().equals("hashCode")) {
-				// Use hashCode of Connection proxy.
+				// Use hashCode of Connection staticProxy.
 				return System.identityHashCode(proxy);
 			}
 			else if (method.getName().equals("commit")) {

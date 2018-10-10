@@ -53,7 +53,7 @@ public final class AfterAdviceBindingTests {
 		testBeanProxy = (ITestBean) ctx.getBean("testBean");
 		assertTrue(AopUtils.isAopProxy(testBeanProxy));
 
-		// we need the real target too, not just the proxy...
+		// we need the real target too, not just the staticProxy...
 		testBeanTarget = (TestBean) ((Advised) testBeanProxy).getTargetSource().getTarget();
 
 		mockCollaborator = mock(AdviceBindingCollaborator.class);

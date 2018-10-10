@@ -57,7 +57,7 @@ public class BeanNamePointcutAtAspectTests {
 
 	@Test
 	public void testMatchingBeanName() {
-		assertTrue("Expected a proxy", testBean1 instanceof Advised);
+		assertTrue("Expected a staticProxy", testBean1 instanceof Advised);
 
 		// Call two methods to test for SPR-3953-like condition
 		testBean1.setAge(20);
@@ -67,7 +67,7 @@ public class BeanNamePointcutAtAspectTests {
 
 	@Test
 	public void testNonMatchingBeanName() {
-		assertFalse("Didn't expect a proxy", testBean3 instanceof Advised);
+		assertFalse("Didn't expect a staticProxy", testBean3 instanceof Advised);
 
 		testBean3.setAge(20);
 		assertEquals(0, counterAspect.count);
@@ -85,9 +85,9 @@ public class BeanNamePointcutAtAspectTests {
 
 		ITestBean proxyTestBean = factory.getProxy();
 
-		assertTrue("Expected a proxy", proxyTestBean instanceof Advised);
+		assertTrue("Expected a staticProxy", proxyTestBean instanceof Advised);
 		proxyTestBean.setAge(20);
-		assertEquals("Programmatically created proxy shouldn't match bean()", 0, myCounterAspect.count);
+		assertEquals("Programmatically created staticProxy shouldn't match bean()", 0, myCounterAspect.count);
 	}
 
 }

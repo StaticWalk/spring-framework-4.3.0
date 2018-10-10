@@ -44,7 +44,7 @@ import org.springframework.util.ReflectionUtils;
  * {@link #forGenericInterfaces(Class) interfaces} or {@link #forTypeParameters(Class)
  * type parameters} or a regular {@link Class} can also be used as source.
  *
- * <p>The returned type will either be a {@link Class} or a serializable proxy of
+ * <p>The returned type will either be a {@link Class} or a serializable staticProxy of
  * {@link GenericArrayType}, {@link ParameterizedType}, {@link TypeVariable} or
  * {@link WildcardType}. With the exception of {@link Class} (which is final) calls to
  * methods that return further {@link Type}s (for example
@@ -169,7 +169,7 @@ abstract class SerializableTypeWrapper {
 
 
 	/**
-	 * Additional interface implemented by the type proxy.
+	 * Additional interface implemented by the type staticProxy.
 	 */
 	interface SerializableTypeProxy {
 

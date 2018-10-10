@@ -66,9 +66,9 @@ import java.lang.annotation.Target;
  * will be properly processed and that {@code FooService} will be proxied mixing in the
  * advice that it contributes.
  *
- * <p>Users can control the type of proxy that gets created for {@code FooService} using
+ * <p>Users can control the type of staticProxy that gets created for {@code FooService} using
  * the {@link #proxyTargetClass()} attribute. The following enables CGLIB-style 'subclass'
- * proxies as opposed to the default interface-based JDK proxy approach.
+ * proxies as opposed to the default interface-based JDK staticProxy approach.
  *
  * <pre class="code">
  * &#064;Configuration

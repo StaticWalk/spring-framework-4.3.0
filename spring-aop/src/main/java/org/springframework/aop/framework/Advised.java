@@ -27,7 +27,7 @@ import org.springframework.aop.TargetSource;
  * of a factory of AOP proxies. This configuration includes the
  * Interceptors and other advice, Advisors, and the proxied interfaces.
  *
- * <p>Any AOP proxy obtained from Spring can be cast to this interface to
+ * <p>Any AOP staticProxy obtained from Spring can be cast to this interface to
  * allow manipulation of its AOP advice.
  *
  * @author Rod Johnson
@@ -49,7 +49,7 @@ public interface Advised extends TargetClassAware {
 	boolean isProxyTargetClass();
 
 	/**
-	 * Return the interfaces proxied by the AOP proxy.
+	 * Return the interfaces proxied by the AOP staticProxy.
 	 * <p>Will not include the target class, which may also be proxied.
 	 */
 	Class<?>[] getProxiedInterfaces();
@@ -73,9 +73,9 @@ public interface Advised extends TargetClassAware {
 	TargetSource getTargetSource();
 
 	/**
-	 * Set whether the proxy should be exposed by the AOP framework as a
+	 * Set whether the staticProxy should be exposed by the AOP framework as a
 	 * {@link ThreadLocal} for retrieval via the {@link AopContext} class.
-	 * <p>It can be necessary to expose the proxy if an advised object needs
+	 * <p>It can be necessary to expose the staticProxy if an advised object needs
 	 * to invoke a method on itself with advice applied. Otherwise, if an
 	 * advised object invokes a method on {@code this}, no advice will be applied.
 	 * <p>Default is {@code false}, for optimal performance.
@@ -83,41 +83,41 @@ public interface Advised extends TargetClassAware {
 	void setExposeProxy(boolean exposeProxy);
 
 	/**
-	 * Return whether the factory should expose the proxy as a {@link ThreadLocal}.
-	 * <p>It can be necessary to expose the proxy if an advised object needs
+	 * Return whether the factory should expose the staticProxy as a {@link ThreadLocal}.
+	 * <p>It can be necessary to expose the staticProxy if an advised object needs
 	 * to invoke a method on itself with advice applied. Otherwise, if an
 	 * advised object invokes a method on {@code this}, no advice will be applied.
-	 * <p>Getting the proxy is analogous to an EJB calling {@code getEJBObject()}.
+	 * <p>Getting the staticProxy is analogous to an EJB calling {@code getEJBObject()}.
 	 * @see AopContext
 	 */
 	boolean isExposeProxy();
 
 	/**
-	 * Set whether this proxy configuration is pre-filtered so that it only
-	 * contains applicable advisors (matching this proxy's target class).
+	 * Set whether this staticProxy configuration is pre-filtered so that it only
+	 * contains applicable advisors (matching this staticProxy's target class).
 	 * <p>Default is "false". Set this to "true" if the advisors have been
 	 * pre-filtered already, meaning that the ClassFilter check can be skipped
-	 * when building the actual advisor chain for proxy invocations.
+	 * when building the actual advisor chain for staticProxy invocations.
 	 * @see org.springframework.aop.ClassFilter
 	 */
 	void setPreFiltered(boolean preFiltered);
 
 	/**
-	 * Return whether this proxy configuration is pre-filtered so that it only
-	 * contains applicable advisors (matching this proxy's target class).
+	 * Return whether this staticProxy configuration is pre-filtered so that it only
+	 * contains applicable advisors (matching this staticProxy's target class).
 	 */
 	boolean isPreFiltered();
 
 	/**
-	 * Return the advisors applying to this proxy.
-	 * @return a list of Advisors applying to this proxy (never {@code null})
+	 * Return the advisors applying to this staticProxy.
+	 * @return a list of Advisors applying to this staticProxy (never {@code null})
 	 */
 	Advisor[] getAdvisors();
 
 	/**
 	 * Add an advisor at the end of the advisor chain.
 	 * <p>The Advisor may be an {@link org.springframework.aop.IntroductionAdvisor},
-	 * in which new interfaces will be available when a proxy is next obtained
+	 * in which new interfaces will be available when a staticProxy is next obtained
 	 * from the relevant factory.
 	 * @param advisor the advisor to add to the end of the chain
 	 * @throws AopConfigException in case of invalid advice
@@ -149,7 +149,7 @@ public interface Advised extends TargetClassAware {
 
 	/**
 	 * Return the index (from 0) of the given advisor,
-	 * or -1 if no such advisor applies to this proxy.
+	 * or -1 if no such advisor applies to this staticProxy.
 	 * <p>The return value of this method can be used to index into the advisors array.
 	 * @param advisor the advisor to search for
 	 * @return index from 0 of this advisor, or -1 if there's no such advisor
@@ -159,7 +159,7 @@ public interface Advised extends TargetClassAware {
 	/**
 	 * Replace the given advisor.
 	 * <p><b>Note:</b> If the advisor is an {@link org.springframework.aop.IntroductionAdvisor}
-	 * and the replacement is not or implements different interfaces, the proxy will need
+	 * and the replacement is not or implements different interfaces, the staticProxy will need
 	 * to be re-obtained or the old interfaces won't be supported and the new interface
 	 * won't be implemented.
 	 * @param a the advisor to replace
@@ -174,7 +174,7 @@ public interface Advised extends TargetClassAware {
 	 * Add the given AOP Alliance advice to the tail of the advice (interceptor) chain.
 	 * <p>This will be wrapped in a DefaultPointcutAdvisor with a pointcut that always
 	 * applies, and returned from the {@code getAdvisors()} method in this wrapped form.
-	 * <p>Note that the given advice will apply to all invocations on the proxy,
+	 * <p>Note that the given advice will apply to all invocations on the staticProxy,
 	 * even to the {@code toString()} method! Use appropriate advice implementations
 	 * or specify appropriate pointcuts to apply to a narrower set of methods.
 	 * @param advice advice to add to the tail of the chain
@@ -189,7 +189,7 @@ public interface Advised extends TargetClassAware {
 	 * <p>This will be wrapped in a {@link org.springframework.aop.support.DefaultPointcutAdvisor}
 	 * with a pointcut that always applies, and returned from the {@link #getAdvisors()}
 	 * method in this wrapped form.
-	 * <p>Note: The given advice will apply to all invocations on the proxy,
+	 * <p>Note: The given advice will apply to all invocations on the staticProxy,
 	 * even to the {@code toString()} method! Use appropriate advice implementations
 	 * or specify appropriate pointcuts to apply to a narrower set of methods.
 	 * @param pos index from 0 (head)
@@ -208,7 +208,7 @@ public interface Advised extends TargetClassAware {
 
 	/**
 	 * Return the index (from 0) of the given AOP Alliance Advice,
-	 * or -1 if no such advice is an advice for this proxy.
+	 * or -1 if no such advice is an advice for this staticProxy.
 	 * <p>The return value of this method can be used to index into
 	 * the advisors array.
 	 * @param advice AOP Alliance advice to search for
@@ -218,8 +218,8 @@ public interface Advised extends TargetClassAware {
 
 	/**
 	 * As {@code toString()} will normally be delegated to the target,
-	 * this returns the equivalent for the AOP proxy.
-	 * @return a string description of the proxy configuration
+	 * this returns the equivalent for the AOP staticProxy.
+	 * @return a string description of the staticProxy configuration
 	 */
 	String toProxyConfigString();
 

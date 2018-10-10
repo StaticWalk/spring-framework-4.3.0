@@ -35,7 +35,7 @@ import org.springframework.jmx.support.JmxUtils;
  *
  * <p>This class offers two flavors of Class extraction from a managed bean
  * instance: {@link #getTargetClass}, extracting the target class behind
- * any kind of AOP proxy, and {@link #getClassToExpose}, returning the
+ * any kind of AOP staticProxy, and {@link #getClassToExpose}, returning the
  * class or interface that will be searched for annotations and exposed
  * to the JMX runtime.
  *
@@ -48,7 +48,7 @@ public abstract class AbstractMBeanInfoAssembler implements MBeanInfoAssembler {
 	/**
 	 * Create an instance of the {@code ModelMBeanInfoSupport} class supplied with all
 	 * JMX implementations and populates the metadata through calls to the subclass.
-	 * @param managedBean the bean that will be exposed (might be an AOP proxy)
+	 * @param managedBean the bean that will be exposed (might be an AOP staticProxy)
 	 * @param beanKey the key associated with the managed bean
 	 * @return the populated ModelMBeanInfo instance
 	 * @throws JMException in case of errors
@@ -76,7 +76,7 @@ public abstract class AbstractMBeanInfoAssembler implements MBeanInfoAssembler {
 	 * Check the given bean instance, throwing an IllegalArgumentException
 	 * if it is not eligible for exposure with this assembler.
 	 * <p>Default implementation is empty, accepting every bean instance.
-	 * @param managedBean the bean that will be exposed (might be an AOP proxy)
+	 * @param managedBean the bean that will be exposed (might be an AOP staticProxy)
 	 * @throws IllegalArgumentException the bean is not valid for exposure
 	 */
 	protected void checkManagedBean(Object managedBean) throws IllegalArgumentException {
@@ -85,9 +85,9 @@ public abstract class AbstractMBeanInfoAssembler implements MBeanInfoAssembler {
 	/**
 	 * Return the actual bean class of the given bean instance.
 	 * This is the class exposed to description-style JMX properties.
-	 * <p>Default implementation returns the target class for an AOP proxy,
+	 * <p>Default implementation returns the target class for an AOP staticProxy,
 	 * and the plain bean class else.
-	 * @param managedBean the bean instance (might be an AOP proxy)
+	 * @param managedBean the bean instance (might be an AOP staticProxy)
 	 * @return the bean class to expose
 	 * @see org.springframework.aop.support.AopUtils#getTargetClass(Object)
 	 */
@@ -99,7 +99,7 @@ public abstract class AbstractMBeanInfoAssembler implements MBeanInfoAssembler {
 	 * Return the class or interface to expose for the given bean.
 	 * This is the class that will be searched for attributes and operations
 	 * (for example, checked for annotations).
-	 * @param managedBean the bean instance (might be an AOP proxy)
+	 * @param managedBean the bean instance (might be an AOP staticProxy)
 	 * @return the bean class to expose
 	 * @see JmxUtils#getClassToExpose(Object)
 	 */
@@ -110,7 +110,7 @@ public abstract class AbstractMBeanInfoAssembler implements MBeanInfoAssembler {
 	/**
 	 * Return the class or interface to expose for the given bean class.
 	 * This is the class that will be searched for attributes and operations
-	 * @param beanClass the bean class (might be an AOP proxy class)
+	 * @param beanClass the bean class (might be an AOP staticProxy class)
 	 * @return the bean class to expose
 	 * @see JmxUtils#getClassToExpose(Class)
 	 */
@@ -122,7 +122,7 @@ public abstract class AbstractMBeanInfoAssembler implements MBeanInfoAssembler {
 	 * Get the class name of the MBean resource.
 	 * <p>Default implementation returns a simple description for the MBean
 	 * based on the class name.
-	 * @param managedBean the bean instance (might be an AOP proxy)
+	 * @param managedBean the bean instance (might be an AOP staticProxy)
 	 * @param beanKey the key associated with the MBean in the beans map
 	 * of the {@code MBeanExporter}
 	 * @return the MBean description
@@ -136,7 +136,7 @@ public abstract class AbstractMBeanInfoAssembler implements MBeanInfoAssembler {
 	 * Get the description of the MBean resource.
 	 * <p>Default implementation returns a simple description for the MBean
 	 * based on the class name.
-	 * @param managedBean the bean instance (might be an AOP proxy)
+	 * @param managedBean the bean instance (might be an AOP staticProxy)
 	 * @param beanKey the key associated with the MBean in the beans map
 	 * of the {@code MBeanExporter}
 	 * @throws JMException in case of errors
@@ -155,7 +155,7 @@ public abstract class AbstractMBeanInfoAssembler implements MBeanInfoAssembler {
 	 * <p>Subclasses can implement this method to add additional descriptors to the
 	 * MBean metadata. Default implementation is empty.
 	 * @param descriptor the {@code Descriptor} for the MBean resource.
-	 * @param managedBean the bean instance (might be an AOP proxy)
+	 * @param managedBean the bean instance (might be an AOP staticProxy)
 	 * @param beanKey the key associated with the MBean in the beans map
 	 * of the {@code MBeanExporter}
 	 * @throws JMException in case of errors
@@ -169,7 +169,7 @@ public abstract class AbstractMBeanInfoAssembler implements MBeanInfoAssembler {
 	 * this method to return the appropriate metadata for all constructors that should
 	 * be exposed in the management interface for the managed resource.
 	 * <p>Default implementation returns an empty array of {@code ModelMBeanConstructorInfo}.
-	 * @param managedBean the bean instance (might be an AOP proxy)
+	 * @param managedBean the bean instance (might be an AOP staticProxy)
 	 * @param beanKey the key associated with the MBean in the beans map
 	 * of the {@code MBeanExporter}
 	 * @return the constructor metadata
@@ -185,7 +185,7 @@ public abstract class AbstractMBeanInfoAssembler implements MBeanInfoAssembler {
 	 * this method to return the appropriate metadata for all notifications that should
 	 * be exposed in the management interface for the managed resource.
 	 * <p>Default implementation returns an empty array of {@code ModelMBeanNotificationInfo}.
-	 * @param managedBean the bean instance (might be an AOP proxy)
+	 * @param managedBean the bean instance (might be an AOP staticProxy)
 	 * @param beanKey the key associated with the MBean in the beans map
 	 * of the {@code MBeanExporter}
 	 * @return the notification metadata
@@ -201,7 +201,7 @@ public abstract class AbstractMBeanInfoAssembler implements MBeanInfoAssembler {
 	 * Get the attribute metadata for the MBean resource. Subclasses should implement
 	 * this method to return the appropriate metadata for all the attributes that should
 	 * be exposed in the management interface for the managed resource.
-	 * @param managedBean the bean instance (might be an AOP proxy)
+	 * @param managedBean the bean instance (might be an AOP staticProxy)
 	 * @param beanKey the key associated with the MBean in the beans map
 	 * of the {@code MBeanExporter}
 	 * @return the attribute metadata
@@ -214,7 +214,7 @@ public abstract class AbstractMBeanInfoAssembler implements MBeanInfoAssembler {
 	 * Get the operation metadata for the MBean resource. Subclasses should implement
 	 * this method to return the appropriate metadata for all operations that should
 	 * be exposed in the management interface for the managed resource.
-	 * @param managedBean the bean instance (might be an AOP proxy)
+	 * @param managedBean the bean instance (might be an AOP staticProxy)
 	 * @param beanKey the key associated with the MBean in the beans map
 	 * of the {@code MBeanExporter}
 	 * @return the operation metadata

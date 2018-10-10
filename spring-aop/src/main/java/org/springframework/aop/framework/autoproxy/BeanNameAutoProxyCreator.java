@@ -27,7 +27,7 @@ import org.springframework.util.PatternMatchUtils;
 import org.springframework.util.StringUtils;
 
 /**
- * Auto proxy creator that identifies beans to proxy via a list of names.
+ * Auto staticProxy creator that identifies beans to staticProxy via a list of names.
  * Checks for direct, "xxx*", and "*xxx" matches.
  *
  * <p>For configuration details, see the javadoc of the parent class
@@ -54,7 +54,7 @@ public class BeanNameAutoProxyCreator extends AbstractAutoProxyCreator {
 	 * will match the bean named "myBean" and all beans whose name start with "tx".
 	 * <p><b>NOTE:</b> In case of a FactoryBean, only the objects created by the
 	 * FactoryBean will get proxied. This default behavior applies as of Spring 2.0.
-	 * If you intend to proxy a FactoryBean instance itself (a rare use case, but
+	 * If you intend to staticProxy a FactoryBean instance itself (a rare use case, but
 	 * Spring 1.2's default behavior), specify the bean name of the FactoryBean
 	 * including the factory-bean prefix "&": e.g. "&myFactoryBean".
 	 * @see org.springframework.beans.factory.FactoryBean
@@ -70,7 +70,7 @@ public class BeanNameAutoProxyCreator extends AbstractAutoProxyCreator {
 
 
 	/**
-	 * Identify as bean to proxy if the bean name is in the configured list of names.
+	 * Identify as bean to staticProxy if the bean name is in the configured list of names.
 	 */
 	@Override
 	protected Object[] getAdvicesAndAdvisorsForBean(Class<?> beanClass, String beanName, TargetSource targetSource) {

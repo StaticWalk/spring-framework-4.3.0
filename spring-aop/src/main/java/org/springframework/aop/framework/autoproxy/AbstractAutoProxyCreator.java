@@ -51,7 +51,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * {@link org.springframework.beans.factory.config.BeanPostProcessor} implementation
- * that wraps each eligible bean with an AOP proxy, delegating to specified interceptors
+ * that wraps each eligible bean with an AOP staticProxy, delegating to specified interceptors
  * before invoking the bean itself.
  *
  * <p>This class distinguishes between "common" interceptors: shared for all proxies it
@@ -64,7 +64,7 @@ import org.springframework.util.StringUtils;
  *
  * <p>Such auto-proxying is particularly useful if there's a large number of beans that
  * need to be wrapped with similar proxies, i.e. delegating to the same interceptors.
- * Instead of x repetitive proxy definitions for x target beans, you can register
+ * Instead of x repetitive staticProxy definitions for x target beans, you can register
  * one single such post processor with the bean factory to achieve the same effect.
  *
  * <p>Subclasses can apply any strategy to decide if a bean is to be proxied,
@@ -94,14 +94,14 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 		implements SmartInstantiationAwareBeanPostProcessor, BeanFactoryAware {
 
 	/**
-	 * Convenience constant for subclasses: Return value for "do not proxy".
+	 * Convenience constant for subclasses: Return value for "do not staticProxy".
 	 * @see #getAdvicesAndAdvisorsForBean
 	 */
 	protected static final Object[] DO_NOT_PROXY = null;
 
 	/**
 	 * Convenience constant for subclasses: Return value for
-	 * "proxy without additional interceptors, just the common ones".
+	 * "staticProxy without additional interceptors, just the common ones".
 	 * @see #getAdvicesAndAdvisorsForBean
 	 */
 	protected static final Object[] PROXY_WITHOUT_ADDITIONAL_INTERCEPTORS = new Object[0];
@@ -114,7 +114,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	private AdvisorAdapterRegistry advisorAdapterRegistry = GlobalAdvisorAdapterRegistry.getInstance();
 
 	/**
-	 * Indicates whether or not the proxy should be frozen. Overridden from super
+	 * Indicates whether or not the staticProxy should be frozen. Overridden from super
 	 * to prevent the configuration from becoming frozen too early.
 	 */
 	private boolean freezeProxy = false;
@@ -140,10 +140,10 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 
 
 	/**
-	 * Set whether or not the proxy should be frozen, preventing advice
+	 * Set whether or not the staticProxy should be frozen, preventing advice
 	 * from being added to it once it is created.
-	 * <p>Overridden from the super class to prevent the proxy configuration
-	 * from being frozen before the proxy is created.
+	 * <p>Overridden from the super class to prevent the staticProxy configuration
+	 * from being frozen before the staticProxy is created.
 	 */
 	@Override
 	public void setFrozen(boolean frozen) {
@@ -252,7 +252,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 			}
 		}
 
-		// Create proxy here if we have a custom TargetSource.
+		// Create staticProxy here if we have a custom TargetSource.
 		// Suppresses unnecessary default instantiation of the target bean:
 		// The TargetSource will handle target instances in a custom fashion.
 		if (beanName != null) {
@@ -287,8 +287,8 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	}
 
 	/**
-	 * Create a proxy with the configured interceptors if the bean is
-	 * identified as one to proxy by the subclass.
+	 * Create a staticProxy with the configured interceptors if the bean is
+	 * identified as one to staticProxy by the subclass.
 	 * @see #getAdvicesAndAdvisorsForBean
 	 */
 	@Override
@@ -329,7 +329,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 * @param bean the raw bean instance
 	 * @param beanName the name of the bean
 	 * @param cacheKey the cache key for metadata access
-	 * @return a proxy wrapping the bean, or the raw bean instance as-is
+	 * @return a staticProxy wrapping the bean, or the raw bean instance as-is
 	 */
 	protected Object wrapIfNecessary(Object bean, String beanName, Object cacheKey) {
 		if (beanName != null && this.targetSourcedBeans.contains(beanName)) {
@@ -343,7 +343,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 			return bean;
 		}
 
-		// Create proxy if we have advice.
+		// Create staticProxy if we have advice.
 		Object[] specificInterceptors = getAdvicesAndAdvisorsForBean(bean.getClass(), beanName, null);
 		if (specificInterceptors != DO_NOT_PROXY) {
 			this.advisedBeans.put(cacheKey, Boolean.TRUE);
@@ -375,7 +375,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 				Advisor.class.isAssignableFrom(beanClass) ||
 				AopInfrastructureBean.class.isAssignableFrom(beanClass);
 		if (retVal && logger.isTraceEnabled()) {
-			logger.trace("Did not attempt to auto-proxy infrastructure class [" + beanClass.getName() + "]");
+			logger.trace("Did not attempt to auto-staticProxy infrastructure class [" + beanClass.getName() + "]");
 		}
 		return retVal;
 	}
@@ -425,14 +425,14 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	}
 
 	/**
-	 * Create an AOP proxy for the given bean.
+	 * Create an AOP staticProxy for the given bean.
 	 * @param beanClass the class of the bean
 	 * @param beanName the name of the bean
 	 * @param specificInterceptors the set of interceptors that is
 	 * specific to this bean (may be empty, but not null)
-	 * @param targetSource the TargetSource for the proxy,
+	 * @param targetSource the TargetSource for the staticProxy,
 	 * already pre-configured to access the bean
-	 * @return the AOP proxy for the bean
+	 * @return the AOP staticProxy for the bean
 	 * @see #buildAdvisors
 	 */
 	protected Object createProxy(
@@ -525,7 +525,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 		if (logger.isDebugEnabled()) {
 			int nrOfCommonInterceptors = commonInterceptors.length;
 			int nrOfSpecificInterceptors = (specificInterceptors != null ? specificInterceptors.length : 0);
-			logger.debug("Creating implicit proxy for bean '" + beanName + "' with " + nrOfCommonInterceptors +
+			logger.debug("Creating implicit staticProxy for bean '" + beanName + "' with " + nrOfCommonInterceptors +
 					" common interceptors and " + nrOfSpecificInterceptors + " specific interceptors");
 		}
 
@@ -558,7 +558,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 * to change the interfaces exposed.
 	 * <p>The default implementation is empty.
 	 * @param proxyFactory ProxyFactory that is already configured with
-	 * TargetSource and interfaces and will be used to create the proxy
+	 * TargetSource and interfaces and will be used to create the staticProxy
 	 * immediately after this method returns
 	 */
 	protected void customizeProxyFactory(ProxyFactory proxyFactory) {
@@ -575,7 +575,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 * Will be {@code null} if no custom target source is in use.
 	 * @return an array of additional interceptors for the particular bean;
 	 * or an empty array if no additional interceptors but just the common ones;
-	 * or {@code null} if no proxy at all, not even with the common interceptors.
+	 * or {@code null} if no staticProxy at all, not even with the common interceptors.
 	 * See constants DO_NOT_PROXY and PROXY_WITHOUT_ADDITIONAL_INTERCEPTORS.
 	 * @throws BeansException in case of errors
 	 * @see #DO_NOT_PROXY

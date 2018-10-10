@@ -19,7 +19,7 @@ package org.springframework.core;
 /**
  * Interface to be implemented by a reloading-aware ClassLoader
  * (e.g. a Groovy-based ClassLoader). Detected for example by
- * Spring's CGLIB proxy factory for making a caching decision.
+ * Spring's CGLIB staticProxy factory for making a caching decision.
  *
  * <p>If a ClassLoader does <i>not</i> implement this interface,
  * then all of the classes obtained from it should be considered

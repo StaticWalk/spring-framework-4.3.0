@@ -169,7 +169,7 @@ public class BeanConfigurerSupport implements BeanFactoryAware, InitializingBean
 	private void checkExposedObject(Object exposedObject, Object originalBeanInstance) {
 		if (exposedObject != originalBeanInstance) {
 			throw new IllegalStateException("Post-processor tried to replace bean instance of type [" +
-					originalBeanInstance.getClass().getName() + "] with (proxy) object of type [" +
+					originalBeanInstance.getClass().getName() + "] with (staticProxy) object of type [" +
 					exposedObject.getClass().getName() + "] - not supported for aspect-configured classes!");
 		}
 	}

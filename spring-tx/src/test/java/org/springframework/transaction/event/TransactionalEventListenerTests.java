@@ -463,7 +463,7 @@ public class TransactionalEventListenerTests {
 	@Component
 	static interface TransactionalComponentTestListenerInterface {
 
-		// Cannot use #data in condition due to dynamic proxy.
+		// Cannot use #data in condition due to dynamic staticProxy.
 		@TransactionalEventListener(condition = "!'SKIP'.equals(#p0)")
 		void handleAfterCommit(String data);
 	}

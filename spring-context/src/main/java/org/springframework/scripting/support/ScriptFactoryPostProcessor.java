@@ -191,7 +191,7 @@ public class ScriptFactoryPostProcessor extends InstantiationAwareBeanPostProces
 	}
 
 	/**
-	 * Flag to signal that refreshable proxies should be created to proxy the target class not its interfaces.
+	 * Flag to signal that refreshable proxies should be created to staticProxy the target class not its interfaces.
 	 * @param defaultProxyTargetClass the flag value to set
 	 */
 	public void setDefaultProxyTargetClass(boolean defaultProxyTargetClass) {
@@ -413,7 +413,7 @@ public class ScriptFactoryPostProcessor extends InstantiationAwareBeanPostProces
 			proxyTargetClass = Boolean.valueOf((String) attributeValue);
 		}
 		else if (attributeValue != null) {
-			throw new BeanDefinitionStoreException("Invalid proxy target class attribute [" +
+			throw new BeanDefinitionStoreException("Invalid staticProxy target class attribute [" +
 					PROXY_TARGET_CLASS_ATTRIBUTE + "] with value '" + attributeValue +
 					"': needs to be of type Boolean or String");
 		}
@@ -516,7 +516,7 @@ public class ScriptFactoryPostProcessor extends InstantiationAwareBeanPostProces
 	/**
 	 * Create a composite interface Class for the given interfaces,
 	 * implementing the given interfaces in one single Class.
-	 * <p>The default implementation builds a JDK proxy class
+	 * <p>The default implementation builds a JDK staticProxy class
 	 * for the given interfaces.
 	 * @param interfaces the interfaces to merge
 	 * @return the merged interface as Class
@@ -550,11 +550,11 @@ public class ScriptFactoryPostProcessor extends InstantiationAwareBeanPostProces
 	}
 
 	/**
-	 * Create a refreshable proxy for the given AOP TargetSource.
+	 * Create a refreshable staticProxy for the given AOP TargetSource.
 	 * @param ts the refreshable TargetSource
-	 * @param interfaces the proxy interfaces (may be {@code null} to
+	 * @param interfaces the staticProxy interfaces (may be {@code null} to
 	 * indicate proxying of all interfaces implemented by the target class)
-	 * @return the generated proxy
+	 * @return the generated staticProxy
 	 * @see RefreshableScriptTargetSource
 	 */
 	protected Object createRefreshableProxy(TargetSource ts, Class<?>[] interfaces, boolean proxyTargetClass) {

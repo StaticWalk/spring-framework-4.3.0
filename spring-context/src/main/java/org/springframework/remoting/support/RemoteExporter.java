@@ -79,7 +79,7 @@ public abstract class RemoteExporter extends RemotingSupport {
 	/**
 	 * Set whether to register a RemoteInvocationTraceInterceptor for exported
 	 * services. Only applied when a subclass uses {@code getProxyForService}
-	 * for creating the proxy to expose.
+	 * for creating the staticProxy to expose.
 	 * <p>Default is "true". RemoteInvocationTraceInterceptor's most important value
 	 * is that it logs exception stacktraces on the server, before propagating an
 	 * exception to the client. Note that RemoteInvocationTraceInterceptor will <i>not</i>
@@ -140,12 +140,12 @@ public abstract class RemoteExporter extends RemotingSupport {
 	}
 
 	/**
-	 * Get a proxy for the given service object, implementing the specified
+	 * Get a staticProxy for the given service object, implementing the specified
 	 * service interface.
-	 * <p>Used to export a proxy that does not expose any internals but just
+	 * <p>Used to export a staticProxy that does not expose any internals but just
 	 * a specific interface intended for remote access. Furthermore, a
 	 * {@link RemoteInvocationTraceInterceptor} will be registered (by default).
-	 * @return the proxy
+	 * @return the staticProxy
 	 * @see #setServiceInterface
 	 * @see #setRegisterTraceInterceptor
 	 * @see RemoteInvocationTraceInterceptor

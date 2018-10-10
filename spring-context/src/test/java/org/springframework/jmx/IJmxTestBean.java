@@ -34,7 +34,7 @@ public interface IJmxTestBean {
 
 	public String getName();
 
-	// used to test invalid methods that exist in the proxy interface
+	// used to test invalid methods that exist in the staticProxy interface
 	public void dontExposeMe();
 
 }

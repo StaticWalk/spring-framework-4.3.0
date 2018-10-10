@@ -32,7 +32,7 @@ import org.springframework.beans.factory.NamedBean;
  * invocation. May support a {@code bean()} pointcut designator with AspectJ.
  *
  * <p>Typically used in Spring auto-proxying, where the bean name is known
- * at proxy creation time.
+ * at staticProxy creation time.
  *
  * @author Rod Johnson
  * @author Juergen Hoeller

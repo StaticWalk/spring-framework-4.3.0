@@ -57,7 +57,7 @@ public class AroundAdviceBindingTests {
 		assertTrue(AopUtils.isAopProxy(injectedTestBean));
 
 		this.testBeanProxy = injectedTestBean;
-		// we need the real target too, not just the proxy...
+		// we need the real target too, not just the staticProxy...
 
 		this.testBeanTarget = (TestBean) ((Advised) testBeanProxy).getTargetSource().getTarget();
 

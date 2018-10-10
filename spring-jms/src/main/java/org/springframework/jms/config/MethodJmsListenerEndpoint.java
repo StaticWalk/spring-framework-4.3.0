@@ -84,7 +84,7 @@ public class MethodJmsListenerEndpoint extends AbstractJmsListenerEndpoint imple
 
 	/**
 	 * Set the most specific method known for this endpoint's declaration.
-	 * <p>In case of a proxy, this will be the method on the target class
+	 * <p>In case of a staticProxy, this will be the method on the target class
 	 * (if annotated itself, that is, if not just annotated in an interface).
 	 * @since 4.2.3
 	 */

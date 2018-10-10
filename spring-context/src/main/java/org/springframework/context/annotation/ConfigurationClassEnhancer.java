@@ -310,7 +310,7 @@ class ConfigurationClassEnhancer {
 			ConfigurableBeanFactory beanFactory = getBeanFactory(enhancedConfigInstance);
 			String beanName = BeanAnnotationHelper.determineBeanNameFor(beanMethod);
 
-			// Determine whether this bean is a scoped-proxy
+			// Determine whether this bean is a scoped-staticProxy
 			Scope scope = AnnotatedElementUtils.findMergedAnnotation(beanMethod, Scope.class);
 			if (scope != null && scope.proxyMode() != ScopedProxyMode.NO) {
 				String scopedBeanName = ScopedProxyCreator.getTargetBeanName(beanName);
@@ -323,14 +323,14 @@ class ConfigurationClassEnhancer {
 			// container for already cached instances.
 
 			// First, check to see if the requested bean is a FactoryBean. If so, create a subclass
-			// proxy that intercepts calls to getObject() and returns any cached bean instance.
+			// staticProxy that intercepts calls to getObject() and returns any cached bean instance.
 			// This ensures that the semantics of calling a FactoryBean from within @Bean methods
 			// is the same as that of referring to a FactoryBean within XML. See SPR-6602.
 			if (factoryContainsBean(beanFactory, BeanFactory.FACTORY_BEAN_PREFIX + beanName) &&
 					factoryContainsBean(beanFactory, beanName)) {
 				Object factoryBean = beanFactory.getBean(BeanFactory.FACTORY_BEAN_PREFIX + beanName);
 				if (factoryBean instanceof ScopedProxyFactoryBean) {
-					// Pass through - scoped proxy factory beans are a special case and should not
+					// Pass through - scoped staticProxy factory beans are a special case and should not
 					// be further proxied
 				}
 				else {
@@ -433,7 +433,7 @@ class ConfigurationClassEnhancer {
 		}
 
 		/**
-		 * Create a subclass proxy that intercepts calls to getObject(), delegating to the current BeanFactory
+		 * Create a subclass staticProxy that intercepts calls to getObject(), delegating to the current BeanFactory
 		 * instead of creating a new instance. These proxies are created only when calling a FactoryBean from
 		 * within a Bean method, allowing for proper scoping semantics even when working against the FactoryBean
 		 * instance directly. If a FactoryBean instance is fetched through the container via &-dereferencing,
@@ -447,8 +447,8 @@ class ConfigurationClassEnhancer {
 			enhancer.setNamingPolicy(SpringNamingPolicy.INSTANCE);
 			enhancer.setCallbackType(MethodInterceptor.class);
 
-			// Ideally create enhanced FactoryBean proxy without constructor side effects,
-			// analogous to AOP proxy creation in ObjenesisCglibAopProxy...
+			// Ideally create enhanced FactoryBean staticProxy without constructor side effects,
+			// analogous to AOP staticProxy creation in ObjenesisCglibAopProxy...
 			Class<?> fbClass = enhancer.createClass();
 			Object fbProxy = null;
 

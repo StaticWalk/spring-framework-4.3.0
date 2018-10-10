@@ -36,16 +36,16 @@ import org.springframework.util.Assert;
  * delegating to the current thread-bound PersistenceManager (the Spring-managed
  * transactional PersistenceManager or the single OpenPersistenceManagerInView
  * PersistenceManager, if any) on each invocation. This class makes such a
- * Spring-style PersistenceManager proxy available for bean references.
+ * Spring-style PersistenceManager staticProxy available for bean references.
  *
- * <p>The main advantage of this proxy is that it allows DAOs to work with a
+ * <p>The main advantage of this staticProxy is that it allows DAOs to work with a
  * plain JDO PersistenceManager reference in JDO 3.0 style
  * (see {@link javax.jdo.PersistenceManagerFactory#getPersistenceManagerProxy()}),
  * while still participating in Spring's resource and transaction management.
  *
- * <p>The behavior of this proxy matches the behavior that the JDO 3.0 spec
- * defines for a PersistenceManager proxy. Hence, DAOs could seamlessly switch
- * between {@link StandardPersistenceManagerProxyBean} and this Spring-style proxy,
+ * <p>The behavior of this staticProxy matches the behavior that the JDO 3.0 spec
+ * defines for a PersistenceManager staticProxy. Hence, DAOs could seamlessly switch
+ * between {@link StandardPersistenceManagerProxyBean} and this Spring-style staticProxy,
  * receiving the reference through Dependency Injection. This will work without
  * any Spring API dependencies in the DAO code!
  *
@@ -70,21 +70,21 @@ public class SpringPersistenceManagerProxyBean implements FactoryBean<Persistenc
 
 
 	/**
-	 * Set the target PersistenceManagerFactory for this proxy.
+	 * Set the target PersistenceManagerFactory for this staticProxy.
 	 */
 	public void setPersistenceManagerFactory(PersistenceManagerFactory persistenceManagerFactory) {
 		this.persistenceManagerFactory = persistenceManagerFactory;
 	}
 
 	/**
-	 * Return the target PersistenceManagerFactory for this proxy.
+	 * Return the target PersistenceManagerFactory for this staticProxy.
 	 */
 	protected PersistenceManagerFactory getPersistenceManagerFactory() {
 		return this.persistenceManagerFactory;
 	}
 
 	/**
-	 * Set the JDO dialect to use for this proxy.
+	 * Set the JDO dialect to use for this staticProxy.
 	 * <p>Default is a DefaultJdoDialect based on the PersistenceManagerFactory's
 	 * underlying DataSource, if any.
 	 */
@@ -93,7 +93,7 @@ public class SpringPersistenceManagerProxyBean implements FactoryBean<Persistenc
 	}
 
 	/**
-	 * Return the JDO dialect to use for this proxy.
+	 * Return the JDO dialect to use for this staticProxy.
 	 */
 	protected JdoDialect getJdoDialect() {
 		return this.jdoDialect;
@@ -118,7 +118,7 @@ public class SpringPersistenceManagerProxyBean implements FactoryBean<Persistenc
 	}
 
 	/**
-	 * Set whether the PersistenceManagerFactory proxy is allowed to create
+	 * Set whether the PersistenceManagerFactory staticProxy is allowed to create
 	 * a non-transactional PersistenceManager when no transactional
 	 * PersistenceManager can be found for the current thread.
 	 * <p>Default is "true". Can be turned off to enforce access to
@@ -133,7 +133,7 @@ public class SpringPersistenceManagerProxyBean implements FactoryBean<Persistenc
 	}
 
 	/**
-	 * Return whether the PersistenceManagerFactory proxy is allowed to create
+	 * Return whether the PersistenceManagerFactory staticProxy is allowed to create
 	 * a non-transactional PersistenceManager when no transactional
 	 * PersistenceManager can be found for the current thread.
 	 */
@@ -187,12 +187,12 @@ public class SpringPersistenceManagerProxyBean implements FactoryBean<Persistenc
 				return (proxy == args[0]);
 			}
 			else if (method.getName().equals("hashCode")) {
-				// Use hashCode of PersistenceManager proxy.
+				// Use hashCode of PersistenceManager staticProxy.
 				return System.identityHashCode(proxy);
 			}
 			else if (method.getName().equals("toString")) {
 				// Deliver toString without touching a target EntityManager.
-				return "Spring PersistenceManager proxy for target factory [" + getPersistenceManagerFactory() + "]";
+				return "Spring PersistenceManager staticProxy for target factory [" + getPersistenceManagerFactory() + "]";
 			}
 			else if (method.getName().equals("getPersistenceManagerFactory")) {
 				// Return PersistenceManagerFactory without creating a PersistenceManager.

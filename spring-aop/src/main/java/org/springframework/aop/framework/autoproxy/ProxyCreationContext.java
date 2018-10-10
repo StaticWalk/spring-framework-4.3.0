@@ -19,7 +19,7 @@ package org.springframework.aop.framework.autoproxy;
 import org.springframework.core.NamedThreadLocal;
 
 /**
- * Holder for the current proxy creation context, as exposed by auto-proxy creators
+ * Holder for the current staticProxy creation context, as exposed by auto-staticProxy creators
  * such as {@link AbstractAdvisorAutoProxyCreator}.
  *
  * @author Juergen Hoeller

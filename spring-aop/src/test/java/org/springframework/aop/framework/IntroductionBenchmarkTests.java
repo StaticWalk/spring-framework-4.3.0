@@ -64,13 +64,13 @@ public final class IntroductionBenchmarkTests {
 
 		Counter counter = (Counter) proxy;
 
-		sw.start(INVOCATIONS + " invocations on proxy, not hitting introduction");
+		sw.start(INVOCATIONS + " invocations on staticProxy, not hitting introduction");
 		for (int i = 0; i < INVOCATIONS; i++) {
 			proxy.getAge();
 		}
 		sw.stop();
 
-		sw.start(INVOCATIONS + " invocations on proxy, hitting introduction");
+		sw.start(INVOCATIONS + " invocations on staticProxy, hitting introduction");
 		for (int i = 0; i < INVOCATIONS; i++) {
 			counter.getCount();
 		}

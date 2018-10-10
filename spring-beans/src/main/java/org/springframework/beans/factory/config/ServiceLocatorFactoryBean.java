@@ -37,7 +37,7 @@ import org.springframework.util.StringUtils;
  * A {@link FactoryBean} implementation that takes an interface which must have one or more
  * methods with the signatures {@code MyType xxx()} or {@code MyType xxx(MyIdType id)}
  * (typically, {@code MyService getService()} or {@code MyService getService(String id)})
- * and creates a dynamic proxy which implements that interface, delegating to an
+ * and creates a dynamic staticProxy which implements that interface, delegating to an
  * underlying {@link org.springframework.beans.factory.BeanFactory}.
  *
  * <p>Such service locators permit the decoupling of calling code from
@@ -57,7 +57,7 @@ import org.springframework.util.StringUtils;
  * is thrown.
  *
  * <p>On invocation of the single-arg factory method with a non-null (and
- * non-empty) argument, the proxy returns the result of a
+ * non-empty) argument, the staticProxy returns the result of a
  * {@link org.springframework.beans.factory.BeanFactory#getBean(String)} call,
  * using a stringified version of the passed-in id as bean name.
  *
@@ -260,7 +260,7 @@ public class ServiceLocatorFactoryBean implements FactoryBean<Object>, BeanFacto
 			throw new IllegalArgumentException("Property 'serviceLocatorInterface' is required");
 		}
 
-		// Create service locator proxy.
+		// Create service locator staticProxy.
 		this.proxy = Proxy.newProxyInstance(
 				this.serviceLocatorInterface.getClassLoader(),
 				new Class<?>[] {this.serviceLocatorInterface},
@@ -353,7 +353,7 @@ public class ServiceLocatorFactoryBean implements FactoryBean<Object>, BeanFacto
 				return (proxy == args[0]);
 			}
 			else if (ReflectionUtils.isHashCodeMethod(method)) {
-				// Use hashCode of service locator proxy.
+				// Use hashCode of service locator staticProxy.
 				return System.identityHashCode(proxy);
 			}
 			else if (ReflectionUtils.isToStringMethod(method)) {
