@@ -160,10 +160,12 @@ class CglibAopProxy implements AopProxy, Serializable {
 				}
 			}
 
+			//验证class
 			// Validate the class, writing log messages as necessary.
 			validateClassIfNecessary(proxySuperClass, classLoader);
 
 			// Configure CGLIB Enhancer...
+			//创建和配置Enhancer
 			Enhancer enhancer = createEnhancer();
 			if (classLoader != null) {
 				enhancer.setClassLoader(classLoader);
@@ -187,6 +189,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 					this.advised.getConfigurationOnlyCopy(), this.fixedInterceptorMap, this.fixedInterceptorOffset));
 			enhancer.setCallbackTypes(types);
 
+			//生成代理类以及创建代理
 			// Generate the staticProxy class and create a staticProxy instance.
 			return createProxyClassAndInstance(enhancer, callbacks);
 		}
@@ -294,6 +297,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 				new StaticDispatcher(this.advised.getTargetSource().getTarget()) : new SerializableNoOp();
 
 		Callback[] mainCallbacks = new Callback[] {
+				//将拦截器加入到Callback中
 				aopInterceptor,  // for normal advice
 				targetInterceptor,  // invoke target without considering advice, if optimized
 				new SerializableNoOp(),  // no override for methods mapped to this
@@ -641,7 +645,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 					retVal = methodProxy.invoke(target, argsToUse);
 				}
 				else {
-					//进入拦截器链
+					//进入拦截器链,创建方法调用
 					// We need to create a method invocation...
 					retVal = new CglibMethodInvocation(proxy, target, method, args, targetClass, chain, methodProxy).proceed();
 				}
