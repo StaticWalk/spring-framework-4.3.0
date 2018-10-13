@@ -571,6 +571,7 @@ public abstract class AnnotationUtils {
 				result = searchOnInterfaces(method, annotationType, method.getDeclaringClass().getInterfaces());
 			}
 
+			//如果在声明的类中找不到method的注解，就遍历其父类
 			Class<?> clazz = method.getDeclaringClass();
 			while (result == null) {
 				clazz = clazz.getSuperclass();

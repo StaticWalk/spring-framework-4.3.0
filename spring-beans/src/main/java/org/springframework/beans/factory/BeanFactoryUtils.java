@@ -209,6 +209,7 @@ public abstract class BeanFactoryUtils {
 	 * @param type the type that beans must match
 	 * @return the array of matching bean names, or an empty array if none
 	 */
+	//拿到历史中的beanNames，通过递归实现
 	public static String[] beanNamesForTypeIncludingAncestors(
 			ListableBeanFactory lbf, Class<?> type, boolean includeNonSingletons, boolean allowEagerInit) {
 
@@ -219,6 +220,7 @@ public abstract class BeanFactoryUtils {
 			if (hbf.getParentBeanFactory() instanceof ListableBeanFactory) {
 				String[] parentResult = beanNamesForTypeIncludingAncestors(
 						(ListableBeanFactory) hbf.getParentBeanFactory(), type, includeNonSingletons, allowEagerInit);
+				//数组容量已经确定了，只能通过强转List来添加新元素，这里不需要加锁操作
 				List<String> resultList = new ArrayList<String>();
 				resultList.addAll(Arrays.asList(result));
 				for (String beanName : parentResult) {

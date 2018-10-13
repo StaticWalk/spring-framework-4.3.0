@@ -59,6 +59,7 @@ import java.util.List;
  * @see AdvisedSupport
  * @see ProxyFactory
  */
+//实现了InvocationHandler,需要重写invoke方法
 final class JdkDynamicAopProxy implements AopProxy, InvocationHandler, Serializable {
 
 	/** use serialVersionUID from Spring 1.2 for interoperability */
@@ -160,7 +161,7 @@ final class JdkDynamicAopProxy implements AopProxy, InvocationHandler, Serializa
 		Object target = null;
 
 		try {
-			//出来equals
+			//处理equals
 			if (!this.equalsDefined && AopUtils.isEqualsMethod(method)) {
 				// The target does not implement the equals(Object) method itself.
 				return equals(args[0]);

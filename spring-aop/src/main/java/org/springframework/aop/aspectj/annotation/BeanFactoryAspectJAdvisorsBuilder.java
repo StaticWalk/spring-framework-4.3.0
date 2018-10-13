@@ -80,10 +80,13 @@ public class BeanFactoryAspectJAdvisorsBuilder {
 		synchronized (this) {
 			aspectNames = this.aspectBeanNames;
 			if (aspectNames == null) {
+				//存放从bean中提取出来的增强
 				List<Advisor> advisors = new LinkedList<Advisor>();
 				aspectNames = new LinkedList<String>();
+				//取出所有的beanName
 				String[] beanNames =
 						BeanFactoryUtils.beanNamesForTypeIncludingAncestors(this.beanFactory, Object.class, true, false);
+				//找出声明@Aspect注解的类
 				for (String beanName : beanNames) {
 					if (!isEligibleBean(beanName)) {
 						continue;

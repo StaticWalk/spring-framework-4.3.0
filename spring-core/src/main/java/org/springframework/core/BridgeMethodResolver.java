@@ -16,14 +16,14 @@
 
 package org.springframework.core;
 
+import org.springframework.util.ClassUtils;
+import org.springframework.util.ReflectionUtils;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import org.springframework.util.ClassUtils;
-import org.springframework.util.ReflectionUtils;
 
 /**
  * Helper for resolving synthetic {@link Method#isBridge bridge Methods} to the
@@ -90,6 +90,7 @@ public abstract class BridgeMethodResolver {
 	 * by the supplied {@link Method bridge Method}. This method performs inexpensive
 	 * checks and can be used quickly filter for a set of possible matches.
 	 */
+	//是否桥接方法通过判断方法名、参数的个数、泛型类型的参数长度来获取
 	private static boolean isBridgedCandidateFor(Method candidateMethod, Method bridgeMethod) {
 		return (!candidateMethod.isBridge() && !candidateMethod.equals(bridgeMethod) &&
 				candidateMethod.getName().equals(bridgeMethod.getName()) &&
