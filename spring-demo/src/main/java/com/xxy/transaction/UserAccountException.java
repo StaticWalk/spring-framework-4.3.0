@@ -5,7 +5,6 @@ package com.xxy.transaction;
  * Data:2018/10/13
  * Time:21:29
  */
-
 public class UserAccountException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
