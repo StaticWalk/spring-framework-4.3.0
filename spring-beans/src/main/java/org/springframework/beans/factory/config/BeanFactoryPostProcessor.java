@@ -45,6 +45,14 @@ import org.springframework.beans.BeansException;
 public interface BeanFactoryPostProcessor {
 
 	/**
+	 * 执行时机：
+	 * bean实例创建--> 填充属性值--> postProcessBeforeInitialization() --> 初始化回调执行
+	 * 初始化回调指以下情况：
+	 * 1.通过InitializingBean接口实现的AfterPropertiesSet
+	 * 2.xml方法指定的bean是init-method初始化方法
+	 * 3.注解@PostConstruct注解的初始化方法
+	 * 4.Java配置中@Bean(initMethod='init')指定的初始化方法
+	 *
 	 * Modify the application context's internal bean factory after its standard
 	 * initialization. All bean definitions will have been loaded, but no beans
 	 * will have been instantiated yet. This allows for overriding or adding

@@ -59,7 +59,7 @@ import org.springframework.util.StringUtils;
  * and extract results. This class executes SQL queries or updates, initiating
  * iteration over ResultSets and catching JDBC exceptions and translating
  * them to the generic, more informative exception hierarchy defined in the
- * {@code org.springframework.dao} package.
+ * {@code org.springframework.demo} package.
  *
  * <p>Code using this class need only implement callback interfaces, giving
  * them a clearly defined contract. The {@link PreparedStatementCreator} callback

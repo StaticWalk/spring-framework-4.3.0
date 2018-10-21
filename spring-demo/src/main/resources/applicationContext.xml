@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+           ">
+
+    <context:component-scan base-package="com.xxy.demo.aspect"></context:component-scan>
+    <aop:aspectj-autoproxy/>
+
+    <bean id="personDao" class="com.xxy.demo.impl.PersonDamImpl"/>
+    <bean id="personService" class="com.xxy.demo.serviceimpl.PersonServiceImpl"/>
+
+    <!--<bean id="helloWorld" name="helloWorld" class="com.hgx.springtest.HelloWorld"></bean>-->
+    <!--<bean id="helloWorldTest" name="helloWorldTest" class="com.hgx.springtest.HelloWorld1"></bean>-->
+
+
+    <bean id="exceptionAspect" class="com.xxy.demo.aspect.ExceptionAspect"/>
+
+    <aop:config>
+        <aop:pointcut id="perform" expression="execution(* com.xxy.demo.serviceimpl.*.*(..))"/>
+        <aop:aspect ref="exceptionAspect">
+            <aop:after-throwing method="throwingException" pointcut-ref="perform" throwing="ex" />
+        </aop:aspect>
+
+    </aop:config>
+
+    <!--注解驱动的事务-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!--transaction-manager默认在applicationContext.xml中找transactionManager-->
+
+    <!--&lt;!&ndash;事务管理Demo&ndash;&gt;-->
+    <!--&lt;!&ndash;引入外部配置文件&ndash;&gt;-->
+    <!--<context:property-placeholder location="classpath:jdbc.properties"/>-->
+    <!---->
+
+    <!--&lt;!&ndash;配置c3p0链接池&ndash;&gt;-->
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+        <!--<property name="driverClass" value="${jdbc.driverClass}"/>-->
+        <!--<property name="jdbcUrl" value="${jdbc.url}"/>-->
+        <!--<property name="user" value="${jdbc.username}"/>-->
+        <!--<property name="password" value="${jdbc.password}"/>-->
+    <!--</bean>-->
+
+
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/tx" />
+        <property name="username" value="root" />
+        <property name="password" value="1126" />
+    </bean>
+
+
+    <bean id="accountService" class="com.xxy.demo.serviceimpl.AccountServiceImpl">
+        <property name="accountDao" ref="accountDao"/>
+    </bean>
+
+    <bean id="accountDao" class="com.xxy.demo.impl.AccountDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <!--为dao提供jdbc模版-->
+    </bean>
+
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--事务代理工厂bean已经被淘汰,现在Spring提供一个tx配置命名空间,简化声明式事务,即事务的通知-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager"  >
+        <tx:attributes>
+            <tx:method name="transfer" propagation="REQUIRED"/>
+        </tx:attributes>
+
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="pointcut" expression="execution(* com.xxy.demo.service.AccountService.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
+    </aop:config>
+
+
+</beans>

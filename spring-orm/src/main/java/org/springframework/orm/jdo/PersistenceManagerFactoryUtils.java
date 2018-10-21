@@ -210,7 +210,7 @@ public abstract class PersistenceManagerFactoryUtils {
 
 	/**
 	 * Convert the given JDOException to an appropriate exception from the
-	 * {@code org.springframework.dao} hierarchy.
+	 * {@code org.springframework.demo} hierarchy.
 	 * <p>The most important cases like object not found or optimistic locking failure
 	 * are covered here. For more fine-granular conversion, JdoTransactionManager
 	 * supports sophisticated translation of exceptions via a JdoDialect.

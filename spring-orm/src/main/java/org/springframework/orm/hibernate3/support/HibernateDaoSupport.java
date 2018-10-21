@@ -182,7 +182,7 @@ public abstract class HibernateDaoSupport extends DaoSupport {
 
 	/**
 	 * Convert the given HibernateException to an appropriate exception from the
-	 * {@code org.springframework.dao} hierarchy. Will automatically detect
+	 * {@code org.springframework.demo} hierarchy. Will automatically detect
 	 * wrapped SQLExceptions and convert them accordingly.
 	 * <p>Delegates to the
 	 * {@link org.springframework.orm.hibernate3.HibernateTemplate#convertHibernateAccessException}

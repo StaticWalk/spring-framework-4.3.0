@@ -46,7 +46,7 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
  * Note that this interceptor automatically translates HibernateExceptions,
  * via delegating to the {@code SessionFactoryUtils.convertHibernateAccessException}
  * method that converts them to exceptions that are compatible with the
- * {@code org.springframework.dao} exception hierarchy (like HibernateTemplate does).
+ * {@code org.springframework.demo} exception hierarchy (like HibernateTemplate does).
  * This can be turned off if the raw exceptions are preferred.
  *
  * <p>This class can be considered a declarative alternative to HibernateTemplate's
@@ -83,7 +83,7 @@ public class HibernateInterceptor extends HibernateAccessor implements MethodInt
 
 	/**
 	 * Set whether to convert any HibernateException raised to a Spring DataAccessException,
-	 * compatible with the {@code org.springframework.dao} exception hierarchy.
+	 * compatible with the {@code org.springframework.demo} exception hierarchy.
 	 * <p>Default is "true". Turn this flag off to let the caller receive raw exceptions
 	 * as-is, without any wrapping.
 	 * @see org.springframework.dao.DataAccessException

@@ -13,6 +13,6 @@ public class TestTransaction {
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("transaction/transaction.xml");
 		BookShopService service =(BookShopService) applicationContext.getBean("bookShopService");
-		service.purchase("wangp","123");
+		service.purchase("hhh","1");
 	}
 }

@@ -49,7 +49,7 @@ import org.springframework.util.Assert;
  * It executes core CCI workflow, leaving application code to provide parameters
  * to CCI and extract results. This class executes EIS queries or updates,
  * catching ResourceExceptions and translating them to the generic exception
- * hierarchy defined in the {@code org.springframework.dao} package.
+ * hierarchy defined in the {@code org.springframework.demo} package.
  *
  * <p>Code using this class can pass in and receive {@link javax.resource.cci.Record}
  * instances, or alternatively implement callback interfaces for creating input

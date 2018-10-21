@@ -23,7 +23,7 @@ import org.springframework.dao.UncategorizedDataAccessException;
 /**
  * Hibernate-specific subclass of UncategorizedDataAccessException,
  * for Hibernate system errors that do not match any concrete
- * {@code org.springframework.dao} exceptions.
+ * {@code org.springframework.demo} exceptions.
  *
  * @author Juergen Hoeller
  * @since 3.1

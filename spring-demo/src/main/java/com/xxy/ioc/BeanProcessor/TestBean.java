@@ -1,4 +1,4 @@
-package com.xxy.BeanProcessor;
+package com.xxy.ioc.BeanProcessor;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;

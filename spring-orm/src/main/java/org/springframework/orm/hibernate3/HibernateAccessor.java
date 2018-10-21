@@ -398,7 +398,7 @@ public abstract class HibernateAccessor implements InitializingBean, BeanFactory
 
 	/**
 	 * Convert the given HibernateException to an appropriate exception
-	 * from the {@code org.springframework.dao} hierarchy.
+	 * from the {@code org.springframework.demo} hierarchy.
 	 * <p>Will automatically apply a specified SQLExceptionTranslator to a
 	 * Hibernate JDBCException, else rely on Hibernate's default translation.
 	 * @param ex HibernateException that occured
@@ -418,7 +418,7 @@ public abstract class HibernateAccessor implements InitializingBean, BeanFactory
 
 	/**
 	 * Convert the given Hibernate JDBCException to an appropriate exception
-	 * from the {@code org.springframework.dao} hierarchy, using the
+	 * from the {@code org.springframework.demo} hierarchy, using the
 	 * given SQLExceptionTranslator.
 	 * @param ex Hibernate JDBCException that occured
 	 * @param translator the SQLExceptionTranslator to use
@@ -430,7 +430,7 @@ public abstract class HibernateAccessor implements InitializingBean, BeanFactory
 
 	/**
 	 * Convert the given SQLException to an appropriate exception from the
-	 * {@code org.springframework.dao} hierarchy. Can be overridden in subclasses.
+	 * {@code org.springframework.demo} hierarchy. Can be overridden in subclasses.
 	 * <p>Note that a direct SQLException can just occur when callback code
 	 * performs direct JDBC access via {@code Session.connection()}.
 	 * @param ex the SQLException

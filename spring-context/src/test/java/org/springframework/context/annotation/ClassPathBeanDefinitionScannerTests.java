@@ -372,7 +372,7 @@ public class ClassPathBeanDefinitionScannerTests {
 		ClassPathBeanDefinitionScanner multiPackageScanner = new ClassPathBeanDefinitionScanner(multiPackageContext);
 		int singlePackageBeanCount = singlePackageScanner.scan(BASE_PACKAGE);
 		assertEquals(12, singlePackageBeanCount);
-		multiPackageScanner.scan(BASE_PACKAGE, "org.springframework.dao.annotation");
+		multiPackageScanner.scan(BASE_PACKAGE, "org.springframework.demo.annotation");
 		// assertTrue(multiPackageBeanCount > singlePackageBeanCount);
 	}
 

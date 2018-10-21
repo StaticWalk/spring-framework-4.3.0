@@ -513,7 +513,7 @@ public class JdoTransactionManager extends AbstractPlatformTransactionManager
 
 	/**
 	 * Convert the given JDOException to an appropriate exception from the
-	 * {@code org.springframework.dao} hierarchy.
+	 * {@code org.springframework.demo} hierarchy.
 	 * <p>The default implementation delegates to the JdoDialect.
 	 * May be overridden in subclasses.
 	 * @param ex JDOException that occured

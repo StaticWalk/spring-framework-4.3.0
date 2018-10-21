@@ -99,7 +99,7 @@ class AnnotationDrivenBeanDefinitionParser implements BeanDefinitionParser {
 	 * Inner class to just introduce an AOP framework dependency when actually in staticProxy mode.
 	 */
 	private static class AopAutoProxyConfigurer {
-
+//三个bean InfrastructureAdvisorAutoProxyCreator AnnotationTransactionAttributeSource TransactionInterceptor
 		public static void configureAutoProxyCreator(Element element, ParserContext parserContext) {
 			//注册InfrastructureAdvisorAutoProxyCreator这个bean
 			AopNamespaceUtils.registerAutoProxyCreatorIfNecessary(parserContext, element);
@@ -114,11 +114,11 @@ class AnnotationDrivenBeanDefinitionParser implements BeanDefinitionParser {
 						"org.springframework.transaction.annotation.AnnotationTransactionAttributeSource");
 				sourceDef.setSource(eleSource);
 				sourceDef.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);
-				//注册bean，并使用Spring中的定义规则生成beanName
+				//使用Spring中的定义规则生成beanName，并注册了bean
 				String sourceName = parserContext.getReaderContext().registerWithGeneratedName(sourceDef);
 
 				// Create the TransactionInterceptor definition.
-				//创建TransactionInterceptor的bean
+				//创建TransactionInterceptor事务拦截器的bean
 				RootBeanDefinition interceptorDef = new RootBeanDefinition(TransactionInterceptor.class);
 				interceptorDef.setSource(eleSource);
 				interceptorDef.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);

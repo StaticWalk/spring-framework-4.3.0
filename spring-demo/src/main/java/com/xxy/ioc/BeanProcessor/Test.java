@@ -1,4 +1,4 @@
-package com.xxy.BeanProcessor;
+package com.xxy.ioc.BeanProcessor;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -28,7 +28,7 @@ public class Test {
 
 	public static void main(String[] args) throws Exception {
 
-		ApplicationContext context=new ClassPathXmlApplicationContext("BeanProcessor/beans.xml");
+		ApplicationContext context=new ClassPathXmlApplicationContext("ioc/BeanProcessor/beans.xml");
 		TestBean testBean = (TestBean)context.getBean("testBean");
 		System.out.println(testBean.getName() + testBean.getAge());
 		testBean.destroy();

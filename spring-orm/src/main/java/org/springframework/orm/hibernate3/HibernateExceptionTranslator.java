@@ -75,7 +75,7 @@ public class HibernateExceptionTranslator implements PersistenceExceptionTransla
 
 	/**
 	 * Convert the given HibernateException to an appropriate exception from the
-	 * {@code org.springframework.dao} hierarchy.
+	 * {@code org.springframework.demo} hierarchy.
 	 * <p>Will automatically apply a specified SQLExceptionTranslator to a
 	 * Hibernate JDBCException, else rely on Hibernate's default translation.
 	 * @param ex HibernateException that occured

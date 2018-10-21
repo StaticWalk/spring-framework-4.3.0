@@ -364,7 +364,7 @@ public abstract class EntityManagerFactoryUtils {
 
 	/**
 	 * Convert the given runtime exception to an appropriate exception from the
-	 * {@code org.springframework.dao} hierarchy.
+	 * {@code org.springframework.demo} hierarchy.
 	 * Return null if no translation is appropriate: any other exception may
 	 * have resulted from user code, and should not be translated.
 	 * <p>The most important cases like object not found or optimistic locking failure

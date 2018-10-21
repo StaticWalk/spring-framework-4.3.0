@@ -628,7 +628,7 @@ public abstract class SessionFactoryUtils {
 
 	/**
 	 * Convert the given HibernateException to an appropriate exception
-	 * from the {@code org.springframework.dao} hierarchy.
+	 * from the {@code org.springframework.demo} hierarchy.
 	 * @param ex HibernateException that occurred
 	 * @return the corresponding DataAccessException instance
 	 * @see HibernateAccessor#convertHibernateAccessException
