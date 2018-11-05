@@ -278,6 +278,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 							}
 						}
 					});
+					//
 					bean = getObjectForBeanInstance(sharedInstance, name, beanName, mbd);
 				}
 
