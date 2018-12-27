@@ -6,5 +6,8 @@ package com.xxy.ioc;
  * Time:16:30
  */
 public interface UserService {
+
+	int age = 5;
+
 	void login();
 }

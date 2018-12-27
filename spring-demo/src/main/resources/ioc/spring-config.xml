@@ -7,7 +7,18 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--解析xml时按照顺序对bean进行读取-->
 
-<context:component-scan
-            base-package="com.xxy.ioc"/>
+
+    <!--java类之间存在继承关系的时候才能使用parent-->
+    <!--BeanFactory不会进行预实例化，ApplicationContext才会在DefaultListableBeanFactory
+    的preInstantiateSingletons中根据lazy-init进行预实例化-->
+    <!--<bean id="foo" name="hhh" class="com.xxy.ioc.Foo" parent="parentOfFoo" lazy-init="true">-->
+    <bean id="foo" name="hhh" class="com.xxy.ioc.Foo" >
+        <property name="age" value="20"/>
+    </bean>
+
+
+    <context:component-scan
+                base-package="com.xxy.ioc"/>
 </beans>
