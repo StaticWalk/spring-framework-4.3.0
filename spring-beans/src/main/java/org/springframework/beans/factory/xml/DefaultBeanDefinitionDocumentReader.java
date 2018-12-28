@@ -153,7 +153,8 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 		return delegate;
 	}
 
-	/**
+	/**fd
+	 *
 	 * Parse the elements at the root level in the document:
 	 * "import", "alias", "bean".
 	 * @param root the DOM root element of the document

@@ -11,8 +11,9 @@
     <bean id="timeMonitorHandler" class="com.xxy.aop.TimeMonitorHandler"/>
 
     <bean id="defaultBeforeAdvice" class="com.xxy.aop.DefaultBeforeAdvice"/>
+
     <!--注解配置-->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
     <aop:config proxy-target-class="false">
         <!--<aop:aspect>与<aop:advisor>的区别-->
         <!--advice-ref中的bean必须是Advice类型的-->
