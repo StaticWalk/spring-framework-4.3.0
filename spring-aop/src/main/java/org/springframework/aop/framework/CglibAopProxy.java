@@ -179,6 +179,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 			enhancer.setNamingPolicy(SpringNamingPolicy.INSTANCE);
 			enhancer.setStrategy(new ClassLoaderAwareUndeclaredThrowableStrategy(classLoader));
 
+			//设置拦截器，将拦截器封装在DynamicAdvisedInterceptor中，再次调用代理的时候会调用DynamicAdvisedIntercepter的intercept()
 			Callback[] callbacks = getCallbacks(rootClass);
 			Class<?>[] types = new Class<?>[callbacks.length];
 			for (int x = 0; x < types.length; x++) {
@@ -189,7 +190,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 					this.advised.getConfigurationOnlyCopy(), this.fixedInterceptorMap, this.fixedInterceptorOffset));
 			enhancer.setCallbackTypes(types);
 
-			//生成代理类以及创建代理
+			// 生成代理类以及创建代理
 			// Generate the staticProxy class and create a staticProxy instance.
 			return createProxyClassAndInstance(enhancer, callbacks);
 		}
@@ -211,6 +212,7 @@ class CglibAopProxy implements AopProxy, Serializable {
 		}
 	}
 
+	//生成代理类以及创建代理
 	protected Object createProxyClassAndInstance(Enhancer enhancer, Callback[] callbacks) {
 		enhancer.setInterceptDuringConstruction(false);
 		enhancer.setCallbacks(callbacks);

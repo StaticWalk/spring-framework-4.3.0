@@ -335,18 +335,22 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 			return bean;
 		}
 		//给定的bean类是否代表一个基础设施类，基础设施类不应该被代理，配置了指定bean的不需要自动代理
+		// 所谓InfrastructureClass就是指Advice/PointCut/Advisor等接口的实现类。
+     	// shouldSkip默认实现为返回false,由于是protected方法，子类可以覆盖。
 		if (isInfrastructureClass(bean.getClass()) || shouldSkip(bean.getClass(), beanName)) {
 			this.advisedBeans.put(cacheKey, Boolean.FALSE);
 			return bean;
 		}
 //获取适合应用到该bean的所有advisor
 		// Create staticProxy if we have advice.
+		// AbstractAdvisorAutoProxyCreator.class
 		Object[] specificInterceptors = getAdvicesAndAdvisorsForBean(bean.getClass(), beanName, null);
 		//如果获取到了增强则需要增强创建代理
 		if (specificInterceptors != DO_NOT_PROXY) {
 			this.advisedBeans.put(cacheKey, Boolean.TRUE);
 			//创建代理
 			Object proxy = createProxy(
+					//beanName就是要进行代理的这个bean，specificInterceptors就是刚刚的Advisors
 					bean.getClass(), beanName, specificInterceptors, new SingletonTargetSource(bean));
 			this.proxyTypes.put(cacheKey, proxy.getClass());
 			return proxy;
@@ -440,7 +444,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 		if (this.beanFactory instanceof ConfigurableListableBeanFactory) {
 			AutoProxyUtils.exposeTargetClass((ConfigurableListableBeanFactory) this.beanFactory, beanName, beanClass);
 		}
-
+		//新建一个代理工厂ProxyFactory
 		ProxyFactory proxyFactory = new ProxyFactory();
 		//获取当前类中的全部属性
 		proxyFactory.copyFrom(this);

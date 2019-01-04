@@ -61,6 +61,7 @@ public class BeanFactoryAdvisorRetrievalHelper {
 	 * @return the list of {@link org.springframework.aop.Advisor} beans
 	 * @see #isEligibleBean
 	 */
+	// 递归查找的
 	public List<Advisor> findAdvisorBeans() {
 		// Determine list of advisor bean names, if not cached already.
 		String[] advisorNames = null;
@@ -70,7 +71,7 @@ public class BeanFactoryAdvisorRetrievalHelper {
 				// Do not initialize FactoryBeans here: We need to leave all regular beans
 				// uninitialized to let the auto-staticProxy creator apply to them!
 				//找历史中的beans，最深就找到BeanFactoryUtils.beanNamesForTypeIncludingAncestors()
-				//从BeanFactory中获取所有对应Advisor的类 6
+				//从BeanFactory中获取所有对应Advisor的beanNames 6
 				advisorNames = BeanFactoryUtils.beanNamesForTypeIncludingAncestors(
 						this.beanFactory, Advisor.class, true, false);
 				this.cachedAdvisorBeanNames = advisorNames;
@@ -90,7 +91,7 @@ public class BeanFactoryAdvisorRetrievalHelper {
 				}
 				else {
 					try {
-						//getBean方法可以获取Advisor
+						//getBean()可以通过benaName来获取Advisor的bean实例
 						advisors.add(this.beanFactory.getBean(name, Advisor.class));
 					}
 					catch (BeanCreationException ex) {

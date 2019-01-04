@@ -220,7 +220,7 @@ public abstract class BeanFactoryUtils {
 			if (hbf.getParentBeanFactory() instanceof ListableBeanFactory) {
 				String[] parentResult = beanNamesForTypeIncludingAncestors(
 						(ListableBeanFactory) hbf.getParentBeanFactory(), type, includeNonSingletons, allowEagerInit);
-				//数组容量已经确定了，只能通过强转List来添加新元素，这里不需要加锁操作
+				//数组容量已经确定了，只能借助转化为List来添加新元素，这里不需要加锁操作
 				List<String> resultList = new ArrayList<String>();
 				resultList.addAll(Arrays.asList(result));
 				for (String beanName : parentResult) {
